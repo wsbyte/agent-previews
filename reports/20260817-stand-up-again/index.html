@@ -3,303 +3,165 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>允许停下来，然后重新出发</title>
+    <title>短视频 · 允许停下来</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Serif+SC:wght@700;900&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@900&family=Plus+Jakarta+Sans:wght@800;900&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-cream: #fbf9f4;
-            --bg-card: rgba(255, 255, 255, 0.85);
-            --coral-orange: #ff7a59;
-            --coral-soft: #fff0eb;
-            --mint-green: #38b2ac;
-            --mint-soft: #e6fffa;
-            --soft-yellow: #fef3c7;
-            --text-dark: #2d3748;
-            --text-subtle: #718096;
-            --border-subtle: rgba(226, 232, 240, 0.8);
-        }
-
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
             -webkit-tap-highlight-color: transparent;
+            user-select: none;
         }
 
         body {
-            background-color: #f0ece1;
-            color: var(--text-dark);
-            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+            background-color: #000000;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             min-height: 100dvh;
-            padding: 12px;
+            overflow: hidden;
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
         }
 
-        /* 手机端 9:16 画幅精致卡片 */
-        .video-phone-frame {
+        /* 纯净 9:16 短视频视口 */
+        .reel-canvas {
             width: 100%;
             max-width: 440px;
             aspect-ratio: 9 / 16;
-            max-height: 94vh;
+            max-height: 100vh;
             position: relative;
-            border-radius: 36px;
             overflow: hidden;
-            background: var(--bg-cream);
-            box-shadow: 0 20px 45px -10px rgba(160, 140, 120, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8);
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            padding: 24px 20px 20px;
+            background: #111;
+            box-shadow: 0 0 40px rgba(0,0,0,0.8);
         }
 
-        /* 温暖柔和流体背景 */
-        .ambient-soft-blob {
+        /* 背景层：真实唯美场景 + 慢速推镜（Ken Burns Effect） */
+        .bg-layer {
+            position: absolute;
+            inset: -10%;
+            width: 120%;
+            height: 120%;
+            background-size: cover;
+            background-position: center;
+            opacity: 0;
+            transition: opacity 1s ease-in-out;
+            transform: scale(1);
+            filter: brightness(0.82) contrast(1.05);
+        }
+
+        .bg-layer.active {
+            opacity: 1;
+            animation: slowZoom 14s ease-out forwards;
+        }
+
+        @keyframes slowZoom {
+            0% { transform: scale(1) translateY(0); }
+            100% { transform: scale(1.1) translateY(-2%); }
+        }
+
+        /* 电影级微暗角遮罩，保证文字极度清晰 */
+        .vignette-overlay {
             position: absolute;
             inset: 0;
-            background: 
-                radial-gradient(circle at 15% 15%, #fee2e2 0%, transparent 40%),
-                radial-gradient(circle at 85% 20%, #fef3c7 0%, transparent 45%),
-                radial-gradient(circle at 50% 85%, #e6fffa 0%, transparent 50%),
-                #fbf9f4;
-            z-index: 1;
-        }
-
-        /* 顶部清新信息栏 */
-        .top-nav-bar {
-            position: relative;
-            z-index: 10;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .topic-pill {
-            background: #ffffff;
-            border: 1px solid var(--border-subtle);
-            padding: 6px 14px;
-            border-radius: 9999px;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
-        }
-
-        .topic-pill-dot {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--coral-orange);
-        }
-
-        .topic-pill-text {
-            font-size: 12px;
-            font-weight: 700;
-            color: var(--coral-orange);
-            letter-spacing: 0.05em;
-        }
-
-        .time-tag {
-            font-family: 'Plus Jakarta Sans', monospace;
-            font-size: 11.5px;
-            font-weight: 600;
-            color: var(--text-subtle);
-            background: rgba(255, 255, 255, 0.6);
-            padding: 4px 10px;
-            border-radius: 12px;
-        }
-
-        /* 中部小红书杂志风动态画布 */
-        .stage-canvas {
-            position: relative;
-            z-index: 10;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            margin: 12px 0;
-        }
-
-        .scene-container {
-            position: absolute;
-            width: 100%;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-            opacity: 0;
-            transform: translateY(16px) scale(0.96);
-            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+            background: radial-gradient(circle at 50% 50%, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.45) 80%, rgba(0,0,0,0.7) 100%);
+            z-index: 2;
             pointer-events: none;
         }
 
-        .scene-container.active {
-            opacity: 1;
-            transform: translateY(0) scale(1);
-            pointer-events: auto;
-        }
-
-        /* 3D 可爱实物浮动视差 */
-        .clay-img-wrap {
-            position: relative;
-            width: 195px;
-            height: 195px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            filter: drop-shadow(0 12px 24px rgba(180, 150, 130, 0.25));
-            animation: bounceFloat 3.5s ease-in-out infinite alternate;
-        }
-
-        .clay-img {
-            max-width: 100%;
-            max-height: 100%;
-            object-fit: contain;
-        }
-
-        @keyframes bounceFloat {
-            0% { transform: translateY(0px) rotate(-1deg); }
-            100% { transform: translateY(-12px) rotate(1.5deg); }
-        }
-
-        /* 小红书爆款标签 & 标题卡片 */
-        .badge-step {
-            display: inline-block;
-            background: var(--coral-soft);
-            color: var(--coral-orange);
-            font-size: 11.5px;
-            font-weight: 800;
-            padding: 5px 14px;
-            border-radius: 9999px;
-            margin-bottom: 12px;
-            letter-spacing: 0.05em;
-            box-shadow: 0 2px 6px rgba(255, 122, 89, 0.15);
-        }
-
-        .title-catchy {
-            font-family: 'Noto Serif SC', serif;
-            font-size: 25px;
-            font-weight: 900;
-            color: #1a202c;
-            line-height: 1.35;
-            margin-bottom: 14px;
-            padding: 0 10px;
-        }
-
-        .title-catchy mark {
-            background: linear-gradient(120deg, rgba(255, 226, 226, 0.8) 0%, rgba(254, 243, 199, 0.9) 100%);
-            padding: 2px 8px;
-            border-radius: 6px;
-            color: #1a202c;
-        }
-
-        /* 便签纸风格核心提炼小卡片 */
-        .sticky-note {
-            background: #ffffff;
-            border: 1px solid var(--border-subtle);
-            border-radius: 18px;
-            padding: 14px 18px;
-            max-width: 92%;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .sticky-emoji {
-            font-size: 22px;
-            flex-shrink: 0;
-        }
-
-        .sticky-text {
-            font-size: 13px;
-            line-height: 1.55;
-            color: #4a5568;
-            font-weight: 600;
-            text-align: left;
-        }
-
-        /* 底部动态同步字幕条 */
-        .bottom-shelf {
-            position: relative;
+        /* 舞台居中区：动态花字与核心视觉冲击 */
+        .stage-center {
+            position: absolute;
+            inset: 0;
             z-index: 10;
             display: flex;
             flex-direction: column;
-            gap: 12px;
-        }
-
-        .subtitle-pill-card {
-            background: #ffffff;
-            border: 1.5px solid #edf2f7;
-            border-radius: 16px;
-            padding: 14px 16px;
-            min-height: 64px;
-            display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
+            padding: 0 24px;
             text-align: center;
-            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
+            pointer-events: none;
         }
 
-        .live-subtitle-text {
-            font-size: 15px;
-            font-weight: 800;
-            color: #2d3748;
-            line-height: 1.45;
-            letter-spacing: 0.01em;
-        }
-
-        /* 播放与进度控制器 */
-        .control-bar {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .btn-play-toggle {
-            width: 38px;
-            height: 38px;
-            border-radius: 50%;
-            background: var(--coral-orange);
-            border: none;
+        /* 爆款卡点动态大花字 */
+        .hook-big-badge {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 38px;
+            font-weight: 900;
             color: #ffffff;
+            line-height: 1.25;
+            letter-spacing: -0.02em;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.8), 0 1px 4px rgba(0,0,0,0.9);
+            transform: scale(0.85);
+            opacity: 0;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            margin-bottom: 20px;
+        }
+
+        .hook-big-badge.show {
+            transform: scale(1);
+            opacity: 1;
+        }
+
+        /* 醒目的高光黄色贴纸底色 */
+        .highlight-sticker {
+            background: #ffcc00;
+            color: #111111;
+            padding: 2px 10px;
+            border-radius: 8px;
+            display: inline-block;
+            box-shadow: 0 6px 16px rgba(0,0,0,0.4);
+            transform: rotate(-2deg);
+        }
+
+        /* 底部动态逐句对齐字幕（抖音同款黑框/黄字高光） */
+        .subtitle-anchor {
+            position: absolute;
+            bottom: 12%;
+            left: 0;
+            right: 0;
+            z-index: 20;
             display: flex;
-            align-items: center;
             justify-content: center;
-            cursor: pointer;
-            flex-shrink: 0;
-            box-shadow: 0 4px 12px rgba(255, 122, 89, 0.35);
-            transition: transform 0.15s;
+            padding: 0 20px;
+            pointer-events: none;
         }
 
-        .btn-play-toggle:active {
-            transform: scale(0.92);
+        .tiktok-caption {
+            background: rgba(0, 0, 0, 0.72);
+            backdrop-filter: blur(8px);
+            border: 1.5px solid rgba(255, 255, 255, 0.15);
+            color: #ffffff;
+            font-size: 19px;
+            font-weight: 900;
+            line-height: 1.45;
+            padding: 10px 20px;
+            border-radius: 9999px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.6);
+            letter-spacing: 0.02em;
+            text-align: center;
+            max-width: 90%;
+            transform: translateY(10px);
+            opacity: 0;
+            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.3, 1.2);
         }
 
-        .progress-rail {
-            flex: 1;
-            height: 7px;
-            background: #e2e8f0;
-            border-radius: 4px;
-            overflow: hidden;
-            cursor: pointer;
+        .tiktok-caption.active {
+            transform: translateY(0);
+            opacity: 1;
         }
 
-        .progress-bar-fill {
-            height: 100%;
-            width: 0%;
-            background: linear-gradient(90deg, #ff7a59, #f59e0b);
-            transition: width 0.1s linear;
+        .tiktok-caption span.word-pop {
+            color: #ffcc00;
+            display: inline-block;
+            transform: scale(1.1);
         }
 
-        /* 初始醒目呼吸播放遮罩 */
-        .hero-play-curtain {
+        /* 纯净点击遮罩层（仅在未播放前出现，一点击彻底销毁） */
+        .clean-touch-curtain {
             position: absolute;
             inset: 0;
             z-index: 50;
@@ -307,235 +169,181 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(251, 249, 244, 0.88);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.55);
+            backdrop-filter: blur(10px);
             cursor: pointer;
-            transition: opacity 0.3s ease;
             gap: 16px;
+            transition: opacity 0.35s ease;
         }
 
-        .curtain-play-btn {
-            width: 80px;
-            height: 80px;
+        .play-ring {
+            width: 72px;
+            height: 72px;
             border-radius: 50%;
-            background: var(--coral-orange);
+            background: #ffcc00;
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 10px 30px rgba(255, 122, 89, 0.4);
-            animation: pulseSoft 2s infinite;
+            box-shadow: 0 0 35px rgba(255, 204, 0, 0.6);
+            animation: pulseTap 1.8s infinite;
         }
 
-        @keyframes pulseSoft {
-            0%, 100% { transform: scale(1); box-shadow: 0 10px 25px rgba(255, 122, 89, 0.35); }
-            50% { transform: scale(1.08); box-shadow: 0 15px 35px rgba(255, 122, 89, 0.55); }
+        @keyframes pulseTap {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.1); }
         }
 
-        .curtain-label {
+        .curtain-text {
             font-size: 15px;
             font-weight: 800;
-            color: #2d3748;
-            background: #ffffff;
-            padding: 8px 20px;
-            border-radius: 9999px;
-            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-            border: 1px solid #edf2f7;
+            color: #ffffff;
+            letter-spacing: 0.05em;
+            text-shadow: 0 2px 10px rgba(0,0,0,0.8);
         }
     </style>
 </head>
 <body>
-    <div class="video-phone-frame" onclick="togglePlayPause(event)">
-        <div class="ambient-soft-blob"></div>
+    <div class="reel-canvas" onclick="handleTap()">
+        <!-- 镜头背景切换（Ken Burns 慢速推镜） -->
+        <div id="bg-1" class="bg-layer active" style="background-image: url('bg_scene1.jpg');"></div>
+        <div id="bg-2" class="bg-layer" style="background-image: url('bg_scene2.jpg');"></div>
+        <div id="bg-3" class="bg-layer" style="background-image: url('bg_scene3.jpg');"></div>
 
-        <!-- 晓晓配音音频 -->
+        <div class="vignette-overlay"></div>
+
+        <!-- 音频源（晓晓高共情配音） -->
         <audio id="main-audio" src="audio_xiaoxiao.mp3" preload="auto"></audio>
 
-        <!-- 初始播放点击遮罩 -->
-        <div id="hero-curtain" class="hero-play-curtain" onclick="startInitialPlayback(event)">
-            <div class="curtain-play-btn">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffffff"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+        <!-- 初始全屏点击即播（无任何多余UI） -->
+        <div id="touch-curtain" class="clean-touch-curtain">
+            <div class="play-ring">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="#111"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
             </div>
-            <div class="curtain-label">🎧 点击播放 · 治愈系配音短片</div>
+            <div class="curtain-text">轻触屏幕 · 播放短视频</div>
         </div>
 
-        <!-- 顶部信息 -->
-        <div class="top-nav-bar">
-            <div class="topic-pill">
-                <div class="topic-pill-dot"></div>
-                <span class="topic-pill-text">情绪抚慰 & 个人重塑</span>
-            </div>
-            <div id="time-indicator" class="time-tag">00:00 / 01:23</div>
-        </div>
-
-        <!-- 中部动态场景 -->
-        <div class="stage-canvas">
-            <!-- 场景 1：离开工位与身份解绑 (0s ~ 22.9s) -->
-            <div id="scene-1" class="scene-container active">
-                <div class="clay-img-wrap">
-                    <img src="cozy_desk.png" class="clay-img" alt="治愈书桌">
-                </div>
-                <div class="badge-step">第一阶段 · 卸下内耗</div>
-                <h1 class="title-catchy">平台带走的只是<mark>工牌</mark></h1>
-                <div class="sticky-note">
-                    <span class="sticky-emoji">🌱</span>
-                    <p class="sticky-text">真正熬过的难题与磨练出的韧性，全部实打实长在你的骨头里。</p>
-                </div>
-            </div>
-
-            <!-- 场景 2：第一步 能力彻底脱水 (22.9s ~ 43.6s) -->
-            <div id="scene-2" class="scene-container">
-                <div class="clay-img-wrap">
-                    <img src="water_drop.png" class="clay-img" alt="能力脱水">
-                </div>
-                <div class="badge-step">实操指南 01</div>
-                <h1 class="title-catchy">给能力做一次<mark>“彻底脱水”</mark></h1>
-                <div class="sticky-note">
-                    <span class="sticky-emoji">📝</span>
-                    <p class="sticky-text">删掉大厂汇报黑话，只写脱离平台后能独立帮人解决的 3 个真实痛点。</p>
-                </div>
-            </div>
-
-            <!-- 场景 3：第二步 打造微型交付物 (43.6s ~ 58.7s) -->
-            <div id="scene-3" class="scene-container">
-                <div class="clay-img-wrap">
-                    <img src="sprout.png" class="clay-img" alt="幼苗">
-                </div>
-                <div class="badge-step">实操指南 02</div>
-                <h1 class="title-catchy">做你的<mark>微型个人交付物</mark></h1>
-                <div class="sticky-note">
-                    <span class="sticky-emoji">✨</span>
-                    <p class="sticky-text">写一篇深度经验复盘，重新建立直接拿到正向反馈的掌控感。</p>
-                </div>
-            </div>
-
-            <!-- 场景 4：第三步 低能耗生活与重塑 (58.7s ~ 83.6s) -->
-            <div id="scene-4" class="scene-container">
-                <div class="clay-img-wrap">
-                    <img src="cute_plant.png" class="clay-img" alt="可爱盆栽">
-                </div>
-                <div class="badge-step">实操指南 03</div>
-                <h1 class="title-catchy">拿回你的<mark>时间所有权</mark></h1>
-                <div class="sticky-note">
-                    <span class="sticky-emoji">☀️</span>
-                    <p class="sticky-text">低能耗松绑生存成本，把应付内耗的才华全部拿来投资你自己。</p>
-                </div>
+        <!-- 中部动态大花字（随剧情卡点爆发） -->
+        <div class="stage-center">
+            <div id="hook-title" class="hook-big-badge show">
+                离开工位<br>努力<span class="highlight-sticker">全白费了吗？</span>
             </div>
         </div>
 
-        <!-- 底部字幕与播放条 -->
-        <div class="bottom-shelf">
-            <div class="subtitle-pill-card">
-                <div id="subtitle-box" class="live-subtitle-text">离开工位的那一刻，很多人会陷入一种深深的怀疑...</div>
-            </div>
-            <div class="control-bar">
-                <button id="play-btn" class="btn-play-toggle" onclick="togglePlayPause(event)">
-                    <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                    <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-                </button>
-                <div class="progress-rail" onclick="seekAudio(event)">
-                    <div id="progress-fill" class="progress-bar-fill"></div>
-                </div>
+        <!-- 底部抖音同款胶囊字幕条 -->
+        <div class="subtitle-anchor">
+            <div id="caption-box" class="tiktok-caption active">
+                离开工位的那一刻，很多人会陷入深深的怀疑...
             </div>
         </div>
     </div>
 
     <script>
         const audio = document.getElementById('main-audio');
-        const curtain = document.getElementById('hero-curtain');
-        const subBox = document.getElementById('subtitle-box');
-        const progFill = document.getElementById('progress-fill');
-        const timeInd = document.getElementById('time-indicator');
-        const playIcon = document.getElementById('play-icon');
-        const pauseIcon = document.getElementById('pause-icon');
+        const curtain = document.getElementById('touch-curtain');
+        const hookTitle = document.getElementById('hook-title');
+        const captionBox = document.getElementById('caption-box');
 
-        // 基于 Edge-TTS VTT 生成的精准时间轴与场景切换
+        // 精准分镜与动态大花字对照表（按文案剧情彻底异构）
         const timeline = [
-            { start: 0.1, end: 7.9, text: "离开工位的那一刻，很多人会陷入一种深深的怀疑：“难道我过去这些年的努力，真的全白费了吗？", scene: 1 },
-            { start: 7.9, end: 12.1, text: "其实不是你不行，只是流水线把人拆成了零件。", scene: 1 },
-            { start: 12.1, end: 22.9, text: "平台带走的只是一张工牌和一个系统权限，那些你真正解决过的复杂难题、锻炼出的逻辑与韧性，全部实打实地长在你自己的骨头里。", scene: 1 },
-            { start: 22.9, end: 24.8, text: "不要慌着否定自己。", scene: 2 },
-            { start: 24.8, end: 30.5, text: "如果你正处在空窗期，明天早晨醒来，试着做好这三件具体的小事：", scene: 2 },
-            { start: 30.5, end: 34.3, text: "第一件事：给自己的能力做一次“彻底脱水”。", scene: 2 },
-            { start: 34.3, end: 43.6, text: "拿出一张白纸，删掉所有只有大厂才听得懂的汇报黑话，只写你脱离平台后，还能独立帮别人解决的三个真实问题。", scene: 2 },
-            { start: 43.6, end: 47.5, text: "第二件事：去做一个属于你自己的“微型交付物”。", scene: 3 },
-            { start: 47.5, end: 58.7, text: "不用一上来就想着宏大创业，哪怕写一篇深度的行业经验复盘，或者帮身边的朋友做一次专业咨询，重新找回直接创造价值的肌肉记忆。", scene: 3 },
-            { start: 58.7, end: 62.0, text: "第三件事：给生活开启“低能耗模式”。", scene: 4 },
-            { start: 62.0, end: 67.7, text: "砍掉面子型消费，把生存成本降到最低，保持规律的作息与运动。", scene: 4 },
-            { start: 67.7, end: 72.9, text: "当你不再被恐慌感催赶着，你才能做出真正清醒的长远选择。", scene: 4 },
-            { start: 72.9, end: 78.2, text: "空窗期不是你人生的暂停，而是你真正拿回时间所有权的起点。", scene: 4 },
-            { start: 78.2, end: 83.6, text: "把原本用来应付内耗的才华，从今天开始，全部拿来投资你自己。", scene: 4 }
+            { 
+                start: 0.1, end: 7.9, 
+                text: "离开工位的那一刻，很多人会陷入深深的怀疑：“过去这些年的努力，全白费了吗？”", 
+                bg: 1, 
+                hookHtml: '离开工位<br>努力<span class="highlight-sticker">全白费了吗？</span>' 
+            },
+            { 
+                start: 7.9, end: 12.1, 
+                text: "其实不是你不行，只是流水线把人拆成了零件。", 
+                bg: 1, 
+                hookHtml: '不是你不行<br><span class="highlight-sticker">系统把人拆碎了</span>' 
+            },
+            { 
+                start: 12.1, end: 22.9, 
+                text: "平台带走的只是一张工牌，那些你真正熬过的难题与韧性，全部长在你自己的骨头里。", 
+                bg: 1, 
+                hookHtml: '平台带走的只是工牌<br>韧性长在<span class="highlight-sticker">你的骨头里</span>' 
+            },
+            { 
+                start: 22.9, end: 34.3, 
+                text: "如果你正处在空窗期，明天早晨醒来，试着做好这三件具体的小事：", 
+                bg: 2, 
+                hookHtml: '空窗期自救<br><span class="highlight-sticker">做好这 3 件事</span>' 
+            },
+            { 
+                start: 34.3, end: 43.6, 
+                text: "第一件事：给能力做一次“彻底脱水”，删掉大厂黑话，只写脱离平台后能独立解决的真实问题。", 
+                bg: 2, 
+                hookHtml: '第 1 步<br>能力<span class="highlight-sticker">彻底脱水</span>' 
+            },
+            { 
+                start: 43.6, end: 58.7, 
+                text: "第二件事：去做一个属于你自己的“微型交付物”，重新找回直接创造价值的掌控感。", 
+                bg: 2, 
+                hookHtml: '第 2 步<br>做个<span class="highlight-sticker">微型个人交付物</span>' 
+            },
+            { 
+                start: 58.7, end: 72.9, 
+                text: "第三件事：给生活开启“低能耗模式”，砍掉面子消费，当你不再恐慌，才能做出清醒的选择。", 
+                bg: 3, 
+                hookHtml: '第 3 步<br>开启<span class="highlight-sticker">低能耗模式</span>' 
+            },
+            { 
+                start: 72.9, end: 83.6, 
+                text: "把原本用来应付内耗的才华，从今天开始，全部拿来投资你自己。", 
+                bg: 3, 
+                hookHtml: '拿回时间所有权<br><span class="highlight-sticker">投资你自己</span>' 
+            }
         ];
 
-        let currentSceneId = 1;
+        let currentBgId = 1;
+        let lastHookText = '';
 
-        function startInitialPlayback(e) {
-            if (e) e.stopPropagation();
-            curtain.style.opacity = '0';
-            setTimeout(() => { curtain.style.display = 'none'; }, 300);
-            audio.play();
-            updatePlayState(true);
-        }
-
-        function togglePlayPause(e) {
-            if (e) e.stopPropagation();
+        function handleTap() {
             if (curtain.style.display !== 'none') {
-                startInitialPlayback(e);
-                return;
-            }
-            if (audio.paused) {
+                curtain.style.opacity = '0';
+                setTimeout(() => { curtain.style.display = 'none'; }, 300);
                 audio.play();
-                updatePlayState(true);
             } else {
-                audio.pause();
-                updatePlayState(false);
+                if (audio.paused) {
+                    audio.play();
+                } else {
+                    audio.pause();
+                }
             }
-        }
-
-        function updatePlayState(isPlaying) {
-            playIcon.style.display = isPlaying ? 'none' : 'block';
-            pauseIcon.style.display = isPlaying ? 'block' : 'none';
-        }
-
-        function seekAudio(e) {
-            if (e) e.stopPropagation();
-            const rect = e.currentTarget.getBoundingClientRect();
-            const clickPos = (e.clientX - rect.left) / rect.width;
-            audio.currentTime = clickPos * (audio.duration || 83.6);
         }
 
         audio.addEventListener('timeupdate', () => {
-            const curTime = audio.currentTime;
-            const dur = audio.duration || 83.6;
-
-            const pct = Math.min(100, (curTime / dur) * 100);
-            progFill.style.width = pct + '%';
-
-            const formatM = (t) => {
-                const m = Math.floor(t / 60);
-                const s = Math.floor(t % 60);
-                return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
-            };
-            timeInd.innerText = `${formatM(curTime)} / ${formatM(dur)}`;
-
-            const matched = timeline.find(item => curTime >= item.start && curTime < item.end);
+            const cur = audio.currentTime;
+            const matched = timeline.find(item => cur >= item.start && cur < item.end);
+            
             if (matched) {
-                subBox.innerText = matched.text;
-                if (matched.scene !== currentSceneId) {
-                    switchScene(matched.scene);
+                // 更新底部抖音胶囊字幕
+                captionBox.innerText = matched.text;
+                captionBox.classList.add('active');
+
+                // 更新中部爆款大花字
+                if (lastHookText !== matched.hookHtml) {
+                    lastHookText = matched.hookHtml;
+                    hookTitle.classList.remove('show');
+                    setTimeout(() => {
+                        hookTitle.innerHTML = matched.hookHtml;
+                        hookTitle.classList.add('show');
+                    }, 150);
+                }
+
+                // 切换背景与镜头推拉
+                if (matched.bg !== currentBgId) {
+                    switchBg(matched.bg);
                 }
             }
         });
 
-        audio.addEventListener('play', () => updatePlayState(true));
-        audio.addEventListener('pause', () => updatePlayState(false));
-        audio.addEventListener('ended', () => updatePlayState(false));
-
-        function switchScene(sceneId) {
-            currentSceneId = sceneId;
-            for (let i = 1; i <= 4; i++) {
-                const el = document.getElementById(`scene-${i}`);
+        function switchBg(bgId) {
+            currentBgId = bgId;
+            for (let i = 1; i <= 3; i++) {
+                const el = document.getElementById(`bg-${i}`);
                 if (el) {
-                    el.classList.toggle('active', i === sceneId);
+                    el.classList.toggle('active', i === bgId);
                 }
             }
         }
