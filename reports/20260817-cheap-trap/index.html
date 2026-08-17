@@ -4,45 +4,35 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="description" content="什么是廉价陷阱？ - 短视频爆款内容结构深度拆解与文案分析报告">
-    <meta property="og:title" content="什么是廉价陷阱？ - 爆款内容深度拆解报告">
-    <meta property="og:description" content="包含黄金前3秒钩子、情绪痛点、叙事曲线、爆款金句及完整SRT字幕。">
-    <meta property="og:type" content="article">
-    <title>什么是廉价陷阱？ · 爆款内容深度拆解报告</title>
+    <title>什么是廉价陷阱？ · 深度内容拆解</title>
     
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --bg-page: #f8fafc;
-            --bg-card: #ffffff;
-            --bg-subtle: #f1f5f9;
-            --bg-tinted: #eff6ff;
-            --bg-amber-tint: #fffbeb;
+            --bg-paper: #fbfbfb;
+            --bg-white: #ffffff;
+            --bg-zinc-50: #f8fafc;
+            --bg-zinc-100: #f1f5f9;
             
-            --border-light: #e2e8f0;
-            --border-focus: #cbd5e1;
-            --border-primary: #bfdbfe;
+            --border-neutral: #e4e4e7;
+            --border-subtle: #f1f1f4;
+            --border-dark: #18181b;
             
-            --text-heading: #0f172a;
-            --text-body: #334155;
-            --text-muted: #64748b;
-            --text-caption: #94a3b8;
+            --text-black: #09090b;
+            --text-secondary: #3f3f46;
+            --text-muted: #71717a;
+            --text-faint: #a1a1aa;
             
-            --brand-primary: #0284c7;
-            --brand-hover: #0369a1;
-            --brand-subtle: rgba(2, 132, 199, 0.08);
+            --accent-blue: #0284c7;
+            --accent-blue-subtle: #f0f9ff;
+            --accent-amber: #d97706;
             
-            --font-main: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-serif: 'Noto Serif SC', 'Songti SC', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
             --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-            
-            --shadow-card: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
-            --shadow-elevated: 0 10px 25px -5px rgba(0, 0, 0, 0.04), 0 8px 10px -6px rgba(0, 0, 0, 0.03);
-            
-            --radius-box: 14px;
-            --radius-inner: 10px;
-            --radius-pill: 9999px;
         }
 
         * {
@@ -53,541 +43,532 @@
         }
 
         body {
-            background-color: var(--bg-page);
-            color: var(--text-body);
-            font-family: var(--font-main);
+            background-color: var(--bg-paper);
+            color: var(--text-secondary);
+            font-family: var(--font-sans);
             line-height: 1.7;
             -webkit-font-smoothing: antialiased;
-            padding: 40px 20px 90px;
-            min-height: 100dvh;
+            padding: 48px 24px 100px;
         }
 
-        .wrapper {
-            max-width: 920px;
+        .editorial-container {
+            max-width: 1040px;
             margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 24px;
         }
 
-        /* 顶部研报大卡片 */
-        .paper-header {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-box);
-            padding: 36px 32px 28px;
-            box-shadow: var(--shadow-card);
+        /* 顶部大画报栏 (Editorial Top Header) */
+        .masthead {
+            border-bottom: 2px solid var(--text-black);
+            padding-bottom: 28px;
+            margin-bottom: 36px;
         }
 
-        .header-meta-row {
+        .masthead-meta {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            gap: 12px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .meta-pills {
-            display: flex;
-            gap: 8px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .pill {
+            font-family: var(--font-mono);
             font-size: 12px;
             font-weight: 700;
-            padding: 4px 12px;
-            border-radius: var(--radius-pill);
-            background: var(--brand-subtle);
-            color: var(--brand-primary);
-            border: 1px solid var(--border-primary);
-            letter-spacing: 0.02em;
-        }
-
-        .pill.secondary {
-            background: var(--bg-subtle);
             color: var(--text-muted);
-            border-color: var(--border-light);
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+            border-bottom: 1px solid var(--border-neutral);
+            padding-bottom: 10px;
         }
 
-        .report-title {
-            font-size: 30px;
-            font-weight: 800;
-            color: var(--text-heading);
-            line-height: 1.35;
+        .masthead-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--text-black);
+        }
+
+        .masthead-title-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: flex-end;
+            margin-bottom: 24px;
+        }
+
+        .editorial-title {
+            font-family: var(--font-serif);
+            font-size: 38px;
+            font-weight: 900;
+            color: var(--text-black);
+            line-height: 1.25;
             letter-spacing: -0.02em;
-            margin-bottom: 22px;
         }
 
-        /* 原视频高亮横幅（浅色清爽版） */
-        .source-light-banner {
+        .masthead-stats {
+            display: flex;
+            gap: 24px;
+            font-family: var(--font-mono);
+            border-left: 1px solid var(--border-neutral);
+            padding-left: 24px;
+        }
+
+        .stat-col {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .stat-col-lbl {
+            font-size: 11px;
+            color: var(--text-faint);
+            text-transform: uppercase;
+        }
+
+        .stat-col-val {
+            font-size: 18px;
+            font-weight: 800;
+            color: var(--text-black);
+        }
+
+        /* 原视频行动条 */
+        .origin-action-bar {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: var(--bg-tinted);
-            border: 1px solid var(--border-primary);
-            border-radius: var(--radius-inner);
-            padding: 14px 18px;
-            margin-bottom: 24px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-neutral);
+            border-radius: 8px;
+            padding: 10px 16px;
             gap: 16px;
             flex-wrap: wrap;
         }
 
-        .source-light-main {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            min-width: 220px;
-            flex: 1;
-        }
-
-        .source-badge {
+        .origin-source-link {
             display: flex;
             align-items: center;
-            gap: 6px;
-            font-size: 11.5px;
-            font-weight: 700;
-            color: var(--brand-primary);
-        }
-
-        .dot-live {
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: var(--brand-primary);
-        }
-
-        .source-url-text {
+            gap: 8px;
             font-family: var(--font-mono);
-            font-size: 13px;
-            color: #1e293b;
-            word-break: break-all;
-        }
-
-        .source-jump-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--brand-primary);
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 700;
-            padding: 9px 18px;
-            border-radius: 8px;
-            text-decoration: none;
-            flex-shrink: 0;
-            transition: all 0.2s ease;
-            box-shadow: 0 2px 4px rgba(2, 132, 199, 0.2);
-        }
-
-        .source-jump-btn:hover {
-            background: var(--brand-hover);
-            transform: translateY(-1px);
-        }
-
-        .source-jump-btn:active {
-            transform: translateY(0);
-        }
-
-        /* 核心指标 3 列 */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-            gap: 20px;
-            padding-top: 22px;
-            border-top: 1px solid var(--border-light);
-        }
-
-        .stat-item {
-            display: flex;
-            flex-direction: column;
-            gap: 2px;
-        }
-
-        .stat-label {
-            font-size: 12px;
-            font-weight: 600;
+            font-size: 12.5px;
             color: var(--text-muted);
+            flex: 1;
+            min-width: 220px;
         }
 
-        .stat-value {
-            font-size: 16px;
-            font-weight: 800;
-            color: var(--text-heading);
-            letter-spacing: -0.01em;
+        .pulse-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #10b981;
+            box-shadow: 0 0 6px #10b981;
         }
 
-        /* 主体双栏/模块排版 */
-        .grid-split {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        .card-block {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-box);
-            padding: 28px 32px;
-            box-shadow: var(--shadow-card);
-        }
-
-        .card-header-bar {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 16px;
-        }
-
-        .header-icon {
-            font-size: 18px;
-            line-height: 1;
-        }
-
-        .card-title-text {
-            font-size: 19px;
-            font-weight: 800;
-            color: var(--text-heading);
-            letter-spacing: -0.01em;
-        }
-
-        .prose-desc {
-            font-size: 15px;
-            color: var(--text-body);
-            line-height: 1.75;
-            margin-bottom: 16px;
-        }
-
-        /* 浅色高光引用块 */
-        .highlight-quote-box {
-            background: var(--bg-subtle);
-            border-left: 4px solid var(--brand-primary);
-            border-radius: 0 8px 8px 0;
-            padding: 16px 20px;
-            font-size: 14.5px;
-            color: var(--text-heading);
-            line-height: 1.65;
-        }
-
-        .highlight-quote-box strong {
-            color: var(--brand-primary);
-            font-weight: 700;
-        }
-
-        /* 金句卡片群 */
-        .quotes-flex {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-        }
-
-        .quote-paper-item {
-            background: var(--bg-subtle);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-inner);
-            padding: 16px 20px;
-            display: flex;
-            gap: 12px;
-            align-items: flex-start;
-        }
-
-        .quote-sign {
-            font-size: 26px;
-            line-height: 1;
-            color: var(--brand-primary);
-            font-family: Georgia, serif;
-            flex-shrink: 0;
-        }
-
-        .quote-val {
-            font-size: 14.5px;
-            color: #1e293b;
-            line-height: 1.7;
+        .source-url-str {
+            color: var(--text-black);
+            word-break: break-all;
             font-weight: 500;
         }
 
-        /* 复刻步骤群 */
-        .steps-wrapper {
-            display: flex;
-            flex-direction: column;
-            gap: 14px;
-        }
-
-        .action-step-item {
-            display: flex;
-            gap: 16px;
-            background: var(--bg-subtle);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-inner);
-            padding: 18px 20px;
-            align-items: flex-start;
-        }
-
-        .step-counter {
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            background: var(--brand-primary);
-            color: #ffffff;
-            font-size: 13px;
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-
-        .step-text-wrap {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-        }
-
-        .step-name {
-            font-size: 15.5px;
-            font-weight: 700;
-            color: var(--text-heading);
-        }
-
-        .step-detail {
-            font-size: 14px;
-            color: var(--text-muted);
-            line-height: 1.65;
-        }
-
-        /* 全文与字幕浏览盒 */
-        .viewer-box {
-            background: var(--bg-card);
-            border: 1px solid var(--border-light);
-            border-radius: var(--radius-box);
-            overflow: hidden;
-            box-shadow: var(--shadow-card);
-        }
-
-        .viewer-top {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            background: var(--bg-subtle);
-            border-bottom: 1px solid var(--border-light);
-            padding: 10px 20px;
-            gap: 12px;
-            flex-wrap: wrap;
-        }
-
-        .tab-group-bar {
-            display: flex;
-            background: #e2e8f0;
-            padding: 3px;
-            border-radius: 8px;
-            gap: 2px;
-        }
-
-        .tab-btn-pill {
-            background: transparent;
-            border: none;
-            color: var(--text-muted);
-            font-family: var(--font-main);
-            font-size: 13px;
-            font-weight: 700;
-            padding: 6px 16px;
-            border-radius: 6px;
-            cursor: pointer;
-            transition: all 0.15s ease;
-        }
-
-        .tab-btn-pill.active {
-            background: #ffffff;
-            color: var(--brand-primary);
-            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
-        }
-
-        .btn-copy-action {
-            background: #ffffff;
-            border: 1px solid var(--border-light);
-            color: var(--text-heading);
-            font-family: var(--font-main);
-            font-size: 13px;
-            font-weight: 700;
-            padding: 7px 16px;
-            border-radius: 8px;
-            cursor: pointer;
+        .btn-play-original {
             display: inline-flex;
             align-items: center;
             gap: 6px;
-            transition: all 0.2s ease;
+            background: var(--text-black);
+            color: #ffffff;
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 7px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            flex-shrink: 0;
         }
 
-        .btn-copy-action:hover {
-            background: var(--bg-subtle);
-            border-color: var(--border-focus);
+        .btn-play-original:hover {
+            opacity: 0.85;
         }
 
-        .btn-copy-action:active {
+        /* 核心内容区：非对称双栏画报 (Asymmetric Magazine Grid) */
+        .magazine-grid {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 36px;
+            margin-bottom: 48px;
+        }
+
+        .magazine-col-main {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .magazine-col-side {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            border-left: 1px solid var(--border-neutral);
+            padding-left: 36px;
+        }
+
+        .article-block {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .article-section-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--accent-blue);
+            letter-spacing: 0.08em;
+        }
+
+        .article-heading {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            font-weight: 800;
+            color: var(--text-black);
+            line-height: 1.35;
+        }
+
+        .article-p {
+            font-size: 15px;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        /* 杂志高光拉出块 (Callout Quote) */
+        .pull-quote {
+            background: var(--bg-white);
+            border: 1px solid var(--border-neutral);
+            border-left: 3px solid var(--text-black);
+            padding: 18px 22px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 6px;
+        }
+
+        .pull-quote-title {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 800;
+            text-transform: uppercase;
+            color: var(--text-muted);
+            margin-bottom: 6px;
+        }
+
+        .pull-quote-text {
+            font-family: var(--font-serif);
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--text-black);
+            line-height: 1.6;
+        }
+
+        /* 侧栏金句集 */
+        .quote-editorial {
+            background: var(--bg-white);
+            border: 1px solid var(--border-neutral);
+            border-radius: 8px;
+            padding: 16px 20px;
+            position: relative;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.02);
+        }
+
+        .quote-bracket {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 900;
+            color: var(--accent-blue);
+            line-height: 1;
+        }
+
+        .quote-bracket.right {
+            display: block;
+            text-align: right;
+        }
+
+        .quote-body {
+            font-size: 14px;
+            color: var(--text-black);
+            font-weight: 600;
+            line-height: 1.65;
+            padding: 4px 0;
+        }
+
+        /* 复刻步骤列表 */
+        .recipe-row {
+            display: flex;
+            gap: 14px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed var(--border-neutral);
+        }
+
+        .recipe-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .recipe-num {
+            font-family: var(--font-mono);
+            font-size: 16px;
+            font-weight: 900;
+            color: var(--text-black);
+            flex-shrink: 0;
+            line-height: 1.2;
+            width: 24px;
+        }
+
+        .recipe-head {
+            font-size: 14.5px;
+            font-weight: 700;
+            color: var(--text-black);
+            margin-bottom: 3px;
+        }
+
+        .recipe-desc {
+            font-size: 13.5px;
+            color: var(--text-muted);
+            line-height: 1.6;
+        }
+
+        /* 底部沉浸式文稿阅读台 (Full-width Text & SRT Station) */
+        .station-card {
+            background: var(--bg-white);
+            border: 1px solid var(--border-neutral);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.03);
+            margin-top: 16px;
+        }
+
+        .station-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-zinc-50);
+            border-bottom: 1px solid var(--border-neutral);
+            padding: 12px 24px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .station-tabs {
+            display: flex;
+            gap: 4px;
+            background: var(--border-neutral);
+            padding: 3px;
+            border-radius: 6px;
+        }
+
+        .tab-trigger {
+            background: transparent;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 13px;
+            font-weight: 700;
+            color: var(--text-muted);
+            padding: 6px 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .tab-trigger.active {
+            background: var(--bg-white);
+            color: var(--text-black);
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+        }
+
+        .btn-station-copy {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-white);
+            border: 1px solid var(--border-neutral);
+            color: var(--text-black);
+            font-family: var(--font-sans);
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 6px 14px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .btn-station-copy:hover {
+            background: var(--bg-zinc-100);
+        }
+
+        .btn-station-copy:active {
             transform: scale(0.97);
         }
 
-        .viewer-content-area {
-            padding: 28px 32px;
-            max-height: 440px;
+        .station-view {
+            padding: 32px;
+            max-height: 480px;
             overflow-y: auto;
             white-space: pre-wrap;
-            line-height: 1.9;
-            font-size: 15px;
-            color: #1e293b;
+            line-height: 1.95;
+            font-size: 15.5px;
+            color: #27272a;
             display: none;
         }
 
-        .viewer-content-area.active {
+        .station-view.active {
             display: block;
         }
 
-        .viewer-content-area.srt-style {
+        .station-view.mono-view {
             font-family: var(--font-mono);
-            font-size: 13px;
-            color: #0f766e;
-            background: #f0fdfa;
+            font-size: 13.5px;
+            color: #0369a1;
+            background: #f8fafc;
         }
 
-        .report-footer {
-            text-align: center;
-            font-size: 12.5px;
-            color: var(--text-caption);
-            padding: 12px 0 20px;
+        .editorial-footer {
+            margin-top: 48px;
+            padding-top: 24px;
+            border-top: 1px solid var(--border-neutral);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: var(--font-mono);
+            font-size: 12px;
+            color: var(--text-faint);
+            flex-wrap: wrap;
+            gap: 12px;
         }
 
-        @media (max-width: 640px) {
-            body { padding: 16px 12px 60px; }
-            .paper-header { padding: 22px 18px; }
-            .report-title { font-size: 23px; }
-            .card-block { padding: 22px 18px; }
-            .viewer-content-area { padding: 20px 18px; }
-            .source-light-banner { flex-direction: column; align-items: flex-start; }
-            .source-jump-btn { width: 100%; justify-content: center; }
+        @media (max-width: 820px) {
+            body { padding: 24px 16px 60px; }
+            .editorial-title { font-size: 26px; }
+            .masthead-title-row { grid-template-columns: 1fr; }
+            .masthead-stats { border-left: none; padding-left: 0; }
+            .magazine-grid { grid-template-columns: 1fr; gap: 32px; }
+            .magazine-col-side { border-left: none; padding-left: 0; border-top: 1px solid var(--border-neutral); padding-top: 32px; }
+            .station-view { padding: 20px 16px; }
         }
     </style>
 </head>
 <body>
-    <div class="wrapper">
-        <!-- 头部研报信息 -->
-        <header class="paper-header">
-            <div class="header-meta-row">
-                <div class="meta-pills">
-                    <span class="pill">爆款深度拆解报告</span>
-                    <span class="pill secondary">本地文件</span>
-                </div>
-                <span class="pill secondary">2026-08-17</span>
+    <div class="editorial-container">
+        <!-- 报头 (Masthead) -->
+        <header class="masthead">
+            <div class="masthead-meta">
+                <span class="masthead-tag">
+                    <span>●</span>
+                    <span>深度爆款拆解专刊 · 本地文件</span>
+                </span>
+                <span>2026-08-17 归档</span>
             </div>
 
-            <h1 class="report-title">什么是廉价陷阱？</h1>
+            <div class="masthead-title-row">
+                <h1 class="editorial-title">什么是廉价陷阱？</h1>
+                <div class="masthead-stats">
+                    <div class="stat-col">
+                        <span class="stat-col-lbl">时长</span>
+                        <span class="stat-col-val">完整原片</span>
+                    </div>
+                    <div class="stat-col">
+                        <span class="stat-col-lbl">字数</span>
+                        <span class="stat-col-val">1234 字</span>
+                    </div>
+                    <div class="stat-col">
+                        <span class="stat-col-lbl">转写</span>
+                        <span class="stat-col-val">SenseVoice</span>
+                    </div>
+                </div>
+            </div>
 
             
-        <div class="source-light-banner">
-            <div class="source-light-main">
-                <div class="source-badge">
-                    <span class="dot-live"></span>
-                    <span>原视频来源 · 本地文件</span>
-                </div>
-                <div class="source-url-text" title="https://www.douyin.com/video/7667502624799883334">https://www.douyin.com/video/7667502624799883334</div>
+        <div class="origin-action-bar">
+            <div class="origin-source-link">
+                <span class="pulse-dot"></span>
+                <span class="source-url-str" title="https://www.douyin.com/video/7667502624799883334">https://www.douyin.com/video/7667502624799883334</span>
             </div>
-            <a href="https://www.douyin.com/video/7667502624799883334" target="_blank" rel="noopener noreferrer" class="source-jump-btn">
-                <span>直达原视频</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+            <a href="https://www.douyin.com/video/7667502624799883334" target="_blank" rel="noopener noreferrer" class="btn-play-original">
+                <span>观看原视频</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
             </a>
         </div>
         
-
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <span class="stat-label">视频时长</span>
-                    <span class="stat-value">完整原片</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">全文字数</span>
-                    <span class="stat-value">1234 字</span>
-                </div>
-                <div class="stat-item">
-                    <span class="stat-label">转写引擎</span>
-                    <span class="stat-value">SenseVoice-Small</span>
-                </div>
-            </div>
         </header>
 
-        <!-- 黄金前3秒钩子 -->
-        <section class="card-block">
-            <div class="card-header-bar">
-                <span class="header-icon">🎯</span>
-                <h2 class="card-title-text">黄金前 3 秒钩子 (Hook) 拆解</h2>
-            </div>
-            <p class="prose-desc">开篇以设问或具象生活场景迅速建立好奇缺口，直接抛出反常识或大众普遍存在的潜在行为（如：什么是廉价陷阱），瞬间拉升前 3 秒留存率。</p>
-            <div class="highlight-quote-box">
-                <strong>开篇核心语句 : </strong> 什么是廉价陷阱。
-            </div>
-        </section>
+        <!-- 杂志双栏非对称网格 (Asymmetric Magazine Grid) -->
+        <main class="magazine-grid">
+            <!-- 左栏：主叙事与深度机理 (60%) -->
+            <div class="magazine-col-main">
+                <!-- 01 黄金 3 秒钩子 -->
+                <article class="article-block">
+                    <div class="article-section-label">01 / HOOK ANALYSIS</div>
+                    <h2 class="article-heading">黄金前 3 秒钩子剖析</h2>
+                    <p class="article-p">开篇以设问或具象生活场景迅速建立好奇缺口，直接抛出反常识或大众普遍存在的潜在行为（如：什么是廉价陷阱），瞬间拉升前 3 秒留存率。</p>
+                    <div class="pull-quote">
+                        <div class="pull-quote-title">开篇核心金句</div>
+                        <div class="pull-quote-text">“什么是廉价陷阱。”</div>
+                    </div>
+                </article>
 
-        <!-- 痛点与情绪机制 -->
-        <section class="card-block">
-            <div class="card-header-bar">
-                <span class="header-icon">🔥</span>
-                <h2 class="card-title-text">痛点激发与情绪共鸣机制</h2>
-            </div>
-            <p class="prose-desc">直击受众对于“自以为在省钱/理性消费，实则不知不觉陷入更大财务漏洞”的深层焦虑与认知反差。</p>
-            <div class="highlight-quote-box">
-                <strong>底层心理机制 : </strong> 利用了心理学上的「心理账户」与「沉没成本认知偏差」，让受众产生强烈的对号入座感与恍然大悟的惊醒感。
-            </div>
-        </section>
+                <!-- 02 情绪与心理共鸣 -->
+                <article class="article-block">
+                    <div class="article-section-label">02 / PSYCHOLOGY & RESONANCE</div>
+                    <h2 class="article-heading">痛点激发与底层心理机制</h2>
+                    <p class="article-p">直击受众对于“自以为在省钱/理性消费，实则不知不觉陷入更大财务漏洞”的深层焦虑与认知反差。</p>
+                    <div class="pull-quote">
+                        <div class="pull-quote-title">底层心理机制解码</div>
+                        <div class="pull-quote-text">利用了心理学上的「心理账户」与「沉没成本认知偏差」，让受众产生强烈的对号入座感与恍然大悟的惊醒感。</div>
+                    </div>
+                </article>
 
-        <!-- 叙事节奏 -->
-        <section class="card-block">
-            <div class="card-header-bar">
-                <span class="header-icon">🔄</span>
-                <h2 class="card-title-text">叙事节奏与反转高潮</h2>
+                <!-- 03 叙事节奏 -->
+                <article class="article-block">
+                    <div class="article-section-label">03 / NARRATIVE STRUCTURE</div>
+                    <h2 class="article-heading">叙事节奏与反转高潮</h2>
+                    <p class="article-p">采用『生活具象场景切入 → 旁观者质疑/反常积累 → 算账时刻的高潮反转 → 升华至社会商业博弈本质』的四段式叙事链条，节奏紧凑递进。</p>
+                    <div class="pull-quote">
+                        <div class="pull-quote-title">算账与高潮时刻</div>
+                        <div class="pull-quote-text">当所有微小订单汇总计算，金额突破半月工资的瞬间，形成巨大的现实冲击力。</div>
+                    </div>
+                </article>
             </div>
-            <p class="prose-desc">采用『生活具象场景切入 → 旁观者质疑/反常积累 → 算账时刻的高潮反转 → 升华至社会商业博弈本质』的四段式叙事链条，节奏紧凑递进。</p>
-            <div class="highlight-quote-box">
-                <strong>高潮时刻 : </strong> 当所有微小订单汇总计算，金额突破半月工资的瞬间，形成巨大的现实冲击力。
-            </div>
-        </section>
 
-        <!-- 金句提炼 -->
-        <section class="card-block">
-            <div class="card-header-bar">
-                <span class="header-icon">💡</span>
-                <h2 class="card-title-text">高传播力金句提炼</h2>
-            </div>
-            <div class="quotes-flex">
-                <div class="quote-paper-item"><span class="quote-sign">“</span><p class="quote-val">每一件都不贵，每一件他都用得着 : 至少下单的时候他是这样想的。</p></div><div class="quote-paper-item"><span class="quote-sign">“</span><p class="quote-val">不记得自己是从什么时候开始，把便宜当成了需要。</p></div><div class="quote-paper-item"><span class="quote-sign">“</span><p class="quote-val">那些单价极低、毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到在月末叠加出惊人的总数。</p></div><div class="quote-paper-item"><span class="quote-sign">“</span><p class="quote-val">便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。</p></div>
-            </div>
-        </section>
-
-        <!-- 选题复刻指南 -->
-        <section class="card-block">
-            <div class="card-header-bar">
-                <span class="header-icon">🛠️</span>
-                <h2 class="card-title-text">爆款选题复刻与结构仿写</h2>
-            </div>
-            <div class="steps-wrapper">
-                <div class="action-step-item"><div class="step-counter">1</div><div class="step-text-wrap"><h5 class="step-name">选定微小行为切入</h5><p class="step-detail">寻找大众日常中高频但极不起眼的‘小动作’（如攒塑料袋、买打折临期食品、各种 1 元虚拟会员）。</p></div></div><div class="action-step-item"><div class="step-counter">2</div><div class="step-text-wrap"><h5 class="step-name">构建双人对话反差</h5><p class="step-detail">引入清醒的旁观者角色（类似派大星），通过连续提问揭穿主角自我催眠的逻辑。</p></div></div><div class="action-step-item"><div class="step-counter">3</div><div class="step-text-wrap"><h5 class="step-name">设计算账震撼时刻</h5><p class="step-detail">量化微小支出/时间的长期累加效应，给观众一个超出直觉预期的具体数字。</p></div></div><div class="action-step-item"><div class="step-counter">4</div><div class="step-text-wrap"><h5 class="step-name">升华至系统与认知层面</h5><p class="step-detail">不仅停留在劝导，而是上升到商业模式和消费心理的本质，提供高级认知增量。</p></div></div>
-            </div>
-        </section>
-
-        <!-- 全文与字幕 -->
-        <section class="viewer-box">
-            <div class="viewer-top">
-                <div class="tab-group-bar">
-                    <button class="tab-btn-pill active" onclick="switchContentTab('text')">纯文本全文</button>
-                    <button class="tab-btn-pill" onclick="switchContentTab('srt')">SRT 时间轴字幕</button>
+            <!-- 右栏：金句看板与复刻指南 (40%) -->
+            <div class="magazine-col-side">
+                <!-- 传播金句榜 -->
+                <div class="article-block">
+                    <div class="article-section-label">04 / VIRAL QUOTES</div>
+                    <h3 class="article-heading">高传播力金句榜</h3>
+                    <div class="quotes-stack" style="display:flex; flex-direction:column; gap:14px; margin-top:8px;">
+                        <div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">每一件都不贵，每一件他都用得着 : 至少下单的时候他是这样想的。</p><span class="quote-bracket right">」</span></div><div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">不记得自己是从什么时候开始，把便宜当成了需要。</p><span class="quote-bracket right">」</span></div><div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">那些单价极低、毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到在月末叠加出惊人的总数。</p><span class="quote-bracket right">」</span></div><div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。</p><span class="quote-bracket right">」</span></div>
+                    </div>
                 </div>
-                <button class="btn-copy-action" onclick="copyActiveViewer()">
-                    <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
-                    <span>复制当前内容</span>
+
+                <!-- 仿写与复刻工坊 -->
+                <div class="article-block" style="margin-top:12px;">
+                    <div class="article-section-label">05 / REPLICATION RECIPE</div>
+                    <h3 class="article-heading">爆款选题复刻指南</h3>
+                    <div class="recipe-container" style="display:flex; flex-direction:column; gap:16px; margin-top:8px;">
+                        <div class="recipe-row"><div class="recipe-num">01</div><div class="recipe-content"><div class="recipe-head">选定微小行为切入</div><p class="recipe-desc">寻找大众日常中高频但极不起眼的‘小动作’（如攒塑料袋、买打折临期食品、各种 1 元虚拟会员）。</p></div></div><div class="recipe-row"><div class="recipe-num">02</div><div class="recipe-content"><div class="recipe-head">构建双人对话反差</div><p class="recipe-desc">引入清醒的旁观者角色（类似派大星），通过连续提问揭穿主角自我催眠的逻辑。</p></div></div><div class="recipe-row"><div class="recipe-num">03</div><div class="recipe-content"><div class="recipe-head">设计算账震撼时刻</div><p class="recipe-desc">量化微小支出/时间的长期累加效应，给观众一个超出直觉预期的具体数字。</p></div></div><div class="recipe-row"><div class="recipe-num">04</div><div class="recipe-content"><div class="recipe-head">升华至系统与认知层面</div><p class="recipe-desc">不仅停留在劝导，而是上升到商业模式和消费心理的本质，提供高级认知增量。</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 沉浸式文稿与字幕阅读台 -->
+        <section class="station-card">
+            <div class="station-header">
+                <div class="station-tabs">
+                    <button class="tab-trigger active" onclick="switchStation('plain')">纯文本全文</button>
+                    <button class="tab-trigger" onclick="switchStation('srt')">SRT 时间轴字幕</button>
+                </div>
+                <button class="btn-station-copy" onclick="copyStationText()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>复制文本</span>
                 </button>
             </div>
-            <div id="text-panel" class="viewer-content-area active">什么是廉价陷阱。海绵宝宝最近迷上了网购，他第一次下单时对比了好几天的价格，发现网上那包零食便宜了将近一半，想都没想就付了款。从那以后他养成一个新习惯，不管想买什么，先在网上搜一下9.9的鞋垫，12块的压缩毛巾，5.9的手机壳，19块的便携台灯，每一件都不贵，每一件他都用得着。至少下单的时候，他是这样想的，他每天下了班回到住处躺在床上，打开软件往下滑，看到什么便宜就加进购物车，看到什么有折扣，就点进去看看。大多数时候，他不会直接买会先放着等他降价，或者等到自己觉得反正不贵的那天，可那个反正不贵的门槛降的越来越快，后来看到一件东西的时候，他先看价格再想用途，而不是先想需要再找价格。派大星有几次来找海绵宝宝站在门口，等他把堆在沙发上的东西挪开。那些东西包装完好。有些甚至没来得及拆派大星捡起一个巴丈大的密封罐，翻过来看了一下标签。你买这个干什么。海绵宝宝从厨房走出来看了一眼。放干货。派大星说，你什么时候开始用干货了。海绵宝宝没有回答，他确实没有干货，需要放派大星后来又看到海绵宝宝买了4个同样款式的沥水架，排成一排放置在窗台边缘。他说你买四个沥水架做什么。海绵宝宝说一个放厨房一个放阳台派大星指着剩下的两个这两个呢海绵宝宝说先放着以后用得上。可那两个沥水架一直放在原处，蒙了一层灰，从窗台的外侧一个一个向内延伸，最后两个已经不太容易购到了。派大星没有继续再问。他只是在那个堆满的房间里站了一会儿，然后换了一个更靠里的位置做下。海绵宝宝有一次整理房间的时候，把那些网购来的东西，按订单日期排成一排鞋垫毛巾手机壳台灯密封罐沥水架收纳盒挂钩贴膜替换刷头便携剪刀没有一样超过20块，没有一样是不该买的海绵宝宝蹲在地上把那些东西一个个拿起来。那些东西看起来都很小，凑近地面挨个看过去，每一件单独看都不值得注意。可等到他一路扫到尽头的时候，他忽然意识到那些东西已经铺满了整个房间的过道。他把所有订单金额加在一起，算了好几遍，得出的数字让他愣了一下，那些9.912块5块9块堆在一起，超过了他半个月的工资。海绵宝宝看着那个数字，想不起来这些钱是怎么花出去的。他记得每一单的价格也记得每一单的到达，但他不记得自己是从什么时候开始，把便宜当成了需要，这就是廉价陷阱，当消费决策被价格主导。那些单价极低，看起来毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到，在月末叠加出一个惊人的总数。海绵宝宝在每一个9.9块面前都做出了理性的选择。但他没有意识到自己重复做了很多次，不是任何一次下单出了问题。是那个便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。廉价陷阱本质是现代消费体系的结构性博弈。平台与商家通过高频小额的低价策略，系统性削弱大众的消费感知，利用普通人追求性价比的朴素心态，制造低成本无压力的消费假象。个体的单次决策并无过错，但制度化的持续诱导，会不断蚕食基层群体的财富沉淀空间，让节俭度日的人被动陷入月省钱，月存不下钱的发展困境。。</div>
-            <div id="srt-panel" class="viewer-content-area srt-style">1
+            <div id="view-plain" class="station-view active">什么是廉价陷阱。海绵宝宝最近迷上了网购，他第一次下单时对比了好几天的价格，发现网上那包零食便宜了将近一半，想都没想就付了款。从那以后他养成一个新习惯，不管想买什么，先在网上搜一下9.9的鞋垫，12块的压缩毛巾，5.9的手机壳，19块的便携台灯，每一件都不贵，每一件他都用得着。至少下单的时候，他是这样想的，他每天下了班回到住处躺在床上，打开软件往下滑，看到什么便宜就加进购物车，看到什么有折扣，就点进去看看。大多数时候，他不会直接买会先放着等他降价，或者等到自己觉得反正不贵的那天，可那个反正不贵的门槛降的越来越快，后来看到一件东西的时候，他先看价格再想用途，而不是先想需要再找价格。派大星有几次来找海绵宝宝站在门口，等他把堆在沙发上的东西挪开。那些东西包装完好。有些甚至没来得及拆派大星捡起一个巴丈大的密封罐，翻过来看了一下标签。你买这个干什么。海绵宝宝从厨房走出来看了一眼。放干货。派大星说，你什么时候开始用干货了。海绵宝宝没有回答，他确实没有干货，需要放派大星后来又看到海绵宝宝买了4个同样款式的沥水架，排成一排放置在窗台边缘。他说你买四个沥水架做什么。海绵宝宝说一个放厨房一个放阳台派大星指着剩下的两个这两个呢海绵宝宝说先放着以后用得上。可那两个沥水架一直放在原处，蒙了一层灰，从窗台的外侧一个一个向内延伸，最后两个已经不太容易购到了。派大星没有继续再问。他只是在那个堆满的房间里站了一会儿，然后换了一个更靠里的位置做下。海绵宝宝有一次整理房间的时候，把那些网购来的东西，按订单日期排成一排鞋垫毛巾手机壳台灯密封罐沥水架收纳盒挂钩贴膜替换刷头便携剪刀没有一样超过20块，没有一样是不该买的海绵宝宝蹲在地上把那些东西一个个拿起来。那些东西看起来都很小，凑近地面挨个看过去，每一件单独看都不值得注意。可等到他一路扫到尽头的时候，他忽然意识到那些东西已经铺满了整个房间的过道。他把所有订单金额加在一起，算了好几遍，得出的数字让他愣了一下，那些9.912块5块9块堆在一起，超过了他半个月的工资。海绵宝宝看着那个数字，想不起来这些钱是怎么花出去的。他记得每一单的价格也记得每一单的到达，但他不记得自己是从什么时候开始，把便宜当成了需要，这就是廉价陷阱，当消费决策被价格主导。那些单价极低，看起来毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到，在月末叠加出一个惊人的总数。海绵宝宝在每一个9.9块面前都做出了理性的选择。但他没有意识到自己重复做了很多次，不是任何一次下单出了问题。是那个便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。廉价陷阱本质是现代消费体系的结构性博弈。平台与商家通过高频小额的低价策略，系统性削弱大众的消费感知，利用普通人追求性价比的朴素心态，制造低成本无压力的消费假象。个体的单次决策并无过错，但制度化的持续诱导，会不断蚕食基层群体的财富沉淀空间，让节俭度日的人被动陷入月省钱，月存不下钱的发展困境。。</div>
+            <div id="view-srt" class="station-view mono-view">1
 00:00:00,000 --&gt; 00:00:01,500
 什么是廉价陷阱。
 
@@ -713,31 +694,32 @@
 </div>
         </section>
 
-        <footer class="report-footer">
-            短视频爆款内容深度拆解报告 · 自动生成并归档
+        <footer class="editorial-footer">
+            <span>短视频爆款内容深度拆解专刊</span>
+            <span>ANTIGRAVITY VIRAL ANALYZER · TASTE-SKILL</span>
         </footer>
     </div>
 
     <script>
-        let currentTabMode = 'text';
-        function switchContentTab(mode) {
-            currentTabMode = mode;
-            document.querySelectorAll('.tab-btn-pill').forEach((btn, idx) => {
-                btn.classList.toggle('active', (idx === 0 && mode === 'text') || (idx === 1 && mode === 'srt'));
+        let currentStationMode = 'plain';
+        function switchStation(mode) {
+            currentStationMode = mode;
+            document.querySelectorAll('.tab-trigger').forEach((btn, idx) => {
+                btn.classList.toggle('active', (idx === 0 && mode === 'plain') || (idx === 1 && mode === 'srt'));
             });
-            document.getElementById('text-panel').classList.toggle('active', mode === 'text');
-            document.getElementById('srt-panel').classList.toggle('active', mode === 'srt');
+            document.getElementById('view-plain').classList.toggle('active', mode === 'plain');
+            document.getElementById('view-srt').classList.toggle('active', mode === 'srt');
         }
 
-        function showNotification(text) {
-            let toast = document.getElementById('light-toast');
+        function notifyUser(msg) {
+            let toast = document.getElementById('editorial-toast');
             if (!toast) {
                 toast = document.createElement('div');
-                toast.id = 'light-toast';
-                toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0f172a;color:#ffffff;font-weight:700;font-size:13.5px;padding:10px 22px;border-radius:9999px;box-shadow:0 10px 25px rgba(0,0,0,0.15);z-index:999;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);opacity:0;pointer-events:none;';
+                toast.id = 'editorial-toast';
+                toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#18181b;color:#ffffff;font-weight:700;font-size:13px;padding:9px 20px;border-radius:9999px;box-shadow:0 8px 20px rgba(0,0,0,0.12);z-index:999;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);opacity:0;pointer-events:none;';
                 document.body.appendChild(toast);
             }
-            toast.innerText = text;
+            toast.innerText = msg;
             toast.style.opacity = '1';
             toast.style.transform = 'translateX(-50%) translateY(-4px)';
             setTimeout(() => { 
@@ -746,20 +728,20 @@
             }, 2000);
         }
 
-        function copyActiveViewer() {
-            const text = currentTabMode === 'text' 
-                ? document.getElementById('text-panel').innerText 
-                : document.getElementById('srt-panel').innerText;
+        function copyStationText() {
+            const text = currentStationMode === 'plain' 
+                ? document.getElementById('view-plain').innerText 
+                : document.getElementById('view-srt').innerText;
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showNotification('✅ 已复制到剪贴板');
-                }).catch(() => { fallbackCopyText(text); });
+                    notifyUser('✅ 已成功复制');
+                }).catch(() => { execFallback(text); });
             } else {
-                fallbackCopyText(text);
+                execFallback(text);
             }
         }
 
-        function fallbackCopyText(text) {
+        function execFallback(text) {
             const textArea = document.createElement("textarea");
             textArea.value = text;
             textArea.style.position = "fixed";
@@ -769,9 +751,9 @@
             textArea.select();
             try {
                 document.execCommand('copy');
-                showNotification('✅ 已复制到剪贴板');
+                notifyUser('✅ 已成功复制');
             } catch (err) {
-                showNotification('请长按文本复制');
+                notifyUser('请长按选中复制');
             }
             document.body.removeChild(textArea);
         }
