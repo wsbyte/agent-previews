@@ -554,15 +554,47 @@
             document.getElementById('panel-srt').classList.toggle('active', tab === 'srt');
         }
 
+        function showToast(msg) {
+            let toast = document.getElementById('toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'toast';
+                toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#38bdf8;color:#0c0e14;font-weight:700;font-size:13px;padding:8px 18px;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:999;transition:opacity 0.3s;opacity:0;pointer-events:none;';
+                document.body.appendChild(toast);
+            }
+            toast.innerText = msg;
+            toast.style.opacity = '1';
+            setTimeout(() => { toast.style.opacity = '0'; }, 2000);
+        }
+
         function copyActiveContent() {
             const text = currentTab === 'text' 
                 ? document.getElementById('panel-text').innerText 
                 : document.getElementById('panel-srt').innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert('已成功复制到剪贴板！');
-            }).catch(err => {
-                alert('复制失败，请手动选择复制');
-            });
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast('✅ 已成功复制到剪贴板！');
+                }).catch(() => { fallbackCopy(text); });
+            } else {
+                fallbackCopy(text);
+            }
+        }
+
+        function fallbackCopy(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                showToast('✅ 已成功复制到剪贴板！');
+            } catch (err) {
+                showToast('⚠️ 复制失败，请手动长按复制');
+            }
+            document.body.removeChild(textArea);
         }
     </script>
 </body>
