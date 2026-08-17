@@ -2,7 +2,7 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=1080, height=1920, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <title>允许停下来，然后重新出发</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -11,9 +11,7 @@
         :root {
             --bg-deep: #0c0d12;
             --gold-accent: #f59e0b;
-            --gold-glow: rgba(245, 158, 11, 0.25);
-            --emerald-accent: #10b981;
-            --emerald-glow: rgba(16, 185, 129, 0.25);
+            --gold-glow: rgba(245, 158, 11, 0.35);
             --cyan-accent: #06b6d4;
             --text-pure: #ffffff;
             --text-warm: #fef3c7;
@@ -27,17 +25,33 @@
             box-sizing: border-box;
             margin: 0;
             padding: 0;
+            -webkit-tap-highlight-color: transparent;
         }
 
         body {
-            width: 1080px;
-            height: 1920px;
-            overflow: hidden;
             background-color: var(--bg-deep);
             color: var(--text-pure);
             font-family: var(--font-sans);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            min-height: 100dvh;
+            padding: 10px;
+        }
+
+        /* 手机画幅外壳容器（自适应屏幕高度与居中） */
+        .video-viewport {
+            width: 100%;
+            max-width: 480px;
+            aspect-ratio: 9 / 16;
+            max-height: 94vh;
             position: relative;
-            perspective: 1200px;
+            border-radius: 24px;
+            overflow: hidden;
+            background: #090a0f;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
+            perspective: 1000px;
         }
 
         /* 电影级暗角与流体光晕背景 */
@@ -45,9 +59,9 @@
             position: absolute;
             inset: 0;
             background: 
-                radial-gradient(circle at 50% 25%, rgba(30, 41, 59, 0.6) 0%, transparent 60%),
-                radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.08) 0%, transparent 50%),
-                radial-gradient(circle at 80% 85%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 25%, rgba(30, 41, 59, 0.7) 0%, transparent 65%),
+                radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
+                radial-gradient(circle at 80% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
                 #090a0f;
             z-index: 1;
         }
@@ -56,8 +70,8 @@
             position: absolute;
             inset: 0;
             background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
-            background-size: 80px 80px;
-            opacity: 0.3;
+            background-size: 40px 40px;
+            opacity: 0.25;
             z-index: 2;
         }
 
@@ -69,41 +83,41 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            padding: 140px 80px 140px;
+            padding: 24px 20px 20px;
         }
 
-        /* 顶部品牌与主题小标 */
+        /* 顶部小标 */
         .top-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding-bottom: 12px;
         }
 
         .header-tag {
             font-family: var(--font-mono);
-            font-size: 24px;
+            font-size: 11px;
             font-weight: 700;
             color: var(--gold-accent);
             letter-spacing: 0.1em;
             display: flex;
             align-items: center;
-            gap: 12px;
+            gap: 6px;
         }
 
         .header-tag::before {
             content: '';
-            width: 10px;
-            height: 10px;
+            width: 6px;
+            height: 6px;
             border-radius: 50%;
             background: var(--gold-accent);
-            box-shadow: 0 0 12px var(--gold-accent);
+            box-shadow: 0 0 8px var(--gold-accent);
         }
 
         .header-timer {
             font-family: var(--font-mono);
-            font-size: 22px;
+            font-size: 11px;
             color: var(--text-subtle);
         }
 
@@ -115,7 +129,7 @@
             justify-content: center;
             align-items: center;
             position: relative;
-            margin: 40px 0;
+            margin: 10px 0;
         }
 
         .scene-card {
@@ -126,8 +140,8 @@
             align-items: center;
             text-align: center;
             opacity: 0;
-            transform: translateY(30px) scale(0.96);
-            transition: all 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(20px) scale(0.96);
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
             pointer-events: none;
         }
 
@@ -140,13 +154,13 @@
         /* 3D 浮动实物透明元素 */
         .element-3d-wrap {
             position: relative;
-            width: 520px;
-            height: 520px;
+            width: 180px;
+            height: 180px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 48px;
-            filter: drop-shadow(0 25px 35px rgba(0, 0, 0, 0.65));
+            margin-bottom: 18px;
+            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
             animation: floatSlow 4s ease-in-out infinite alternate;
         }
 
@@ -154,100 +168,127 @@
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            transform: translateZ(40px) rotateX(4deg) rotateY(-4deg);
+            transform: translateZ(30px) rotateX(4deg) rotateY(-4deg);
         }
 
         @keyframes floatSlow {
             0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-18px) rotate(1.5deg); }
+            100% { transform: translateY(-10px) rotate(1.5deg); }
         }
 
-        /* 电影感大标题与核心结论 */
+        /* 标题与核心结论 */
         .scene-badge-pill {
             display: inline-flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             background: rgba(245, 158, 11, 0.12);
             border: 1px solid rgba(245, 158, 11, 0.3);
             color: var(--gold-accent);
-            font-size: 26px;
+            font-size: 11.5px;
             font-weight: 700;
-            padding: 8px 24px;
+            padding: 4px 14px;
             border-radius: 9999px;
-            margin-bottom: 24px;
+            margin-bottom: 12px;
             letter-spacing: 0.05em;
         }
 
         .scene-title-huge {
             font-family: var(--font-serif);
-            font-size: 64px;
+            font-size: 24px;
             font-weight: 900;
             color: #ffffff;
-            line-height: 1.25;
-            margin-bottom: 28px;
-            letter-spacing: -0.02em;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+            line-height: 1.3;
+            margin-bottom: 14px;
+            letter-spacing: -0.01em;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            padding: 0 10px;
         }
 
         .scene-title-huge span.highlight {
             color: var(--gold-accent);
-            position: relative;
         }
 
         .scene-desc-box {
             background: rgba(255, 255, 255, 0.04);
             border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(20px);
-            border-radius: 20px;
-            padding: 32px 40px;
-            max-width: 900px;
+            backdrop-filter: blur(12px);
+            border-radius: 12px;
+            padding: 14px 18px;
+            max-width: 90%;
         }
 
         .scene-desc-text {
-            font-size: 32px;
+            font-size: 13.5px;
             line-height: 1.6;
-            color: #e2e8f0;
+            color: #cbd5e1;
             font-weight: 500;
         }
 
-        /* 底部动态字幕与进度条 */
+        /* 底部动态字幕与播放控制器 */
         .bottom-shelf {
             display: flex;
             flex-direction: column;
-            gap: 20px;
+            gap: 12px;
         }
 
         .caption-glass-panel {
-            background: rgba(15, 23, 42, 0.75);
+            background: rgba(15, 23, 42, 0.85);
             border: 1px solid rgba(255, 255, 255, 0.12);
             backdrop-filter: blur(16px);
-            border-radius: 16px;
-            padding: 24px 32px;
-            min-height: 110px;
+            border-radius: 12px;
+            padding: 12px 16px;
+            min-height: 60px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
         }
 
         .live-subtitle {
             font-family: var(--font-sans);
-            font-size: 34px;
+            font-size: 14.5px;
             font-weight: 700;
             color: var(--text-warm);
-            line-height: 1.4;
-            letter-spacing: 0.02em;
-            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+            line-height: 1.45;
+            letter-spacing: 0.01em;
+            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
         }
 
-        /* 进度条 */
+        /* 进度条与播放条 */
+        .control-bar {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .btn-mini-toggle {
+            width: 34px;
+            height: 34px;
+            border-radius: 50%;
+            background: var(--gold-accent);
+            border: none;
+            color: #0c0d12;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            flex-shrink: 0;
+            box-shadow: 0 0 15px var(--gold-glow);
+            transition: transform 0.15s;
+        }
+
+        .btn-mini-toggle:active {
+            transform: scale(0.92);
+        }
+
         .progress-rail {
-            width: 100%;
-            height: 8px;
-            background: rgba(255, 255, 255, 0.1);
-            border-radius: 4px;
+            flex: 1;
+            height: 6px;
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 3px;
             overflow: hidden;
+            cursor: pointer;
         }
 
         .progress-bar-fill {
@@ -257,123 +298,150 @@
             transition: width 0.1s linear;
         }
 
-        /* 播放控制悬浮球 */
-        .play-overlay-btn {
-            display: none;
+        /* 醒目的大号初始播放遮罩层 */
+        .hero-play-curtain {
+            position: absolute;
+            inset: 0;
+            z-index: 50;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: rgba(12, 13, 18, 0.78);
+            backdrop-filter: blur(10px);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            gap: 16px;
         }
 
-        .play-circle {
-            width: 130px;
-            height: 130px;
+        .hero-play-btn-circle {
+            width: 76px;
+            height: 76px;
             border-radius: 50%;
             background: var(--gold-accent);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 50px var(--gold-glow);
-            transition: transform 0.2s;
+            box-shadow: 0 0 35px var(--gold-glow);
+            animation: pulseGlow 2s infinite;
         }
 
-        .play-circle:hover {
-            transform: scale(1.08);
+        @keyframes pulseGlow {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 25px var(--gold-glow); }
+            50% { transform: scale(1.08); box-shadow: 0 0 45px rgba(245, 158, 11, 0.6); }
         }
 
-        .play-tip {
-            font-size: 32px;
-            font-weight: 700;
+        .hero-play-label {
+            font-size: 16px;
+            font-weight: 800;
             color: #ffffff;
             letter-spacing: 0.05em;
+            background: rgba(0, 0, 0, 0.4);
+            padding: 6px 18px;
+            border-radius: 9999px;
+            border: 1px solid rgba(255, 255, 255, 0.15);
         }
     </style>
 </head>
 <body>
-    <div class="ambient-bg"></div>
-    <div class="ambient-dust"></div>
+    <div class="video-viewport" onclick="togglePlayPause(event)">
+        <div class="ambient-bg"></div>
+        <div class="ambient-dust"></div>
 
-    <audio id="main-audio" src="audio.mp3" preload="auto"></audio>
+        <audio id="main-audio" src="audio.mp3" preload="auto"></audio>
 
-    <div id="play-overlay" class="play-overlay-btn" onclick="startPlayback()">
-        <div class="play-circle">
-            <svg width="60" height="60" viewBox="0 0 24 24" fill="#0c0d12"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-        </div>
-        <div class="play-tip">点击播放 3D 电影级短片</div>
-    </div>
-
-    <div class="stage-container">
-        <!-- 顶部信息 -->
-        <div class="top-header">
-            <div class="header-tag">GROWTH & INTELLECT</div>
-            <div id="time-indicator" class="header-timer">00:00 / 01:28</div>
+        <!-- 醒目的全屏点击播放遮罩 -->
+        <div id="hero-curtain" class="hero-play-curtain" onclick="startInitialPlayback(event)">
+            <div class="hero-play-btn-circle">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="#0c0d12"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+            </div>
+            <div class="hero-play-label">点击开始播放 · 完整配音短片</div>
         </div>
 
-        <!-- 核心多场景轮播（实物 3D 视差） -->
-        <div class="main-scene-area">
-            <!-- 场景 1：离开工位与身份解绑 (0s ~ 26s) -->
-            <div id="scene-1" class="scene-card active">
-                <div class="element-3d-wrap">
-                    <img src="badge.png" class="element-3d-img" alt="工牌实物">
+        <div class="stage-container">
+            <!-- 顶部信息 -->
+            <div class="top-header">
+                <div class="header-tag">GROWTH & INTELLECT</div>
+                <div id="time-indicator" class="header-timer">00:00 / 01:28</div>
+            </div>
+
+            <!-- 核心多场景轮播（实物 3D 视差） -->
+            <div class="main-scene-area">
+                <!-- 场景 1：离开工位与身份解绑 (0s ~ 26s) -->
+                <div id="scene-1" class="scene-card active">
+                    <div class="element-3d-wrap">
+                        <img src="badge.png" class="element-3d-img" alt="工牌实物">
+                    </div>
+                    <div class="scene-badge-pill">01 · 认知解绑</div>
+                    <h1 class="scene-title-huge">平台带走的只是<span class="highlight">工牌</span></h1>
+                    <div class="scene-desc-box">
+                        <p class="scene-desc-text">真正锻炼出的逻辑、判断力与抗压韧性，全部实打实地长在你自己的骨头里。</p>
+                    </div>
                 </div>
-                <div class="scene-badge-pill">01 · 认知解绑</div>
-                <h1 class="scene-title-huge">平台带走的只是<span class="highlight">工牌</span></h1>
-                <div class="scene-desc-box">
-                    <p class="scene-desc-text">真正锻炼出的逻辑、判断力与抗压韧性，全部实打实地长在你自己的骨头里。</p>
+
+                <!-- 场景 2：第一步 能力彻底脱水 (26s ~ 48s) -->
+                <div id="scene-2" class="scene-card">
+                    <div class="element-3d-wrap">
+                        <img src="crystal.png" class="element-3d-img" alt="能力水晶">
+                    </div>
+                    <div class="scene-badge-pill">02 · 行动第一步</div>
+                    <h1 class="scene-title-huge">给能力做一次<span class="highlight">“彻底脱水”</span></h1>
+                    <div class="scene-desc-box">
+                        <p class="scene-desc-text">删掉所有只有大厂听得懂的汇报黑话，只写脱离平台后能独立解决的 3 个真实问题。</p>
+                    </div>
+                </div>
+
+                <!-- 场景 3：第二步 打造微型交付物 (48s ~ 65s) -->
+                <div id="scene-3" class="scene-card">
+                    <div class="element-3d-wrap">
+                        <img src="sprout.png" class="element-3d-img" alt="希望幼苗">
+                    </div>
+                    <div class="scene-badge-pill">03 · 建立正反馈</div>
+                    <h1 class="scene-title-huge">做属于你的<span class="highlight">微型交付物</span></h1>
+                    <div class="scene-desc-box">
+                        <p class="scene-desc-text">哪怕是一篇深度经验复盘，重新找回直接向真实世界交付价值的肌肉记忆。</p>
+                    </div>
+                </div>
+
+                <!-- 场景 4：第三步 低能耗生活与重塑 (65s ~ 88s) -->
+                <div id="scene-4" class="scene-card">
+                    <div class="element-3d-wrap">
+                        <img src="crystal.png" class="element-3d-img" style="filter: hue-rotate(90deg) brightness(1.2);" alt="自留地">
+                    </div>
+                    <div class="scene-badge-pill">04 · 投资你自己</div>
+                    <h1 class="scene-title-huge">拿回属于你的<span class="highlight">时间所有权</span></h1>
+                    <div class="scene-desc-box">
+                        <p class="scene-desc-text">把原本用来应付内耗的才华，从今天开始，全部拿来重新滋养你自己。</p>
+                    </div>
                 </div>
             </div>
 
-            <!-- 场景 2：第一步 能力彻底脱水 (26s ~ 48s) -->
-            <div id="scene-2" class="scene-card">
-                <div class="element-3d-wrap">
-                    <img src="crystal.png" class="element-3d-img" alt="能力水晶">
+            <!-- 底部字幕与控制条 -->
+            <div class="bottom-shelf">
+                <div class="caption-glass-panel">
+                    <div id="subtitle-box" class="live-subtitle">离开工位的那一刻，很多人会陷入一种深深的怀疑...</div>
                 </div>
-                <div class="scene-badge-pill">02 · 行动第一步</div>
-                <h1 class="scene-title-huge">给能力做一次<span class="highlight">“彻底脱水”</span></h1>
-                <div class="scene-desc-box">
-                    <p class="scene-desc-text">删掉所有只有大厂听得懂的汇报黑话，只写脱离平台后能独立解决的 3 个真实问题。</p>
+                <div class="control-bar">
+                    <button id="play-btn" class="btn-mini-toggle" onclick="togglePlayPause(event)">
+                        <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                        <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                    </button>
+                    <div class="progress-rail" onclick="seekAudio(event)">
+                        <div id="progress-fill" class="progress-bar-fill"></div>
+                    </div>
                 </div>
-            </div>
-
-            <!-- 场景 3：第二步 打造微型交付物 (48s ~ 65s) -->
-            <div id="scene-3" class="scene-card">
-                <div class="element-3d-wrap">
-                    <img src="sprout.png" class="element-3d-img" alt="希望幼苗">
-                </div>
-                <div class="scene-badge-pill">03 · 建立正反馈</div>
-                <h1 class="scene-title-huge">做属于你的<span class="highlight">微型交付物</span></h1>
-                <div class="scene-desc-box">
-                    <p class="scene-desc-text">哪怕是一篇深度经验复盘，重新找回直接向真实世界交付价值的肌肉记忆。</p>
-                </div>
-            </div>
-
-            <!-- 场景 4：第三步 低能耗生活与重塑 (65s ~ 88s) -->
-            <div id="scene-4" class="scene-card">
-                <div class="element-3d-wrap">
-                    <img src="crystal.png" class="element-3d-img" style="filter: hue-rotate(90deg) brightness(1.2);" alt="自留地">
-                </div>
-                <div class="scene-badge-pill">04 · 投资你自己</div>
-                <h1 class="scene-title-huge">拿回属于你的<span class="highlight">时间所有权</span></h1>
-                <div class="scene-desc-box">
-                    <p class="scene-desc-text">把原本用来应付内耗的才华，从今天开始，全部拿来重新滋养你自己。</p>
-                </div>
-            </div>
-        </div>
-
-        <!-- 底部字幕与进度条 -->
-        <div class="bottom-shelf">
-            <div class="caption-glass-panel">
-                <div id="subtitle-box" class="live-subtitle">离开工位的那一刻，很多人会陷入一种深深的怀疑...</div>
-            </div>
-            <div class="progress-rail">
-                <div id="progress-fill" class="progress-bar-fill"></div>
             </div>
         </div>
     </div>
 
     <script>
         const audio = document.getElementById('main-audio');
-        const overlay = document.getElementById('play-overlay');
+        const curtain = document.getElementById('hero-curtain');
         const subBox = document.getElementById('subtitle-box');
         const progFill = document.getElementById('progress-fill');
         const timeInd = document.getElementById('time-indicator');
+        const playIcon = document.getElementById('play-icon');
+        const pauseIcon = document.getElementById('pause-icon');
 
         // SRT 毫秒时间轴对照表
         const timeline = [
@@ -400,21 +468,48 @@
 
         let currentSceneId = 1;
 
-        function startPlayback() {
-            overlay.style.opacity = '0';
-            setTimeout(() => { overlay.style.display = 'none'; }, 300);
+        function startInitialPlayback(e) {
+            if (e) e.stopPropagation();
+            curtain.style.opacity = '0';
+            setTimeout(() => { curtain.style.display = 'none'; }, 300);
             audio.play();
+            updatePlayState(true);
+        }
+
+        function togglePlayPause(e) {
+            if (e) e.stopPropagation();
+            if (curtain.style.display !== 'none') {
+                startInitialPlayback(e);
+                return;
+            }
+            if (audio.paused) {
+                audio.play();
+                updatePlayState(true);
+            } else {
+                audio.pause();
+                updatePlayState(false);
+            }
+        }
+
+        function updatePlayState(isPlaying) {
+            playIcon.style.display = isPlaying ? 'none' : 'block';
+            pauseIcon.style.display = isPlaying ? 'block' : 'none';
+        }
+
+        function seekAudio(e) {
+            if (e) e.stopPropagation();
+            const rect = e.currentTarget.getBoundingClientRect();
+            const clickPos = (e.clientX - rect.left) / rect.width;
+            audio.currentTime = clickPos * (audio.duration || 88.0);
         }
 
         audio.addEventListener('timeupdate', () => {
             const curTime = audio.currentTime;
             const dur = audio.duration || 88.0;
 
-            // 更新进度条
             const pct = Math.min(100, (curTime / dur) * 100);
             progFill.style.width = pct + '%';
 
-            // 更新时间码
             const formatM = (t) => {
                 const m = Math.floor(t / 60);
                 const s = Math.floor(t % 60);
@@ -422,7 +517,6 @@
             };
             timeInd.innerText = `${formatM(curTime)} / ${formatM(dur)}`;
 
-            // 更新字幕与场景
             const matched = timeline.find(item => curTime >= item.start && curTime < item.end);
             if (matched) {
                 subBox.innerText = matched.text;
@@ -431,6 +525,10 @@
                 }
             }
         });
+
+        audio.addEventListener('play', () => updatePlayState(true));
+        audio.addEventListener('pause', () => updatePlayState(false));
+        audio.addEventListener('ended', () => updatePlayState(false));
 
         function switchScene(sceneId) {
             currentSceneId = sceneId;
