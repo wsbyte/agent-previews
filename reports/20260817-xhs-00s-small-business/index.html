@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="description" content="00后女生宅🏠做冷门小生意～ - 短视频爆款内容结构深度拆解与文案分析报告">
+    <title>00后女生宅🏠做冷门小生意～ · 内容拆解</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            /* 护眼沉浸米黄纸张色系 */
+            --bg-canvas: #f6f3eb;
+            --bg-sheet: #fdfbf7;
+            --bg-sheet-hover: #ffffff;
+            --bg-highlight: #f2ede1;
+            --bg-accent-soft: #fbf5e6;
+            
+            --border-paper: #e7e0d3;
+            --border-subtle: #eee7dc;
+            --border-accent: #c4b59f;
+            
+            /* 文字层级（告别死黑，采用温润深褐与层级灰阶） */
+            --ink-headline: #24201d;
+            --ink-primary: #3d3732;
+            --ink-secondary: #635b54;
+            --ink-muted: #8c8277;
+            --ink-faint: #aba196;
+            
+            --brand-warm-accent: #b45309;
+            --brand-warm-light: rgba(180, 83, 9, 0.08);
+            
+            --font-serif: 'Noto Serif SC', 'Songti SC', Georgia, serif;
+            --font-sans: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background-color: var(--bg-canvas);
+            color: var(--ink-primary);
+            font-family: var(--font-sans);
+            line-height: 1.75;
+            -webkit-font-smoothing: antialiased;
+            padding: 44px 20px 80px;
+        }
+
+        .book-container {
+            max-width: 960px;
+            margin: 0 auto;
+        }
+
+        /* 顶部大标题与数据栏 */
+        .book-header {
+            border-bottom: 1.5px solid var(--border-paper);
+            padding-bottom: 24px;
+            margin-bottom: 36px;
+        }
+
+        .book-title-row {
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 24px;
+            align-items: flex-end;
+            margin-bottom: 20px;
+        }
+
+        .book-main-title {
+            font-family: var(--font-serif);
+            font-size: 34px;
+            font-weight: 700;
+            color: var(--ink-headline);
+            line-height: 1.3;
+            letter-spacing: -0.01em;
+        }
+
+        .book-meta-group {
+            display: flex;
+            gap: 20px;
+            border-left: 1px solid var(--border-paper);
+            padding-left: 20px;
+        }
+
+        .book-meta-col {
+            display: flex;
+            flex-direction: column;
+            gap: 1px;
+        }
+
+        .meta-col-name {
+            font-size: 11.5px;
+            color: var(--ink-muted);
+        }
+
+        .meta-col-data {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--ink-headline);
+            font-family: var(--font-mono);
+        }
+
+        /* 原视频行动条 */
+        .warm-action-strip {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-sheet);
+            border: 1px solid var(--border-paper);
+            border-radius: 8px;
+            padding: 10px 16px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .warm-url-view {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: var(--ink-secondary);
+            flex: 1;
+            min-width: 220px;
+        }
+
+        .live-dot {
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: #059669;
+        }
+
+        .url-label {
+            color: var(--ink-headline);
+            word-break: break-all;
+            font-weight: 500;
+        }
+
+        .warm-play-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--ink-headline);
+            color: #ffffff;
+            font-size: 12.5px;
+            font-weight: 600;
+            padding: 7px 14px;
+            border-radius: 6px;
+            text-decoration: none;
+            transition: opacity 0.2s;
+            flex-shrink: 0;
+        }
+
+        .warm-play-btn:hover {
+            opacity: 0.85;
+        }
+
+        /* 核心内容区：非对称双栏画报 */
+        .book-content-grid {
+            display: grid;
+            grid-template-columns: 1.15fr 0.85fr;
+            gap: 36px;
+            margin-bottom: 40px;
+        }
+
+        .book-col-main {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+        }
+
+        .book-col-side {
+            display: flex;
+            flex-direction: column;
+            gap: 32px;
+            border-left: 1px solid var(--border-paper);
+            padding-left: 36px;
+        }
+
+        .chapter-box {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .chapter-badge {
+            font-size: 11.5px;
+            font-weight: 600;
+            color: var(--brand-warm-accent);
+            letter-spacing: 0.04em;
+        }
+
+        .chapter-heading {
+            font-family: var(--font-serif);
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--ink-headline);
+            line-height: 1.35;
+        }
+
+        .chapter-prose {
+            font-size: 14.5px;
+            color: var(--ink-secondary);
+            line-height: 1.8;
+        }
+
+        /* 温润高光引用卡 */
+        .warm-pullout-box {
+            background: var(--bg-sheet);
+            border: 1px solid var(--border-paper);
+            border-left: 3px solid var(--brand-warm-accent);
+            padding: 16px 20px;
+            border-radius: 0 8px 8px 0;
+            margin-top: 4px;
+        }
+
+        .pullout-tag {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink-muted);
+            margin-bottom: 4px;
+        }
+
+        .pullout-content {
+            font-family: var(--font-serif);
+            font-size: 15.5px;
+            font-weight: 600;
+            color: var(--ink-headline);
+            line-height: 1.6;
+        }
+
+        /* 侧栏金句群 */
+        .warm-quote-card {
+            background: var(--bg-sheet);
+            border: 1px solid var(--border-paper);
+            border-radius: 8px;
+            padding: 16px 18px;
+            position: relative;
+        }
+
+        .warm-quote-sign {
+            font-family: var(--font-serif);
+            font-size: 22px;
+            line-height: 1;
+            color: var(--brand-warm-accent);
+            margin-bottom: 2px;
+            opacity: 0.7;
+        }
+
+        .warm-quote-text {
+            font-size: 14px;
+            color: var(--ink-primary);
+            font-weight: 500;
+            line-height: 1.65;
+        }
+
+        /* 复刻步骤列表 */
+        .warm-step-row {
+            display: flex;
+            gap: 12px;
+            padding-bottom: 16px;
+            border-bottom: 1px dashed var(--border-paper);
+        }
+
+        .warm-step-row:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .warm-step-index {
+            font-family: var(--font-mono);
+            font-size: 14px;
+            font-weight: 700;
+            color: var(--brand-warm-accent);
+            flex-shrink: 0;
+            line-height: 1.3;
+        }
+
+        .warm-step-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--ink-headline);
+            margin-bottom: 2px;
+        }
+
+        .warm-step-desc {
+            font-size: 13px;
+            color: var(--ink-muted);
+            line-height: 1.6;
+        }
+
+        /* 底部沉浸式文稿阅读台 */
+        .reading-desk {
+            background: var(--bg-sheet);
+            border: 1px solid var(--border-paper);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-top: 12px;
+        }
+
+        .reading-desk-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--bg-canvas);
+            border-bottom: 1px solid var(--border-paper);
+            padding: 10px 20px;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .desk-tab-pills {
+            display: flex;
+            gap: 4px;
+            background: var(--border-paper);
+            padding: 3px;
+            border-radius: 6px;
+        }
+
+        .desk-tab-btn {
+            background: transparent;
+            border: none;
+            font-family: var(--font-sans);
+            font-size: 12.5px;
+            font-weight: 600;
+            color: var(--ink-muted);
+            padding: 5px 14px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .desk-tab-btn.active {
+            background: var(--bg-sheet);
+            color: var(--ink-headline);
+        }
+
+        .desk-copy-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: var(--bg-sheet);
+            border: 1px solid var(--border-paper);
+            color: var(--ink-headline);
+            font-family: var(--font-sans);
+            font-size: 12px;
+            font-weight: 600;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: all 0.15s;
+        }
+
+        .desk-copy-btn:hover {
+            background: var(--bg-highlight);
+        }
+
+        .desk-copy-btn:active {
+            transform: scale(0.97);
+        }
+
+        .desk-reader-body {
+            padding: 28px;
+            max-height: 460px;
+            overflow-y: auto;
+            white-space: pre-wrap;
+            line-height: 1.9;
+            font-size: 15px;
+            color: var(--ink-primary);
+            display: none;
+        }
+
+        .desk-reader-body.active {
+            display: block;
+        }
+
+        .desk-reader-body.srt-mode {
+            font-family: var(--font-mono);
+            font-size: 13px;
+            color: #4338ca;
+            background: #f7f6fd;
+        }
+
+        @media (max-width: 820px) {
+            body { padding: 20px 14px 40px; }
+            .book-main-title { font-size: 24px; }
+            .book-title-row { grid-template-columns: 1fr; }
+            .book-meta-group { border-left: none; padding-left: 0; }
+            .book-content-grid { grid-template-columns: 1fr; gap: 28px; }
+            .book-col-side { border-left: none; padding-left: 0; border-top: 1px solid var(--border-paper); padding-top: 28px; }
+            .desk-reader-body { padding: 18px 14px; }
+        }
+    </style>
+</head>
+<body>
+    <div class="book-container">
+        <!-- 头部大标题与数据栏 -->
+        <header class="book-header">
+            <div class="book-title-row">
+                <h1 class="book-main-title">00后女生宅🏠做冷门小生意～</h1>
+                <div class="book-meta-group">
+                    <div class="book-meta-col">
+                        <span class="meta-col-name">时长</span>
+                        <span class="meta-col-data">完整原片</span>
+                    </div>
+                    <div class="book-meta-col">
+                        <span class="meta-col-name">字数</span>
+                        <span class="meta-col-data">837 字</span>
+                    </div>
+                    <div class="book-meta-col">
+                        <span class="meta-col-name">转写模型</span>
+                        <span class="meta-col-data">SenseVoice-Small</span>
+                    </div>
+                </div>
+            </div>
+
+            
+        <div class="warm-action-strip">
+            <div class="warm-url-view">
+                <span class="live-dot"></span>
+                <span class="url-label" title="https://www.xiaohongshu.com/discovery/item/6a81da53000000002402c50e?app_platform=ios&amp;app_version=9.42&amp;share_from_user_hidden=true&amp;xsec_source=app_share&amp;type=video&amp;xsec_token=CBZRC-jfWoNUepr2JktS6n92yLXk_tNidAkjUIs6gAfYU=&amp;author_share=1&amp;xhsshare=CopyLink&amp;shareRedId=Nz81MDc2O0I7TD05Tj81PTxEOkk2Okw_&amp;apptime=1786966282&amp;share_id=ed58831a02c5472aaed5bad464c549c1">https://www.xiaohongshu.com/discovery/item/6a81da53000000002402c50e?app_platform=ios&amp;app_version=9.42&amp;share_from_user_hidden=true&amp;xsec_source=app_share&amp;type=video&amp;xsec_token=CBZRC-jfWoNUepr2JktS6n92yLXk_tNidAkjUIs6gAfYU=&amp;author_share=1&amp;xhsshare=CopyLink&amp;shareRedId=Nz81MDc2O0I7TD05Tj81PTxEOkk2Okw_&amp;apptime=1786966282&amp;share_id=ed58831a02c5472aaed5bad464c549c1</span>
+            </div>
+            <a href="https://www.xiaohongshu.com/discovery/item/6a81da53000000002402c50e?app_platform=ios&amp;app_version=9.42&amp;share_from_user_hidden=true&amp;xsec_source=app_share&amp;type=video&amp;xsec_token=CBZRC-jfWoNUepr2JktS6n92yLXk_tNidAkjUIs6gAfYU=&amp;author_share=1&amp;xhsshare=CopyLink&amp;shareRedId=Nz81MDc2O0I7TD05Tj81PTxEOkk2Okw_&amp;apptime=1786966282&amp;share_id=ed58831a02c5472aaed5bad464c549c1" target="_blank" rel="noopener noreferrer" class="warm-play-btn">
+                <span>观看原视频</span>
+                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polygon points="5 3 19 12 5 21 5 3"></polygon></svg>
+            </a>
+        </div>
+        
+        </header>
+
+        <!-- 护眼双栏网格 -->
+        <main class="book-content-grid">
+            <!-- 左栏：主叙事与深度机理 (60%) -->
+            <div class="book-col-main">
+                <!-- 01 黄金 3 秒钩子 -->
+                <article class="chapter-box">
+                    <div class="chapter-badge">01 · 黄金钩子剖析</div>
+                    <h2 class="chapter-heading">黄金前 3 秒钩子剖析</h2>
+                    <p class="chapter-prose">开篇以设问或具象生活场景迅速建立好奇缺口，直接抛出反常识或大众普遍存在的潜在行为（如：不太体面的生意，往往都很赚钱），瞬间拉升前 3 秒留存率。</p>
+                    <div class="warm-pullout-box">
+                        <div class="pullout-tag">开篇核心金句</div>
+                        <div class="pullout-content">“不太体面的生意，往往都很赚钱。”</div>
+                    </div>
+                </article>
+
+                <!-- 02 情绪与心理共鸣 -->
+                <article class="chapter-box">
+                    <div class="chapter-badge">02 · 情绪与心理机制</div>
+                    <h2 class="chapter-heading">痛点激发与底层心理机制</h2>
+                    <p class="chapter-prose">直击受众对于“自以为在省钱/理性消费，实则不知不觉陷入更大财务漏洞”的深层焦虑与认知反差。</p>
+                    <div class="warm-pullout-box">
+                        <div class="pullout-tag">底层心理机制解码</div>
+                        <div class="pullout-content">利用了心理学上的「心理账户」与「沉没成本认知偏差」，让受众产生强烈的对号入座感与恍然大悟的惊醒感。</div>
+                    </div>
+                </article>
+
+                <!-- 03 叙事节奏 -->
+                <article class="chapter-box">
+                    <div class="chapter-badge">03 · 叙事节奏与转折</div>
+                    <h2 class="chapter-heading">叙事节奏与反转高潮</h2>
+                    <p class="chapter-prose">采用『生活具象场景切入 → 旁观者质疑/反常积累 → 算账时刻的高潮反转 → 升华至社会商业博弈本质』的四段式叙事链条，节奏紧凑递进。</p>
+                    <div class="warm-pullout-box">
+                        <div class="pullout-tag">算账与高潮时刻</div>
+                        <div class="pullout-content">当所有微小订单汇总计算，金额突破半月工资的瞬间，形成巨大的现实冲击力。</div>
+                    </div>
+                </article>
+            </div>
+
+            <!-- 右栏：金句看板与复刻指南 (40%) -->
+            <div class="book-col-side">
+                <!-- 传播金句榜 -->
+                <div class="chapter-box">
+                    <div class="chapter-badge">04 · 传播金句榜</div>
+                    <h3 class="chapter-heading">高传播力金句榜</h3>
+                    <div class="quotes-list" style="display:flex; flex-direction:column; gap:12px; margin-top:4px;">
+                        <div class="warm-quote-card"><div class="warm-quote-sign">“</div><p class="warm-quote-text">每一件都不贵，每一件他都用得着 : 至少下单的时候他是这样想的。</p></div><div class="warm-quote-card"><div class="warm-quote-sign">“</div><p class="warm-quote-text">不记得自己是从什么时候开始，把便宜当成了需要。</p></div><div class="warm-quote-card"><div class="warm-quote-sign">“</div><p class="warm-quote-text">那些单价极低、毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到在月末叠加出惊人的总数。</p></div><div class="warm-quote-card"><div class="warm-quote-sign">“</div><p class="warm-quote-text">便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。</p></div>
+                    </div>
+                </div>
+
+                <!-- 仿写与复刻工坊 -->
+                <div class="chapter-box" style="margin-top:8px;">
+                    <div class="chapter-badge">05 · 选题复刻指南</div>
+                    <h3 class="chapter-heading">爆款选题复刻指南</h3>
+                    <div class="recipe-container" style="display:flex; flex-direction:column; gap:14px; margin-top:6px;">
+                        <div class="warm-step-row"><div class="warm-step-index">01</div><div class="warm-step-detail"><h5 class="warm-step-title">选定微小行为切入</h5><p class="warm-step-desc">寻找大众日常中高频但极不起眼的‘小动作’（如攒塑料袋、买打折临期食品、各种 1 元虚拟会员）。</p></div></div><div class="warm-step-row"><div class="warm-step-index">02</div><div class="warm-step-detail"><h5 class="warm-step-title">构建双人对话反差</h5><p class="warm-step-desc">引入清醒的旁观者角色（类似派大星），通过连续提问揭穿主角自我催眠的逻辑。</p></div></div><div class="warm-step-row"><div class="warm-step-index">03</div><div class="warm-step-detail"><h5 class="warm-step-title">设计算账震撼时刻</h5><p class="warm-step-desc">量化微小支出/时间的长期累加效应，给观众一个超出直觉预期的具体数字。</p></div></div><div class="warm-step-row"><div class="warm-step-index">04</div><div class="warm-step-detail"><h5 class="warm-step-title">升华至系统与认知层面</h5><p class="warm-step-desc">不仅停留在劝导，而是上升到商业模式和消费心理的本质，提供高级认知增量。</p></div></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+
+        <!-- 底部沉浸式文稿阅读台 -->
+        <section class="reading-desk">
+            <div class="reading-desk-bar">
+                <div class="desk-tab-pills">
+                    <button class="desk-tab-btn active" onclick="switchDesk('plain')">纯文本全文</button>
+                    <button class="desk-tab-btn" onclick="switchDesk('srt')">字幕时间轴</button>
+                </div>
+                <button class="desk-copy-btn" onclick="copyDeskText()">
+                    <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>复制内容</span>
+                </button>
+            </div>
+            <div id="desk-plain" class="desk-reader-body active">不太体面的生意，往往都很赚钱。这是我花了1000启动资金做的小生意，两个月汇本3万，只工作不上班，再家开网店。今天就来分享一下普通人如何快速上手，办法，虽然有点缺德。但谁让它来钱快呢？首先我们打开小红书，点击左上角三条杠，再点击这个创作中心，点击更多服务，下面就有开通店铺，然后再点击这个立即开店。这里有很多种店铺类型，我们选择个人店就好了。点击下一步上传自己的身份信息，再点下一步等审核通过，你的店铺就开通好了。接着打开小红书签分，找到资金类的账户管理，这里提示你需要缴纳保证金，我们可以直接忽略不计。当我们出单需要提现再去交也不迟。接着给大家分享6个电商人的找货渠道，箱包就找帮牛牛，鞋子就去开商网，运用百货就来易务购女装精选搜款网大牌轻奢找源头床上用品找9一家房网，记不住的，赶紧点赞收藏，别等用的时候找不到了。第三点，怎么上架商品。首先我们打开小红书去我们的小红书市集去找我们一个小卖的商品，点击搜索，我们去及时热搜，去找一个近期热搜的商品。比如说这个毛衣，我们找到一个销量比较高的。比如说这个189的价格是卖了9000多单了。我们把它的商品图截图保存下来。然后我们打开1688以图搜款。这个就是他的一个货源了。我们先筛选小红书面单，要不然会被判无货源违规的，然后我们找到一个有利润空间的，并且支持退货包运费和7天无理由退货的，这些条件都满足的话，然后点击立即铺货，选择我们的小红书店铺，把商品上架到我们的小红书店铺，接着我们打开豆包，但他说我是一名小红书个人店卖家，让他帮我们根据上面的图片生成几片商品栏，要求标题抓眼内容是合小红书社区分为文案生成好之后呢，选择你觉得合适的复制下来。这样我们的带货笔记就做好了。记得一定要挂上商品链接。这样子只要有人刷到我们的笔记下单了。那我们直接返回到1688点击代发下单，选择它需要的那个款式，把数量选择好，直接点击代发下单。像这样子一单，它是一个149的金额。那我们代发下单。它只需要72块。那我们就能赚取其中的一个差价了。</div>
+            <div id="desk-srt" class="desk-reader-body srt-mode">1
+00:00:00,000 --&gt; 00:00:03,727
+不太体面的生意，往往都很赚钱。
+
+2
+00:00:03,827 --&gt; 00:00:13,767
+这是我花了1000启动资金做的小生意，两个月汇本3万，只工作不上班，再家开网店。
+
+3
+00:00:13,867 --&gt; 00:00:20,826
+今天就来分享一下普通人如何快速上手，办法，虽然有点缺德。
+
+4
+00:00:20,926 --&gt; 00:00:23,162
+但谁让它来钱快呢？
+
+5
+00:00:23,262 --&gt; 00:00:37,427
+首先我们打开小红书，点击左上角三条杠，再点击这个创作中心，点击更多服务，下面就有开通店铺，然后再点击这个立即开店。
+
+6
+00:00:37,527 --&gt; 00:00:42,994
+这里有很多种店铺类型，我们选择个人店就好了。
+
+7
+00:00:43,094 --&gt; 00:00:52,040
+点击下一步上传自己的身份信息，再点下一步等审核通过，你的店铺就开通好了。
+
+8
+00:00:52,140 --&gt; 00:01:03,323
+接着打开小红书签分，找到资金类的账户管理，这里提示你需要缴纳保证金，我们可以直接忽略不计。
+
+9
+00:01:03,423 --&gt; 00:01:07,399
+当我们出单需要提现再去交也不迟。
+
+10
+00:01:07,499 --&gt; 00:01:30,113
+接着给大家分享6个电商人的找货渠道，箱包就找帮牛牛，鞋子就去开商网，运用百货就来易务购女装精选搜款网大牌轻奢找源头床上用品找9一家房网，记不住的，赶紧点赞收藏，别等用的时候找不到了。
+
+11
+00:01:30,213 --&gt; 00:01:32,947
+第三点，怎么上架商品。
+
+12
+00:01:33,047 --&gt; 00:01:46,715
+首先我们打开小红书去我们的小红书市集去找我们一个小卖的商品，点击搜索，我们去及时热搜，去找一个近期热搜的商品。
+
+13
+00:01:46,815 --&gt; 00:01:52,033
+比如说这个毛衣，我们找到一个销量比较高的。
+
+14
+00:01:52,133 --&gt; 00:01:57,601
+比如说这个189的价格是卖了9000多单了。
+
+15
+00:01:57,701 --&gt; 00:02:01,428
+我们把它的商品图截图保存下来。
+
+16
+00:02:01,528 --&gt; 00:02:05,256
+然后我们打开1688以图搜款。
+
+17
+00:02:05,356 --&gt; 00:02:08,338
+这个就是他的一个货源了。
+
+18
+00:02:08,438 --&gt; 00:02:54,909
+我们先筛选小红书面单，要不然会被判无货源违规的，然后我们找到一个有利润空间的，并且支持退货包运费和7天无理由退货的，这些条件都满足的话，然后点击立即铺货，选择我们的小红书店铺，把商品上架到我们的小红书店铺，接着我们打开豆包，但他说我是一名小红书个人店卖家，让他帮我们根据上面的图片生成几片商品栏，要求标题抓眼内容是合小红书社区分为文案生成好之后呢，选择你觉得合适的复制下来。
+
+19
+00:02:55,009 --&gt; 00:02:58,488
+这样我们的带货笔记就做好了。
+
+20
+00:02:58,588 --&gt; 00:03:01,570
+记得一定要挂上商品链接。
+
+21
+00:03:01,670 --&gt; 00:03:06,143
+这样子只要有人刷到我们的笔记下单了。
+
+22
+00:03:06,243 --&gt; 00:03:17,674
+那我们直接返回到1688点击代发下单，选择它需要的那个款式，把数量选择好，直接点击代发下单。
+
+23
+00:03:17,774 --&gt; 00:03:22,247
+像这样子一单，它是一个149的金额。
+
+24
+00:03:22,347 --&gt; 00:03:24,335
+那我们代发下单。
+
+25
+00:03:24,435 --&gt; 00:03:26,423
+它只需要72块。
+
+26
+00:03:26,523 --&gt; 00:03:28,000
+那我们就能赚取其中的一个差价了。
+</div>
+        </section>
+    </div>
+
+    <script>
+        let currentDeskMode = 'plain';
+        function switchDesk(mode) {
+            currentDeskMode = mode;
+            document.querySelectorAll('.desk-tab-btn').forEach((btn, idx) => {
+                btn.classList.toggle('active', (idx === 0 && mode === 'plain') || (idx === 1 && mode === 'srt'));
+            });
+            document.getElementById('desk-plain').classList.toggle('active', mode === 'plain');
+            document.getElementById('desk-srt').classList.toggle('active', mode === 'srt');
+        }
+
+        function notifyUser(msg) {
+            let toast = document.getElementById('warm-toast');
+            if (!toast) {
+                toast = document.createElement('div');
+                toast.id = 'warm-toast';
+                toast.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#24201d;color:#f6f3eb;font-weight:600;font-size:13px;padding:8px 18px;border-radius:9999px;box-shadow:0 6px 16px rgba(36,32,29,0.18);z-index:999;transition:all 0.2s cubic-bezier(0.16,1,0.3,1);opacity:0;pointer-events:none;';
+                document.body.appendChild(toast);
+            }
+            toast.innerText = msg;
+            toast.style.opacity = '1';
+            toast.style.transform = 'translateX(-50%) translateY(-4px)';
+            setTimeout(() => { 
+                toast.style.opacity = '0'; 
+                toast.style.transform = 'translateX(-50%) translateY(0)';
+            }, 2000);
+        }
+
+        function copyDeskText() {
+            const text = currentDeskMode === 'plain' 
+                ? document.getElementById('desk-plain').innerText 
+                : document.getElementById('desk-srt').innerText;
+            if (navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    notifyUser('已成功复制');
+                }).catch(() => { execFallback(text); });
+            } else {
+                execFallback(text);
+            }
+        }
+
+        function execFallback(text) {
+            const textArea = document.createElement("textarea");
+            textArea.value = text;
+            textArea.style.position = "fixed";
+            textArea.style.opacity = "0";
+            document.body.appendChild(textArea);
+            textArea.focus();
+            textArea.select();
+            try {
+                document.execCommand('copy');
+                notifyUser('已成功复制');
+            } catch (err) {
+                notifyUser('请长按选中复制');
+            }
+            document.body.removeChild(textArea);
+        }
+    </script>
+</body>
+</html>
