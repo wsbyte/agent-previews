@@ -6,19 +6,19 @@
     <title>允许停下来，然后重新出发</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@600;700;900&family=Plus+Jakarta+Sans:wght@500;700;800&family=Noto+Sans+SC:wght@400;500;700;900&family=JetBrains+Mono:wght@500;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@600;700;800&family=Noto+Serif+SC:wght@700;900&family=ZCOOL+KuaiLe&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg-deep: #0c0d12;
-            --gold-accent: #f59e0b;
-            --gold-glow: rgba(245, 158, 11, 0.35);
-            --cyan-accent: #06b6d4;
-            --text-pure: #ffffff;
-            --text-warm: #fef3c7;
-            --text-subtle: #94a3b8;
-            --font-serif: 'Noto Serif SC', Georgia, serif;
-            --font-sans: 'Plus Jakarta Sans', 'Noto Sans SC', sans-serif;
-            --font-mono: 'JetBrains Mono', monospace;
+            --bg-cream: #fbf9f4;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --coral-orange: #ff7a59;
+            --coral-soft: #fff0eb;
+            --mint-green: #38b2ac;
+            --mint-soft: #e6fffa;
+            --soft-yellow: #fef3c7;
+            --text-dark: #2d3748;
+            --text-subtle: #718096;
+            --border-subtle: rgba(226, 232, 240, 0.8);
         }
 
         * {
@@ -29,110 +29,103 @@
         }
 
         body {
-            background-color: var(--bg-deep);
-            color: var(--text-pure);
-            font-family: var(--font-sans);
+            background-color: #f0ece1;
+            color: var(--text-dark);
+            font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
             min-height: 100dvh;
-            padding: 10px;
+            padding: 12px;
         }
 
-        /* 手机画幅外壳容器（自适应屏幕高度与居中） */
-        .video-viewport {
+        /* 手机端 9:16 画幅精致卡片 */
+        .video-phone-frame {
             width: 100%;
-            max-width: 480px;
+            max-width: 440px;
             aspect-ratio: 9 / 16;
             max-height: 94vh;
             position: relative;
-            border-radius: 24px;
+            border-radius: 36px;
             overflow: hidden;
-            background: #090a0f;
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7), 0 0 0 1px rgba(255, 255, 255, 0.1);
-            perspective: 1000px;
-        }
-
-        /* 电影级暗角与流体光晕背景 */
-        .ambient-bg {
-            position: absolute;
-            inset: 0;
-            background: 
-                radial-gradient(circle at 50% 25%, rgba(30, 41, 59, 0.7) 0%, transparent 65%),
-                radial-gradient(circle at 20% 80%, rgba(245, 158, 11, 0.1) 0%, transparent 50%),
-                radial-gradient(circle at 80% 85%, rgba(6, 182, 212, 0.1) 0%, transparent 50%),
-                #090a0f;
-            z-index: 1;
-        }
-
-        .ambient-dust {
-            position: absolute;
-            inset: 0;
-            background-image: radial-gradient(rgba(255, 255, 255, 0.15) 1px, transparent 1px);
-            background-size: 40px 40px;
-            opacity: 0.25;
-            z-index: 2;
-        }
-
-        /* 舞台容器 */
-        .stage-container {
-            position: absolute;
-            inset: 0;
-            z-index: 10;
+            background: var(--bg-cream);
+            box-shadow: 0 20px 45px -10px rgba(160, 140, 120, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.8);
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             padding: 24px 20px 20px;
         }
 
-        /* 顶部小标 */
-        .top-header {
+        /* 温暖柔和流体背景 */
+        .ambient-soft-blob {
+            position: absolute;
+            inset: 0;
+            background: 
+                radial-gradient(circle at 15% 15%, #fee2e2 0%, transparent 40%),
+                radial-gradient(circle at 85% 20%, #fef3c7 0%, transparent 45%),
+                radial-gradient(circle at 50% 85%, #e6fffa 0%, transparent 50%),
+                #fbf9f4;
+            z-index: 1;
+        }
+
+        /* 顶部清新信息栏 */
+        .top-nav-bar {
+            position: relative;
+            z-index: 10;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            padding-bottom: 12px;
         }
 
-        .header-tag {
-            font-family: var(--font-mono);
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--gold-accent);
-            letter-spacing: 0.1em;
+        .topic-pill {
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            padding: 6px 14px;
+            border-radius: 9999px;
             display: flex;
             align-items: center;
             gap: 6px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.03);
         }
 
-        .header-tag::before {
-            content: '';
-            width: 6px;
-            height: 6px;
+        .topic-pill-dot {
+            width: 7px;
+            height: 7px;
             border-radius: 50%;
-            background: var(--gold-accent);
-            box-shadow: 0 0 8px var(--gold-accent);
+            background: var(--coral-orange);
         }
 
-        .header-timer {
-            font-family: var(--font-mono);
-            font-size: 11px;
+        .topic-pill-text {
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--coral-orange);
+            letter-spacing: 0.05em;
+        }
+
+        .time-tag {
+            font-family: 'Plus Jakarta Sans', monospace;
+            font-size: 11.5px;
+            font-weight: 600;
             color: var(--text-subtle);
+            background: rgba(255, 255, 255, 0.6);
+            padding: 4px 10px;
+            border-radius: 12px;
         }
 
-        /* 主视觉场景编排区 */
-        .main-scene-area {
+        /* 中部小红书杂志风动态画布 */
+        .stage-canvas {
+            position: relative;
+            z-index: 10;
             flex: 1;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            position: relative;
-            margin: 10px 0;
+            margin: 12px 0;
         }
 
-        .scene-card {
+        .scene-container {
             position: absolute;
             width: 100%;
             display: flex;
@@ -140,153 +133,160 @@
             align-items: center;
             text-align: center;
             opacity: 0;
-            transform: translateY(20px) scale(0.96);
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+            transform: translateY(16px) scale(0.96);
+            transition: all 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
             pointer-events: none;
         }
 
-        .scene-card.active {
+        .scene-container.active {
             opacity: 1;
             transform: translateY(0) scale(1);
             pointer-events: auto;
         }
 
-        /* 3D 浮动实物透明元素 */
-        .element-3d-wrap {
+        /* 3D 可爱实物浮动视差 */
+        .clay-img-wrap {
             position: relative;
-            width: 180px;
-            height: 180px;
+            width: 195px;
+            height: 195px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin-bottom: 18px;
-            filter: drop-shadow(0 15px 25px rgba(0, 0, 0, 0.7));
-            animation: floatSlow 4s ease-in-out infinite alternate;
+            margin-bottom: 20px;
+            filter: drop-shadow(0 12px 24px rgba(180, 150, 130, 0.25));
+            animation: bounceFloat 3.5s ease-in-out infinite alternate;
         }
 
-        .element-3d-img {
+        .clay-img {
             max-width: 100%;
             max-height: 100%;
             object-fit: contain;
-            transform: translateZ(30px) rotateX(4deg) rotateY(-4deg);
         }
 
-        @keyframes floatSlow {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(-10px) rotate(1.5deg); }
+        @keyframes bounceFloat {
+            0% { transform: translateY(0px) rotate(-1deg); }
+            100% { transform: translateY(-12px) rotate(1.5deg); }
         }
 
-        /* 标题与核心结论 */
-        .scene-badge-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: rgba(245, 158, 11, 0.12);
-            border: 1px solid rgba(245, 158, 11, 0.3);
-            color: var(--gold-accent);
+        /* 小红书爆款标签 & 标题卡片 */
+        .badge-step {
+            display: inline-block;
+            background: var(--coral-soft);
+            color: var(--coral-orange);
             font-size: 11.5px;
-            font-weight: 700;
-            padding: 4px 14px;
+            font-weight: 800;
+            padding: 5px 14px;
             border-radius: 9999px;
             margin-bottom: 12px;
             letter-spacing: 0.05em;
+            box-shadow: 0 2px 6px rgba(255, 122, 89, 0.15);
         }
 
-        .scene-title-huge {
-            font-family: var(--font-serif);
-            font-size: 24px;
+        .title-catchy {
+            font-family: 'Noto Serif SC', serif;
+            font-size: 25px;
             font-weight: 900;
-            color: #ffffff;
-            line-height: 1.3;
+            color: #1a202c;
+            line-height: 1.35;
             margin-bottom: 14px;
-            letter-spacing: -0.01em;
-            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
             padding: 0 10px;
         }
 
-        .scene-title-huge span.highlight {
-            color: var(--gold-accent);
+        .title-catchy mark {
+            background: linear-gradient(120deg, rgba(255, 226, 226, 0.8) 0%, rgba(254, 243, 199, 0.9) 100%);
+            padding: 2px 8px;
+            border-radius: 6px;
+            color: #1a202c;
         }
 
-        .scene-desc-box {
-            background: rgba(255, 255, 255, 0.04);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(12px);
-            border-radius: 12px;
+        /* 便签纸风格核心提炼小卡片 */
+        .sticky-note {
+            background: #ffffff;
+            border: 1px solid var(--border-subtle);
+            border-radius: 18px;
             padding: 14px 18px;
-            max-width: 90%;
+            max-width: 92%;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
-        .scene-desc-text {
-            font-size: 13.5px;
-            line-height: 1.6;
-            color: #cbd5e1;
-            font-weight: 500;
+        .sticky-emoji {
+            font-size: 22px;
+            flex-shrink: 0;
         }
 
-        /* 底部动态字幕与播放控制器 */
+        .sticky-text {
+            font-size: 13px;
+            line-height: 1.55;
+            color: #4a5568;
+            font-weight: 600;
+            text-align: left;
+        }
+
+        /* 底部动态同步字幕条 */
         .bottom-shelf {
+            position: relative;
+            z-index: 10;
             display: flex;
             flex-direction: column;
             gap: 12px;
         }
 
-        .caption-glass-panel {
-            background: rgba(15, 23, 42, 0.85);
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            backdrop-filter: blur(16px);
-            border-radius: 12px;
-            padding: 12px 16px;
-            min-height: 60px;
+        .subtitle-pill-card {
+            background: #ffffff;
+            border: 1.5px solid #edf2f7;
+            border-radius: 16px;
+            padding: 14px 16px;
+            min-height: 64px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-align: center;
-            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 6px 18px rgba(0, 0, 0, 0.05);
         }
 
-        .live-subtitle {
-            font-family: var(--font-sans);
-            font-size: 14.5px;
-            font-weight: 700;
-            color: var(--text-warm);
+        .live-subtitle-text {
+            font-size: 15px;
+            font-weight: 800;
+            color: #2d3748;
             line-height: 1.45;
             letter-spacing: 0.01em;
-            text-shadow: 0 1px 4px rgba(0, 0, 0, 0.6);
         }
 
-        /* 进度条与播放条 */
+        /* 播放与进度控制器 */
         .control-bar {
             display: flex;
             align-items: center;
             gap: 10px;
         }
 
-        .btn-mini-toggle {
-            width: 34px;
-            height: 34px;
+        .btn-play-toggle {
+            width: 38px;
+            height: 38px;
             border-radius: 50%;
-            background: var(--gold-accent);
+            background: var(--coral-orange);
             border: none;
-            color: #0c0d12;
+            color: #ffffff;
             display: flex;
             align-items: center;
             justify-content: center;
             cursor: pointer;
             flex-shrink: 0;
-            box-shadow: 0 0 15px var(--gold-glow);
+            box-shadow: 0 4px 12px rgba(255, 122, 89, 0.35);
             transition: transform 0.15s;
         }
 
-        .btn-mini-toggle:active {
+        .btn-play-toggle:active {
             transform: scale(0.92);
         }
 
         .progress-rail {
             flex: 1;
-            height: 6px;
-            background: rgba(255, 255, 255, 0.12);
-            border-radius: 3px;
+            height: 7px;
+            background: #e2e8f0;
+            border-radius: 4px;
             overflow: hidden;
             cursor: pointer;
         }
@@ -294,11 +294,11 @@
         .progress-bar-fill {
             height: 100%;
             width: 0%;
-            background: linear-gradient(90deg, var(--cyan-accent), var(--gold-accent));
+            background: linear-gradient(90deg, #ff7a59, #f59e0b);
             transition: width 0.1s linear;
         }
 
-        /* 醒目的大号初始播放遮罩层 */
+        /* 初始醒目呼吸播放遮罩 */
         .hero-play-curtain {
             position: absolute;
             inset: 0;
@@ -307,128 +307,133 @@
             flex-direction: column;
             align-items: center;
             justify-content: center;
-            background: rgba(12, 13, 18, 0.78);
-            backdrop-filter: blur(10px);
+            background: rgba(251, 249, 244, 0.88);
+            backdrop-filter: blur(8px);
             cursor: pointer;
-            transition: all 0.3s ease;
+            transition: opacity 0.3s ease;
             gap: 16px;
         }
 
-        .hero-play-btn-circle {
-            width: 76px;
-            height: 76px;
+        .curtain-play-btn {
+            width: 80px;
+            height: 80px;
             border-radius: 50%;
-            background: var(--gold-accent);
+            background: var(--coral-orange);
             display: flex;
             align-items: center;
             justify-content: center;
-            box-shadow: 0 0 35px var(--gold-glow);
-            animation: pulseGlow 2s infinite;
+            box-shadow: 0 10px 30px rgba(255, 122, 89, 0.4);
+            animation: pulseSoft 2s infinite;
         }
 
-        @keyframes pulseGlow {
-            0%, 100% { transform: scale(1); box-shadow: 0 0 25px var(--gold-glow); }
-            50% { transform: scale(1.08); box-shadow: 0 0 45px rgba(245, 158, 11, 0.6); }
+        @keyframes pulseSoft {
+            0%, 100% { transform: scale(1); box-shadow: 0 10px 25px rgba(255, 122, 89, 0.35); }
+            50% { transform: scale(1.08); box-shadow: 0 15px 35px rgba(255, 122, 89, 0.55); }
         }
 
-        .hero-play-label {
-            font-size: 16px;
+        .curtain-label {
+            font-size: 15px;
             font-weight: 800;
-            color: #ffffff;
-            letter-spacing: 0.05em;
-            background: rgba(0, 0, 0, 0.4);
-            padding: 6px 18px;
+            color: #2d3748;
+            background: #ffffff;
+            padding: 8px 20px;
             border-radius: 9999px;
-            border: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+            border: 1px solid #edf2f7;
         }
     </style>
 </head>
 <body>
-    <div class="video-viewport" onclick="togglePlayPause(event)">
-        <div class="ambient-bg"></div>
-        <div class="ambient-dust"></div>
+    <div class="video-phone-frame" onclick="togglePlayPause(event)">
+        <div class="ambient-soft-blob"></div>
 
-        <audio id="main-audio" src="audio.mp3" preload="auto"></audio>
+        <!-- 晓晓配音音频 -->
+        <audio id="main-audio" src="audio_xiaoxiao.mp3" preload="auto"></audio>
 
-        <!-- 醒目的全屏点击播放遮罩 -->
+        <!-- 初始播放点击遮罩 -->
         <div id="hero-curtain" class="hero-play-curtain" onclick="startInitialPlayback(event)">
-            <div class="hero-play-btn-circle">
-                <svg width="34" height="34" viewBox="0 0 24 24" fill="#0c0d12"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+            <div class="curtain-play-btn">
+                <svg width="34" height="34" viewBox="0 0 24 24" fill="#ffffff"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
             </div>
-            <div class="hero-play-label">点击开始播放 · 完整配音短片</div>
+            <div class="curtain-label">🎧 点击播放 · 治愈系配音短片</div>
         </div>
 
-        <div class="stage-container">
-            <!-- 顶部信息 -->
-            <div class="top-header">
-                <div class="header-tag">GROWTH & INTELLECT</div>
-                <div id="time-indicator" class="header-timer">00:00 / 01:28</div>
+        <!-- 顶部信息 -->
+        <div class="top-nav-bar">
+            <div class="topic-pill">
+                <div class="topic-pill-dot"></div>
+                <span class="topic-pill-text">情绪抚慰 & 个人重塑</span>
             </div>
+            <div id="time-indicator" class="time-tag">00:00 / 01:23</div>
+        </div>
 
-            <!-- 核心多场景轮播（实物 3D 视差） -->
-            <div class="main-scene-area">
-                <!-- 场景 1：离开工位与身份解绑 (0s ~ 26s) -->
-                <div id="scene-1" class="scene-card active">
-                    <div class="element-3d-wrap">
-                        <img src="badge.png" class="element-3d-img" alt="工牌实物">
-                    </div>
-                    <div class="scene-badge-pill">01 · 认知解绑</div>
-                    <h1 class="scene-title-huge">平台带走的只是<span class="highlight">工牌</span></h1>
-                    <div class="scene-desc-box">
-                        <p class="scene-desc-text">真正锻炼出的逻辑、判断力与抗压韧性，全部实打实地长在你自己的骨头里。</p>
-                    </div>
+        <!-- 中部动态场景 -->
+        <div class="stage-canvas">
+            <!-- 场景 1：离开工位与身份解绑 (0s ~ 22.9s) -->
+            <div id="scene-1" class="scene-container active">
+                <div class="clay-img-wrap">
+                    <img src="cozy_desk.png" class="clay-img" alt="治愈书桌">
                 </div>
-
-                <!-- 场景 2：第一步 能力彻底脱水 (26s ~ 48s) -->
-                <div id="scene-2" class="scene-card">
-                    <div class="element-3d-wrap">
-                        <img src="crystal.png" class="element-3d-img" alt="能力水晶">
-                    </div>
-                    <div class="scene-badge-pill">02 · 行动第一步</div>
-                    <h1 class="scene-title-huge">给能力做一次<span class="highlight">“彻底脱水”</span></h1>
-                    <div class="scene-desc-box">
-                        <p class="scene-desc-text">删掉所有只有大厂听得懂的汇报黑话，只写脱离平台后能独立解决的 3 个真实问题。</p>
-                    </div>
-                </div>
-
-                <!-- 场景 3：第二步 打造微型交付物 (48s ~ 65s) -->
-                <div id="scene-3" class="scene-card">
-                    <div class="element-3d-wrap">
-                        <img src="sprout.png" class="element-3d-img" alt="希望幼苗">
-                    </div>
-                    <div class="scene-badge-pill">03 · 建立正反馈</div>
-                    <h1 class="scene-title-huge">做属于你的<span class="highlight">微型交付物</span></h1>
-                    <div class="scene-desc-box">
-                        <p class="scene-desc-text">哪怕是一篇深度经验复盘，重新找回直接向真实世界交付价值的肌肉记忆。</p>
-                    </div>
-                </div>
-
-                <!-- 场景 4：第三步 低能耗生活与重塑 (65s ~ 88s) -->
-                <div id="scene-4" class="scene-card">
-                    <div class="element-3d-wrap">
-                        <img src="crystal.png" class="element-3d-img" style="filter: hue-rotate(90deg) brightness(1.2);" alt="自留地">
-                    </div>
-                    <div class="scene-badge-pill">04 · 投资你自己</div>
-                    <h1 class="scene-title-huge">拿回属于你的<span class="highlight">时间所有权</span></h1>
-                    <div class="scene-desc-box">
-                        <p class="scene-desc-text">把原本用来应付内耗的才华，从今天开始，全部拿来重新滋养你自己。</p>
-                    </div>
+                <div class="badge-step">第一阶段 · 卸下内耗</div>
+                <h1 class="title-catchy">平台带走的只是<mark>工牌</mark></h1>
+                <div class="sticky-note">
+                    <span class="sticky-emoji">🌱</span>
+                    <p class="sticky-text">真正熬过的难题与磨练出的韧性，全部实打实长在你的骨头里。</p>
                 </div>
             </div>
 
-            <!-- 底部字幕与控制条 -->
-            <div class="bottom-shelf">
-                <div class="caption-glass-panel">
-                    <div id="subtitle-box" class="live-subtitle">离开工位的那一刻，很多人会陷入一种深深的怀疑...</div>
+            <!-- 场景 2：第一步 能力彻底脱水 (22.9s ~ 43.6s) -->
+            <div id="scene-2" class="scene-container">
+                <div class="clay-img-wrap">
+                    <img src="water_drop.png" class="clay-img" alt="能力脱水">
                 </div>
-                <div class="control-bar">
-                    <button id="play-btn" class="btn-mini-toggle" onclick="togglePlayPause(event)">
-                        <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
-                        <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
-                    </button>
-                    <div class="progress-rail" onclick="seekAudio(event)">
-                        <div id="progress-fill" class="progress-bar-fill"></div>
-                    </div>
+                <div class="badge-step">实操指南 01</div>
+                <h1 class="title-catchy">给能力做一次<mark>“彻底脱水”</mark></h1>
+                <div class="sticky-note">
+                    <span class="sticky-emoji">📝</span>
+                    <p class="sticky-text">删掉大厂汇报黑话，只写脱离平台后能独立帮人解决的 3 个真实痛点。</p>
+                </div>
+            </div>
+
+            <!-- 场景 3：第二步 打造微型交付物 (43.6s ~ 58.7s) -->
+            <div id="scene-3" class="scene-container">
+                <div class="clay-img-wrap">
+                    <img src="sprout.png" class="clay-img" alt="幼苗">
+                </div>
+                <div class="badge-step">实操指南 02</div>
+                <h1 class="title-catchy">做你的<mark>微型个人交付物</mark></h1>
+                <div class="sticky-note">
+                    <span class="sticky-emoji">✨</span>
+                    <p class="sticky-text">写一篇深度经验复盘，重新建立直接拿到正向反馈的掌控感。</p>
+                </div>
+            </div>
+
+            <!-- 场景 4：第三步 低能耗生活与重塑 (58.7s ~ 83.6s) -->
+            <div id="scene-4" class="scene-container">
+                <div class="clay-img-wrap">
+                    <img src="cute_plant.png" class="clay-img" alt="可爱盆栽">
+                </div>
+                <div class="badge-step">实操指南 03</div>
+                <h1 class="title-catchy">拿回你的<mark>时间所有权</mark></h1>
+                <div class="sticky-note">
+                    <span class="sticky-emoji">☀️</span>
+                    <p class="sticky-text">低能耗松绑生存成本，把应付内耗的才华全部拿来投资你自己。</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部字幕与播放条 -->
+        <div class="bottom-shelf">
+            <div class="subtitle-pill-card">
+                <div id="subtitle-box" class="live-subtitle-text">离开工位的那一刻，很多人会陷入一种深深的怀疑...</div>
+            </div>
+            <div class="control-bar">
+                <button id="play-btn" class="btn-play-toggle" onclick="togglePlayPause(event)">
+                    <svg id="play-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 3 20 12 6 21 6 3"></polygon></svg>
+                    <svg id="pause-icon" width="16" height="16" viewBox="0 0 24 24" fill="currentColor" style="display:none;"><rect x="6" y="4" width="4" height="16"></rect><rect x="14" y="4" width="4" height="16"></rect></svg>
+                </button>
+                <div class="progress-rail" onclick="seekAudio(event)">
+                    <div id="progress-fill" class="progress-bar-fill"></div>
                 </div>
             </div>
         </div>
@@ -443,27 +448,22 @@
         const playIcon = document.getElementById('play-icon');
         const pauseIcon = document.getElementById('pause-icon');
 
-        // SRT 毫秒时间轴对照表
+        // 基于 Edge-TTS VTT 生成的精准时间轴与场景切换
         const timeline = [
-            { start: 0.0, end: 4.5, text: "离开工位的那一刻，很多人会陷入一种深深的怀疑：", scene: 1 },
-            { start: 4.5, end: 8.8, text: "“难道我过去这些年的努力，真的全白费了吗？”", scene: 1 },
-            { start: 8.8, end: 12.6, text: "其实不是你不行，只是流水线把人拆成了零件。", scene: 1 },
-            { start: 12.6, end: 16.8, text: "平台带走的只是一张工牌和一个系统权限，", scene: 1 },
-            { start: 16.8, end: 21.8, text: "那些你真正解决过的复杂难题、锻炼出的逻辑与韧性，", scene: 1 },
-            { start: 21.8, end: 25.8, text: "全部实打实地长在你自己的骨头里。", scene: 1 },
-            { start: 25.8, end: 30.2, text: "不要慌着否定自己，如果你正处在空窗期，", scene: 2 },
-            { start: 30.2, end: 34.8, text: "明天早晨醒来，试着做好这三件具体的小事：", scene: 2 },
-            { start: 34.8, end: 38.5, text: "第一件事：给自己的能力做一次“彻底脱水”。", scene: 2 },
-            { start: 38.5, end: 43.2, text: "拿出一张白纸，删掉所有只有大厂才听得懂的汇报黑话，", scene: 2 },
-            { start: 43.2, end: 48.2, text: "只写你脱离平台后，还能独立帮别人解决的 3 个真实问题。", scene: 2 },
-            { start: 48.2, end: 52.8, text: "第二件事：去做一个属于你自己的“微型交付物”。", scene: 3 },
-            { start: 52.8, end: 57.2, text: "不用一上来就想着宏大创业，哪怕写一篇深度的行业经验复盘，", scene: 3 },
-            { start: 57.2, end: 62.5, text: "或者帮身边的朋友做一次专业咨询，重新找回直接创造价值的肌肉记忆。", scene: 3 },
-            { start: 62.5, end: 66.8, text: "第三件事：给生活开启“低能耗模式”。", scene: 4 },
-            { start: 66.8, end: 71.5, text: "砍掉面子型消费，把生存成本降到最低，保持规律的作息与运动。", scene: 4 },
-            { start: 71.5, end: 76.5, text: "当你不再被恐慌感催赶着，你才能做出真正清醒的长远选择。", scene: 4 },
-            { start: 76.5, end: 81.2, text: "空窗期不是你人生的暂停，而是你真正拿回时间所有权的起点。", scene: 4 },
-            { start: 81.2, end: 88.0, text: "把原本用来应付内耗的才华，从今天开始，全部拿来投资你自己。", scene: 4 }
+            { start: 0.1, end: 7.9, text: "离开工位的那一刻，很多人会陷入一种深深的怀疑：“难道我过去这些年的努力，真的全白费了吗？", scene: 1 },
+            { start: 7.9, end: 12.1, text: "其实不是你不行，只是流水线把人拆成了零件。", scene: 1 },
+            { start: 12.1, end: 22.9, text: "平台带走的只是一张工牌和一个系统权限，那些你真正解决过的复杂难题、锻炼出的逻辑与韧性，全部实打实地长在你自己的骨头里。", scene: 1 },
+            { start: 22.9, end: 24.8, text: "不要慌着否定自己。", scene: 2 },
+            { start: 24.8, end: 30.5, text: "如果你正处在空窗期，明天早晨醒来，试着做好这三件具体的小事：", scene: 2 },
+            { start: 30.5, end: 34.3, text: "第一件事：给自己的能力做一次“彻底脱水”。", scene: 2 },
+            { start: 34.3, end: 43.6, text: "拿出一张白纸，删掉所有只有大厂才听得懂的汇报黑话，只写你脱离平台后，还能独立帮别人解决的三个真实问题。", scene: 2 },
+            { start: 43.6, end: 47.5, text: "第二件事：去做一个属于你自己的“微型交付物”。", scene: 3 },
+            { start: 47.5, end: 58.7, text: "不用一上来就想着宏大创业，哪怕写一篇深度的行业经验复盘，或者帮身边的朋友做一次专业咨询，重新找回直接创造价值的肌肉记忆。", scene: 3 },
+            { start: 58.7, end: 62.0, text: "第三件事：给生活开启“低能耗模式”。", scene: 4 },
+            { start: 62.0, end: 67.7, text: "砍掉面子型消费，把生存成本降到最低，保持规律的作息与运动。", scene: 4 },
+            { start: 67.7, end: 72.9, text: "当你不再被恐慌感催赶着，你才能做出真正清醒的长远选择。", scene: 4 },
+            { start: 72.9, end: 78.2, text: "空窗期不是你人生的暂停，而是你真正拿回时间所有权的起点。", scene: 4 },
+            { start: 78.2, end: 83.6, text: "把原本用来应付内耗的才华，从今天开始，全部拿来投资你自己。", scene: 4 }
         ];
 
         let currentSceneId = 1;
@@ -500,12 +500,12 @@
             if (e) e.stopPropagation();
             const rect = e.currentTarget.getBoundingClientRect();
             const clickPos = (e.clientX - rect.left) / rect.width;
-            audio.currentTime = clickPos * (audio.duration || 88.0);
+            audio.currentTime = clickPos * (audio.duration || 83.6);
         }
 
         audio.addEventListener('timeupdate', () => {
             const curTime = audio.currentTime;
-            const dur = audio.duration || 88.0;
+            const dur = audio.duration || 83.6;
 
             const pct = Math.min(100, (curTime / dur) * 100);
             progFill.style.width = pct + '%';
