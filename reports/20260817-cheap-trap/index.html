@@ -27,8 +27,6 @@
             --text-faint: #a1a1aa;
             
             --accent-blue: #0284c7;
-            --accent-blue-subtle: #f0f9ff;
-            --accent-amber: #d97706;
             
             --font-serif: 'Noto Serif SC', 'Songti SC', Georgia, serif;
             --font-sans: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
@@ -56,7 +54,7 @@
             margin: 0 auto;
         }
 
-        /* 顶部大画报栏 (Editorial Top Header) */
+        /* 顶部大画报栏 */
         .masthead {
             border-bottom: 2px solid var(--text-black);
             padding-bottom: 28px;
@@ -72,7 +70,6 @@
             font-weight: 700;
             color: var(--text-muted);
             letter-spacing: 0.05em;
-            text-transform: uppercase;
             margin-bottom: 16px;
             border-bottom: 1px solid var(--border-neutral);
             padding-bottom: 10px;
@@ -105,7 +102,6 @@
         .masthead-stats {
             display: flex;
             gap: 24px;
-            font-family: var(--font-mono);
             border-left: 1px solid var(--border-neutral);
             padding-left: 24px;
         }
@@ -116,15 +112,16 @@
         }
 
         .stat-col-lbl {
-            font-size: 11px;
+            font-size: 12px;
             color: var(--text-faint);
-            text-transform: uppercase;
+            font-weight: 600;
         }
 
         .stat-col-val {
             font-size: 18px;
             font-weight: 800;
             color: var(--text-black);
+            font-family: var(--font-mono);
         }
 
         /* 原视频行动条 */
@@ -184,7 +181,7 @@
             opacity: 0.85;
         }
 
-        /* 核心内容区：非对称双栏画报 (Asymmetric Magazine Grid) */
+        /* 核心内容区：非对称双栏画报 */
         .magazine-grid {
             display: grid;
             grid-template-columns: 1.2fr 0.8fr;
@@ -213,15 +210,10 @@
         }
 
         .article-section-label {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
-            text-transform: uppercase;
             color: var(--accent-blue);
-            letter-spacing: 0.08em;
+            letter-spacing: 0.04em;
         }
 
         .article-heading {
@@ -238,7 +230,7 @@
             line-height: 1.8;
         }
 
-        /* 杂志高光拉出块 (Callout Quote) */
+        /* 杂志高光拉出块 */
         .pull-quote {
             background: var(--bg-white);
             border: 1px solid var(--border-neutral);
@@ -249,10 +241,8 @@
         }
 
         .pull-quote-title {
-            font-family: var(--font-mono);
-            font-size: 11px;
+            font-size: 12px;
             font-weight: 800;
-            text-transform: uppercase;
             color: var(--text-muted);
             margin-bottom: 6px;
         }
@@ -332,7 +322,7 @@
             line-height: 1.6;
         }
 
-        /* 底部沉浸式文稿阅读台 (Full-width Text & SRT Station) */
+        /* 底部沉浸式文稿阅读台 */
         .station-card {
             background: var(--bg-white);
             border: 1px solid var(--border-neutral);
@@ -433,7 +423,6 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-family: var(--font-mono);
             font-size: 12px;
             color: var(--text-faint);
             flex-wrap: wrap;
@@ -458,7 +447,7 @@
             <div class="masthead-meta">
                 <span class="masthead-tag">
                     <span>●</span>
-                    <span>深度爆款拆解专刊 · 本地文件</span>
+                    <span>深度爆款拆解专刊</span>
                 </span>
                 <span>2026-08-17 归档</span>
             </div>
@@ -475,8 +464,8 @@
                         <span class="stat-col-val">1234 字</span>
                     </div>
                     <div class="stat-col">
-                        <span class="stat-col-lbl">转写</span>
-                        <span class="stat-col-val">SenseVoice</span>
+                        <span class="stat-col-lbl">语音识别</span>
+                        <span class="stat-col-val">阿里语音模型</span>
                     </div>
                 </div>
             </div>
@@ -495,13 +484,13 @@
         
         </header>
 
-        <!-- 杂志双栏非对称网格 (Asymmetric Magazine Grid) -->
+        <!-- 杂志双栏非对称网格 -->
         <main class="magazine-grid">
             <!-- 左栏：主叙事与深度机理 (60%) -->
             <div class="magazine-col-main">
                 <!-- 01 黄金 3 秒钩子 -->
                 <article class="article-block">
-                    <div class="article-section-label">01 / HOOK ANALYSIS</div>
+                    <div class="article-section-label">01 / 黄金钩子剖析</div>
                     <h2 class="article-heading">黄金前 3 秒钩子剖析</h2>
                     <p class="article-p">开篇以设问或具象生活场景迅速建立好奇缺口，直接抛出反常识或大众普遍存在的潜在行为（如：什么是廉价陷阱），瞬间拉升前 3 秒留存率。</p>
                     <div class="pull-quote">
@@ -512,7 +501,7 @@
 
                 <!-- 02 情绪与心理共鸣 -->
                 <article class="article-block">
-                    <div class="article-section-label">02 / PSYCHOLOGY & RESONANCE</div>
+                    <div class="article-section-label">02 / 情绪与心理机制</div>
                     <h2 class="article-heading">痛点激发与底层心理机制</h2>
                     <p class="article-p">直击受众对于“自以为在省钱/理性消费，实则不知不觉陷入更大财务漏洞”的深层焦虑与认知反差。</p>
                     <div class="pull-quote">
@@ -523,7 +512,7 @@
 
                 <!-- 03 叙事节奏 -->
                 <article class="article-block">
-                    <div class="article-section-label">03 / NARRATIVE STRUCTURE</div>
+                    <div class="article-section-label">03 / 叙事节奏与转折</div>
                     <h2 class="article-heading">叙事节奏与反转高潮</h2>
                     <p class="article-p">采用『生活具象场景切入 → 旁观者质疑/反常积累 → 算账时刻的高潮反转 → 升华至社会商业博弈本质』的四段式叙事链条，节奏紧凑递进。</p>
                     <div class="pull-quote">
@@ -537,7 +526,7 @@
             <div class="magazine-col-side">
                 <!-- 传播金句榜 -->
                 <div class="article-block">
-                    <div class="article-section-label">04 / VIRAL QUOTES</div>
+                    <div class="article-section-label">04 / 传播金句榜</div>
                     <h3 class="article-heading">高传播力金句榜</h3>
                     <div class="quotes-stack" style="display:flex; flex-direction:column; gap:14px; margin-top:8px;">
                         <div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">每一件都不贵，每一件他都用得着 : 至少下单的时候他是这样想的。</p><span class="quote-bracket right">」</span></div><div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">不记得自己是从什么时候开始，把便宜当成了需要。</p><span class="quote-bracket right">」</span></div><div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">那些单价极低、毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到在月末叠加出惊人的总数。</p><span class="quote-bracket right">」</span></div><div class="quote-editorial"><span class="quote-bracket">「</span><p class="quote-body">便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。</p><span class="quote-bracket right">」</span></div>
@@ -546,7 +535,7 @@
 
                 <!-- 仿写与复刻工坊 -->
                 <div class="article-block" style="margin-top:12px;">
-                    <div class="article-section-label">05 / REPLICATION RECIPE</div>
+                    <div class="article-section-label">05 / 选题复刻指南</div>
                     <h3 class="article-heading">爆款选题复刻指南</h3>
                     <div class="recipe-container" style="display:flex; flex-direction:column; gap:16px; margin-top:8px;">
                         <div class="recipe-row"><div class="recipe-num">01</div><div class="recipe-content"><div class="recipe-head">选定微小行为切入</div><p class="recipe-desc">寻找大众日常中高频但极不起眼的‘小动作’（如攒塑料袋、买打折临期食品、各种 1 元虚拟会员）。</p></div></div><div class="recipe-row"><div class="recipe-num">02</div><div class="recipe-content"><div class="recipe-head">构建双人对话反差</div><p class="recipe-desc">引入清醒的旁观者角色（类似派大星），通过连续提问揭穿主角自我催眠的逻辑。</p></div></div><div class="recipe-row"><div class="recipe-num">03</div><div class="recipe-content"><div class="recipe-head">设计算账震撼时刻</div><p class="recipe-desc">量化微小支出/时间的长期累加效应，给观众一个超出直觉预期的具体数字。</p></div></div><div class="recipe-row"><div class="recipe-num">04</div><div class="recipe-content"><div class="recipe-head">升华至系统与认知层面</div><p class="recipe-desc">不仅停留在劝导，而是上升到商业模式和消费心理的本质，提供高级认知增量。</p></div></div>
@@ -560,7 +549,7 @@
             <div class="station-header">
                 <div class="station-tabs">
                     <button class="tab-trigger active" onclick="switchStation('plain')">纯文本全文</button>
-                    <button class="tab-trigger" onclick="switchStation('srt')">SRT 时间轴字幕</button>
+                    <button class="tab-trigger" onclick="switchStation('srt')">字幕时间轴</button>
                 </div>
                 <button class="btn-station-copy" onclick="copyStationText()">
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
@@ -696,7 +685,7 @@
 
         <footer class="editorial-footer">
             <span>短视频爆款内容深度拆解专刊</span>
-            <span>ANTIGRAVITY VIRAL ANALYZER · TASTE-SKILL</span>
+            <span>自动化内容情报分析系统 · 归档完毕</span>
         </footer>
     </div>
 
@@ -734,7 +723,7 @@
                 : document.getElementById('view-srt').innerText;
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => {
-                    notifyUser('✅ 已成功复制');
+                    notifyUser('已成功复制');
                 }).catch(() => { execFallback(text); });
             } else {
                 execFallback(text);
@@ -751,7 +740,7 @@
             textArea.select();
             try {
                 document.execCommand('copy');
-                notifyUser('✅ 已成功复制');
+                notifyUser('已成功复制');
             } catch (err) {
                 notifyUser('请长按选中复制');
             }
