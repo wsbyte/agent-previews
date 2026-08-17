@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Edge-TTS AI 智能配音与字幕演示 - Agent Web Previews</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
+    }
+    .wave-bar {
+      transition: height 0.15s ease;
+    }
+    @keyframes pulse-ring {
+      0% { transform: scale(0.95); opacity: 0.8; }
+      50% { transform: scale(1.1); opacity: 0.4; }
+      100% { transform: scale(0.95); opacity: 0.8; }
+    }
+    .pulse-ring {
+      animation: pulse-ring 2s infinite ease-in-out;
+    }
+  </style>
+</head>
+<body class="bg-slate-900 text-slate-100 min-h-screen antialiased flex flex-col justify-between selection:bg-indigo-500 selection:text-white pb-12">
+
+  <!-- Header -->
+  <header class="border-b border-slate-800 bg-slate-900/80 backdrop-blur-md sticky top-0 z-50">
+    <div class="max-w-4xl mx-auto px-4 py-3.5 flex items-center justify-between">
+      <div class="flex items-center gap-3">
+        <a href="../../index.html" class="w-9 h-9 rounded-xl bg-slate-800 hover:bg-slate-700 flex items-center justify-center text-slate-300 transition-colors border border-slate-700/60" title="返回预览展厅首页">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"></path></svg>
+        </a>
+        <div>
+          <div class="flex items-center gap-2">
+            <span class="text-xs font-semibold px-2 py-0.5 rounded-md bg-indigo-500/20 text-indigo-400 border border-indigo-500/30">Edge-TTS</span>
+            <h1 class="text-sm font-bold text-slate-100">AI 智能配音与字幕演示</h1>
+          </div>
+        </div>
+      </div>
+      <a href="https://github.com/wsbyte/agent-previews" target="_blank" class="text-xs text-slate-400 hover:text-slate-200 flex items-center gap-1.5 transition-colors">
+        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.53 1.032 1.53 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"/></svg>
+        <span class="hidden sm:inline">GitHub</span>
+      </a>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-4xl mx-auto px-4 py-8 w-full">
+    <!-- Hero / Intro -->
+    <div class="mb-8 text-center sm:text-left sm:flex sm:items-end sm:justify-between border-b border-slate-800/80 pb-6">
+      <div>
+        <div class="inline-flex items-center gap-1.5 text-xs font-semibold px-2.5 py-1 rounded-full bg-emerald-500/10 text-emerald-400 border border-emerald-500/20 mb-3">
+          <span class="w-1.5 h-1.5 rounded-full bg-emerald-400"></span> 微软高保真神经网络语音 (Neural TTS)
+        </div>
+        <h2 class="text-2xl sm:text-3xl font-extrabold text-white tracking-tight">AI 语音合成与时间轴字幕</h2>
+        <p class="text-sm text-slate-400 mt-2 max-w-xl leading-relaxed">
+          无需安装浏览器与专业显卡，支持 100+ 种多语言及方言自然音色，自带精确到毫秒的时间戳与 SRT 字幕导出。
+        </p>
+      </div>
+      <div class="mt-4 sm:mt-0 flex gap-2 justify-center">
+        <a id="btn-download-mp3" href="demo_yunxi_解说男声.mp3" download class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 flex items-center gap-1.5 transition-colors">
+          <svg class="w-4 h-4 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
+          下载音频 (.mp3)
+        </a>
+        <a id="btn-download-srt" href="demo_yunxi_解说男声.srt" download class="px-3.5 py-2 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 text-xs font-medium border border-slate-700 flex items-center gap-1.5 transition-colors">
+          <svg class="w-4 h-4 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z"></path></svg>
+          下载字幕 (.srt)
+        </a>
+      </div>
+    </div>
+
+    <!-- Interactive Voice Switcher & Player -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-6 mb-10">
+      
+      <!-- Voice Selector List (5 Cols) -->
+      <div class="md:col-span-5 flex flex-col gap-3">
+        <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider px-1">选择试听音色</div>
+        
+        <!-- Voice 1 -->
+        <button onclick="selectVoice(0)" id="voice-btn-0" class="voice-card text-left p-4 rounded-2xl bg-gradient-to-r from-indigo-950/60 to-slate-800/80 border-2 border-indigo-500/80 shadow-lg shadow-indigo-500/10 transition-all cursor-pointer relative overflow-hidden group">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-sm font-bold text-white group-hover:text-indigo-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-indigo-500"></span> 云希 · 经典解说男声
+            </span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-indigo-500/20 text-indigo-300 font-mono">zh-CN-Yunxi</span>
+          </div>
+          <p class="text-xs text-slate-400 line-clamp-2">影视解说、短视频热门口音，节奏感强，生动磁性</p>
+        </button>
+
+        <!-- Voice 2 -->
+        <button onclick="selectVoice(1)" id="voice-btn-1" class="voice-card text-left p-4 rounded-2xl bg-slate-800/40 border border-slate-700/60 hover:bg-slate-800/80 transition-all cursor-pointer group">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-sm font-bold text-slate-200 group-hover:text-pink-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-pink-500 transition-colors"></span> 晓晓 · 温柔播报女声
+            </span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-700/50 text-slate-400 font-mono">zh-CN-Xiaoxiao</span>
+          </div>
+          <p class="text-xs text-slate-400 line-clamp-2">知识科普、有声读物、官方播报，音色清澈温柔自然</p>
+        </button>
+
+        <!-- Voice 3 -->
+        <button onclick="selectVoice(2)" id="voice-btn-2" class="voice-card text-left p-4 rounded-2xl bg-slate-800/40 border border-slate-700/60 hover:bg-slate-800/80 transition-all cursor-pointer group">
+          <div class="flex items-center justify-between mb-1.5">
+            <span class="text-sm font-bold text-slate-200 group-hover:text-amber-300 transition-colors flex items-center gap-2">
+              <span class="w-2.5 h-2.5 rounded-full bg-slate-600 group-hover:bg-amber-500 transition-colors"></span> 晓妮 · 陕西特色方言
+            </span>
+            <span class="text-[10px] px-2 py-0.5 rounded bg-slate-700/50 text-slate-400 font-mono">zh-CN-shaanxi</span>
+          </div>
+          <p class="text-xs text-slate-400 line-clamp-2">地方风味、接地气对话、短剧短视频特色配音</p>
+        </button>
+      </div>
+
+      <!-- Live Player Card (7 Cols) -->
+      <div class="md:col-span-7 bg-slate-800/70 border border-slate-700/70 rounded-2xl p-6 flex flex-col justify-between shadow-xl backdrop-blur-sm relative">
+        
+        <!-- Voice Info Header -->
+        <div>
+          <div class="flex items-center justify-between mb-3">
+            <div class="flex items-center gap-2.5">
+              <div id="voice-avatar" class="w-10 h-10 rounded-xl bg-indigo-600/30 text-indigo-400 border border-indigo-500/30 flex items-center justify-center font-bold text-lg">
+                🎙️
+              </div>
+              <div>
+                <h3 id="current-voice-title" class="text-base font-bold text-white">云希 · 经典解说男声</h3>
+                <span id="current-voice-tag" class="text-[11px] text-slate-400">微软 Azure Neural Voice · zh-CN-YunxiNeural</span>
+              </div>
+            </div>
+            <!-- Live Audio Visualizer Bars -->
+            <div id="visualizer" class="flex items-end gap-1 h-6 px-2 py-1 bg-slate-900/60 rounded-lg border border-slate-700/50">
+              <div class="wave-bar w-1 bg-indigo-500 rounded-full h-2"></div>
+              <div class="wave-bar w-1 bg-indigo-400 rounded-full h-4"></div>
+              <div class="wave-bar w-1 bg-indigo-500 rounded-full h-1.5"></div>
+              <div class="wave-bar w-1 bg-indigo-300 rounded-full h-5"></div>
+              <div class="wave-bar w-1 bg-indigo-500 rounded-full h-2.5"></div>
+            </div>
+          </div>
+
+          <!-- Script Card with Synchronized Highlight -->
+          <div class="p-4 rounded-xl bg-slate-900/80 border border-slate-700/50 my-4 relative">
+            <div class="flex items-center justify-between text-[11px] text-slate-400 mb-2">
+              <span class="flex items-center gap-1 font-semibold text-slate-300">
+                <svg class="w-3.5 h-3.5 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"></path></svg>
+                配音台词文案
+              </span>
+              <button onclick="copyScriptText()" id="copy-btn" class="text-[11px] text-indigo-400 hover:text-indigo-300 transition-colors flex items-center gap-1">
+                复制文本
+              </button>
+            </div>
+            <p id="script-display" class="text-sm text-slate-200 leading-relaxed font-medium transition-colors">
+              “注意看，眼前这个男人叫小帅，他正在用 edge-tts 自动生成短视频配音和字幕。”
+            </p>
+          </div>
+        </div>
+
+        <!-- Audio Element (Hidden Native) -->
+        <audio id="audio-player" src="demo_yunxi_解说男声.mp3" preload="metadata"></audio>
+
+        <!-- Player Controls Container -->
+        <div class="pt-2">
+          <!-- Progress Slider -->
+          <div class="mb-3">
+            <div class="flex justify-between text-[11px] font-mono text-slate-400 mb-1">
+              <span id="current-time">00:00</span>
+              <span id="duration-time">--:--</span>
+            </div>
+            <div class="relative w-full h-2 bg-slate-700 rounded-full cursor-pointer overflow-hidden group" id="progress-bar-container" onclick="seekAudio(event)">
+              <div id="progress-bar" class="h-full bg-gradient-to-r from-indigo-500 to-cyan-400 rounded-full w-0 transition-all duration-75"></div>
+            </div>
+          </div>
+
+          <!-- Bottom Actions: Play, Speed, Volume -->
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-3">
+              <!-- Play / Pause Button -->
+              <button onclick="togglePlay()" id="play-btn" class="w-12 h-12 rounded-2xl bg-indigo-600 hover:bg-indigo-500 text-white flex items-center justify-center shadow-lg shadow-indigo-600/30 transition-transform active:scale-95">
+                <svg id="play-icon" class="w-6 h-6 translate-x-0.5" fill="currentColor" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+                <svg id="pause-icon" class="w-6 h-6 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg>
+              </button>
+              
+              <!-- Quick Replay 5s -->
+              <button onclick="replayAudio()" class="w-9 h-9 rounded-xl bg-slate-700/60 hover:bg-slate-700 text-slate-300 flex items-center justify-center transition-colors" title="重播">
+                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
+              </button>
+            </div>
+
+            <!-- Speed & Volume Controls -->
+            <div class="flex items-center gap-2">
+              <div class="relative">
+                <button onclick="cycleSpeed()" id="speed-btn" class="px-2.5 py-1.5 rounded-lg bg-slate-700/70 hover:bg-slate-700 text-slate-200 text-xs font-mono font-semibold transition-colors border border-slate-600">
+                  1.0x
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- Python Script & Features Section -->
+    <div class="border border-slate-800 bg-slate-900/60 rounded-2xl p-6 mb-8">
+      <div class="flex items-center justify-between mb-4">
+        <div>
+          <h3 class="text-base font-bold text-white flex items-center gap-2">
+            <span>🐍</span> Python 自动化生成代码
+          </h3>
+          <p class="text-xs text-slate-400 mt-0.5">使用 edge-tts 库，异步并发批量生成音频与时间轴字幕</p>
+        </div>
+        <button onclick="copyCodeSnippet()" id="btn-copy-code" class="px-3 py-1.5 rounded-lg bg-slate-800 hover:bg-slate-700 text-slate-300 text-xs border border-slate-700 transition-colors flex items-center gap-1.5">
+          <svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg>
+          复制代码
+        </button>
+      </div>
+
+      <pre class="bg-slate-950 rounded-xl p-4 text-xs font-mono text-slate-300 overflow-x-auto border border-slate-800 leading-relaxed"><code id="code-block">import asyncio
+import edge_tts
+
+VOICE = "zh-CN-YunxiNeural"
+TEXT = "注意看，眼前这个男人叫小帅，他正在用 edge-tts 自动生成短视频配音和字幕。"
+OUTPUT_FILE = "output.mp3"
+WEBVTT_FILE = "output.vtt"
+
+async def main():
+    # 初始化通信对象并生成配音 + 字幕
+    communicate = edge_tts.Communicate(TEXT, VOICE, rate="+0%", volume="+0%", pitch="+0Hz")
+    submaker = edge_tts.SubMaker()
+    
+    with open(OUTPUT_FILE, "wb") as file:
+        async for chunk in communicate.stream():
+            if chunk["type"] == "audio":
+                file.write(chunk["data"])
+            elif chunk["type"] == "WordBoundary":
+                submaker.feed(chunk)
+                
+    with open(WEBVTT_FILE, "w", encoding="utf-8") as file:
+        file.write(submaker.get_srt())
+
+if __name__ == "__main__":
+    asyncio.run(main())</code></pre>
+    </div>
+
+    <!-- Quick Reference Grid -->
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-xs">
+      <div class="p-4 rounded-xl bg-slate-800/40 border border-slate-800">
+        <div class="font-bold text-slate-200 mb-1">⚡ 免 GPU / 纯异步</div>
+        <p class="text-slate-400 leading-relaxed">直接调用高带宽 WebSocket 实时流式合成，秒级极速导出。</p>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-800/40 border border-slate-800">
+        <div class="font-bold text-slate-200 mb-1">⏱️ 毫秒级字幕对齐</div>
+        <p class="text-slate-400 leading-relaxed">内置 WordBoundary 词级别时间戳回调，一键导出 SRT 与 WebVTT。</p>
+      </div>
+      <div class="p-4 rounded-xl bg-slate-800/40 border border-slate-800">
+        <div class="font-bold text-slate-200 mb-1">🎛️ 音调与语速精调</div>
+        <p class="text-slate-400 leading-relaxed">支持 rate（语速±%）、pitch（音调±Hz）、volume（音量±%）微调。</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="text-center text-xs text-slate-500 py-4 border-t border-slate-800/60 mt-auto">
+    由 Google Antigravity 智能体驱动 · 自动发布于 GitHub Pages
+  </footer>
+
+  <!-- Script Logic -->
+  <script>
+    const voices = [
+      {
+        title: "云希 · 经典解说男声",
+        tag: "微软 Azure Neural Voice · zh-CN-YunxiNeural",
+        avatar: "🎙️",
+        audioSrc: "demo_yunxi_解说男声.mp3",
+        srtSrc: "demo_yunxi_解说男声.srt",
+        script: "“注意看，眼前这个男人叫小帅，他正在用 edge-tts 自动生成短视频配音和字幕。”"
+      },
+      {
+        title: "晓晓 · 温柔播报女声",
+        tag: "微软 Azure Neural Voice · zh-CN-XiaoxiaoNeural",
+        avatar: "🌸",
+        audioSrc: "demo_xiaoxiao_温柔女声.mp3",
+        srtSrc: null,
+        script: "“欢迎使用 edge-tts 语音合成系统。无需安装浏览器，无需专业显卡，即可快速批量生成自然流畅的语音。”"
+      },
+      {
+        title: "晓妮 · 陕西特色方言",
+        tag: "微软 Azure Neural Voice · zh-CN-shaanxi-XiaoniNeural",
+        avatar: "🌾",
+        audioSrc: "demo_shaanxi_方言特色.mp3",
+        srtSrc: null,
+        script: "“兄弟们，今儿个咱们聊一聊这个配音自动化，确实是省心又方便得很！”"
+      }
+    ];
+
+    let currentIdx = 0;
+    const player = document.getElementById('audio-player');
+    const playBtn = document.getElementById('play-btn');
+    const playIcon = document.getElementById('play-icon');
+    const pauseIcon = document.getElementById('pause-icon');
+    const progressBar = document.getElementById('progress-bar');
+    const currentTimeEl = document.getElementById('current-time');
+    const durationTimeEl = document.getElementById('duration-time');
+    const speedBtn = document.getElementById('speed-btn');
+    const visualizerBars = document.querySelectorAll('.wave-bar');
+
+    const speeds = [1.0, 1.25, 1.5, 0.75];
+    let speedIdx = 0;
+    let visualizerInterval = null;
+
+    function selectVoice(idx) {
+      currentIdx = idx;
+      const v = voices[idx];
+      
+      // Update UI texts
+      document.getElementById('current-voice-title').innerText = v.title;
+      document.getElementById('current-voice-tag').innerText = v.tag;
+      document.getElementById('voice-avatar').innerText = v.avatar;
+      document.getElementById('script-display').innerText = v.script;
+      
+      // Update Download Links
+      document.getElementById('btn-download-mp3').href = v.audioSrc;
+      const srtBtn = document.getElementById('btn-download-srt');
+      if (v.srtSrc) {
+        srtBtn.href = v.srtSrc;
+        srtBtn.classList.remove('opacity-40', 'pointer-events-none');
+      } else {
+        srtBtn.href = "#";
+        srtBtn.classList.add('opacity-40', 'pointer-events-none');
+      }
+
+      // Update Card Active Borders
+      for (let i = 0; i < voices.length; i++) {
+        const btn = document.getElementById(`voice-btn-${i}`);
+        if (i === idx) {
+          btn.className = "voice-card text-left p-4 rounded-2xl bg-gradient-to-r from-indigo-950/60 to-slate-800/80 border-2 border-indigo-500/80 shadow-lg shadow-indigo-500/10 transition-all cursor-pointer relative overflow-hidden group";
+        } else {
+          btn.className = "voice-card text-left p-4 rounded-2xl bg-slate-800/40 border border-slate-700/60 hover:bg-slate-800/80 transition-all cursor-pointer group";
+        }
+      }
+
+      // Load and auto play
+      player.src = v.audioSrc;
+      player.load();
+      player.play().then(() => {
+        setPlayingState(true);
+      }).catch(() => {
+        setPlayingState(false);
+      });
+    }
+
+    function togglePlay() {
+      if (player.paused) {
+        player.play();
+        setPlayingState(true);
+      } else {
+        player.pause();
+        setPlayingState(false);
+      }
+    }
+
+    function replayAudio() {
+      player.currentTime = 0;
+      player.play();
+      setPlayingState(true);
+    }
+
+    function setPlayingState(isPlaying) {
+      if (isPlaying) {
+        playIcon.classList.add('hidden');
+        pauseIcon.classList.remove('hidden');
+        startVisualizer();
+      } else {
+        playIcon.classList.remove('hidden');
+        pauseIcon.classList.add('hidden');
+        stopVisualizer();
+      }
+    }
+
+    function startVisualizer() {
+      if (visualizerInterval) clearInterval(visualizerInterval);
+      visualizerInterval = setInterval(() => {
+        visualizerBars.forEach(bar => {
+          const h = Math.floor(Math.random() * 20) + 4;
+          bar.style.height = `${h}px`;
+        });
+      }, 100);
+    }
+
+    function stopVisualizer() {
+      if (visualizerInterval) clearInterval(visualizerInterval);
+      visualizerBars.forEach(bar => {
+        bar.style.height = '6px';
+      });
+    }
+
+    function formatTime(secs) {
+      if (isNaN(secs)) return "00:00";
+      const m = Math.floor(secs / 60);
+      const s = Math.floor(secs % 60);
+      return `${m.toString().padStart(2, '0')}:${s.toString().padStart(2, '0')}`;
+    }
+
+    player.addEventListener('timeupdate', () => {
+      const cur = player.currentTime;
+      const dur = player.duration;
+      currentTimeEl.innerText = formatTime(cur);
+      if (dur) {
+        durationTimeEl.innerText = formatTime(dur);
+        const percent = (cur / dur) * 100;
+        progressBar.style.width = `${percent}%`;
+      }
+    });
+
+    player.addEventListener('loadedmetadata', () => {
+      durationTimeEl.innerText = formatTime(player.duration);
+    });
+
+    player.addEventListener('ended', () => {
+      setPlayingState(false);
+      progressBar.style.width = '0%';
+      currentTimeEl.innerText = "00:00";
+    });
+
+    function seekAudio(e) {
+      const container = document.getElementById('progress-bar-container');
+      const rect = container.getBoundingClientRect();
+      const clickX = e.clientX - rect.left;
+      const percent = clickX / rect.width;
+      if (player.duration) {
+        player.currentTime = percent * player.duration;
+      }
+    }
+
+    function cycleSpeed() {
+      speedIdx = (speedIdx + 1) % speeds.length;
+      const s = speeds[speedIdx];
+      player.playbackRate = s;
+      speedBtn.innerText = `${s}x`;
+    }
+
+    function copyScriptText() {
+      const txt = document.getElementById('script-display').innerText;
+      navigator.clipboard.writeText(txt);
+      const btn = document.getElementById('copy-btn');
+      btn.innerText = "已复制 ✓";
+      setTimeout(() => { btn.innerText = "复制文本"; }, 2000);
+    }
+
+    function copyCodeSnippet() {
+      const code = document.getElementById('code-block').innerText;
+      navigator.clipboard.writeText(code);
+      const btn = document.getElementById('btn-copy-code');
+      btn.innerHTML = "<span>✓</span> 已复制到剪贴板";
+      setTimeout(() => {
+        btn.innerHTML = `<svg class="w-3.5 h-3.5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"></path></svg> 复制代码`;
+      }, 2000);
+    }
+  </script>
+</body>
+</html>
