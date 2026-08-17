@@ -7,416 +7,604 @@
     <meta property="og:title" content="什么是廉价陷阱？ - 爆款内容深度拆解报告">
     <meta property="og:description" content="包含黄金3秒钩子、情绪痛点、叙事曲线、爆款金句及完整SRT字幕。">
     <meta property="og:type" content="article">
-    <title>什么是廉价陷阱？ - 爆款内容深度拆解报告</title>
+    <title>什么是廉价陷阱？ · 爆款内容深度拆解</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
     <style>
         :root {
-            --bg-page: #0c0e14;
-            --surface-card: #151821;
-            --surface-card-subtle: #1c202d;
-            --border-subtle: #272d3e;
-            --border-active: #3b445f;
-            --text-primary: #f1f5f9;
+            --bg-base: #090a0f;
+            --surface-elevated: #11131c;
+            --surface-subtle: #161a26;
+            --surface-hover: #1c2132;
+            --border-subtle: rgba(255, 255, 255, 0.08);
+            --border-strong: rgba(255, 255, 255, 0.16);
+            --border-highlight: rgba(56, 189, 248, 0.35);
+            
+            --text-primary: #f8fafc;
             --text-secondary: #94a3b8;
             --text-muted: #64748b;
+            
             --accent-primary: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.12);
-            --accent-warn: #fb923c;
-            --accent-success: #34d399;
+            --accent-glow: rgba(56, 189, 248, 0.14);
+            
             --font-sans: 'Plus Jakarta Sans', 'Noto Sans SC', -apple-system, BlinkMacSystemFont, sans-serif;
+            --font-mono: 'JetBrains Mono', ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+            
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-pill: 9999px;
+            
+            --transition-smooth: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
-        * { box-sizing: border-box; margin: 0; padding: 0; }
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            -webkit-tap-highlight-color: transparent;
+        }
 
         body {
-            background-color: var(--bg-page);
+            background-color: var(--bg-base);
             color: var(--text-primary);
             font-family: var(--font-sans);
-            line-height: 1.6;
+            line-height: 1.65;
             -webkit-font-smoothing: antialiased;
-            padding: 32px 16px;
+            -moz-osx-font-smoothing: grayscale;
+            padding: 40px 20px 80px;
+            min-height: 100dvh;
         }
 
-        .container { max-width: 880px; margin: 0 auto; }
+        .container {
+            max-width: 860px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
 
-        .header {
-            background: linear-gradient(180deg, rgba(28, 32, 45, 0.85) 0%, rgba(21, 24, 33, 0.7) 100%);
+        /* Header Hero */
+        .hero-card {
+            background: radial-gradient(120% 120% at 50% 0%, rgba(30, 41, 59, 0.4) 0%, rgba(15, 23, 42, 0.2) 100%), var(--surface-elevated);
             border: 1px solid var(--border-subtle);
-            border-radius: 16px;
-            padding: 30px 26px;
-            margin-bottom: 20px;
-            backdrop-filter: blur(12px);
+            border-radius: var(--radius-lg);
+            padding: 32px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5), inset 0 1px 0 rgba(255, 255, 255, 0.08);
+            position: relative;
+            overflow: hidden;
         }
 
-        .badge-bar {
+        .hero-top-strip {
             display: flex;
             align-items: center;
-            gap: 10px;
-            margin-bottom: 12px;
+            justify-content: space-between;
+            gap: 12px;
+            margin-bottom: 18px;
             flex-wrap: wrap;
         }
 
-        .tag {
-            font-size: 12px;
+        .badge-group {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+
+        .tag-pill {
+            font-family: var(--font-mono);
+            font-size: 11px;
             font-weight: 600;
+            letter-spacing: 0.06em;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
             padding: 4px 10px;
-            border-radius: 6px;
-            background: var(--surface-card-subtle);
+            border-radius: var(--radius-pill);
+            background: var(--surface-subtle);
             border: 1px solid var(--border-subtle);
             color: var(--accent-primary);
         }
 
-        .tag.time { color: var(--text-secondary); }
-
-        .title {
-            font-size: 26px;
-            font-weight: 700;
-            color: #ffffff;
-            line-height: 1.35;
-            margin-bottom: 16px;
-            letter-spacing: -0.02em;
+        .tag-pill.muted {
+            color: var(--text-muted);
+            border-color: rgba(255, 255, 255, 0.05);
         }
 
-        .source-banner {
+        .hero-title {
+            font-size: 28px;
+            font-weight: 800;
+            color: #ffffff;
+            line-height: 1.3;
+            letter-spacing: -0.03em;
+            margin-bottom: 20px;
+        }
+
+        /* Glassmorphic Source Banner */
+        .source-glass-banner {
             display: flex;
             align-items: center;
             justify-content: space-between;
-            background: rgba(56, 189, 248, 0.08);
-            border: 1px solid rgba(56, 189, 248, 0.25);
-            border-radius: 10px;
-            padding: 12px 16px;
-            margin-bottom: 18px;
+            background: rgba(56, 189, 248, 0.04);
+            border: 1px solid var(--border-highlight);
+            border-radius: var(--radius-md);
+            padding: 14px 18px;
+            gap: 16px;
+            margin-bottom: 22px;
+            backdrop-filter: blur(12px);
+            box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.06);
+            flex-wrap: wrap;
+        }
+
+        .source-glass-content {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+            min-width: 220px;
+            flex: 1;
+        }
+
+        .source-glass-tag {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: var(--font-mono);
+            font-size: 10.5px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            color: var(--accent-primary);
+        }
+
+        .pulse-indicator {
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: var(--accent-primary);
+            box-shadow: 0 0 8px var(--accent-primary);
+        }
+
+        .source-glass-link {
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: #cbd5e1;
+            word-break: break-all;
+        }
+
+        .source-glass-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+            background: var(--accent-primary);
+            color: #090a0f;
+            font-size: 12.5px;
+            font-weight: 700;
+            padding: 8px 16px;
+            border-radius: var(--radius-sm);
+            text-decoration: none;
+            flex-shrink: 0;
+            transition: var(--transition-smooth);
+            box-shadow: 0 4px 12px var(--accent-glow);
+        }
+
+        .source-glass-btn:hover {
+            opacity: 0.92;
+            transform: translateY(-1px);
+        }
+
+        .source-glass-btn:active {
+            transform: translateY(0);
+        }
+
+        /* Metrics Bar */
+        .metrics-strip {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 16px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .metric-block {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .metric-label {
+            font-family: var(--font-mono);
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-muted);
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+
+        .metric-val {
+            font-size: 15px;
+            font-weight: 700;
+            color: var(--text-primary);
+            letter-spacing: -0.01em;
+        }
+
+        /* Content Sections */
+        .content-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            padding: 28px;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+            transition: border-color 0.2s ease;
+        }
+
+        .content-card:hover {
+            border-color: var(--border-strong);
+        }
+
+        .section-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .section-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: var(--radius-sm);
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-subtle);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            flex-shrink: 0;
+        }
+
+        .section-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.02em;
+        }
+
+        .prose-text {
+            font-size: 14.5px;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 14px;
+        }
+
+        .callout-box {
+            background: var(--surface-subtle);
+            border-left: 3px solid var(--accent-primary);
+            border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+            padding: 14px 18px;
+            font-size: 14px;
+            color: #e2e8f0;
+            line-height: 1.6;
+        }
+
+        .callout-box strong {
+            color: #ffffff;
+            font-weight: 600;
+        }
+
+        /* Quotes Grid */
+        .quotes-grid {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .quote-card {
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 16px 20px;
+            display: flex;
+            gap: 12px;
+            align-items: flex-start;
+        }
+
+        .quote-mark {
+            font-size: 24px;
+            line-height: 1;
+            color: var(--accent-primary);
+            font-family: Georgia, serif;
+            opacity: 0.8;
+            flex-shrink: 0;
+        }
+
+        .quote-text {
+            font-size: 14px;
+            color: #cbd5e1;
+            font-style: normal;
+            line-height: 1.65;
+        }
+
+        /* Step Cards */
+        .steps-container {
+            display: flex;
+            flex-direction: column;
+            gap: 14px;
+        }
+
+        .step-card {
+            display: flex;
+            gap: 16px;
+            background: var(--surface-subtle);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-md);
+            padding: 18px 20px;
+            align-items: flex-start;
+        }
+
+        .step-badge {
+            font-family: var(--font-mono);
+            font-size: 12px;
+            font-weight: 800;
+            color: var(--accent-primary);
+            background: rgba(56, 189, 248, 0.1);
+            border: 1px solid var(--border-highlight);
+            padding: 4px 8px;
+            border-radius: var(--radius-sm);
+            flex-shrink: 0;
+            margin-top: 1px;
+        }
+
+        .step-body {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .step-heading {
+            font-size: 15px;
+            font-weight: 700;
+            color: #ffffff;
+            letter-spacing: -0.01em;
+        }
+
+        .step-desc {
+            font-size: 13.5px;
+            color: var(--text-secondary);
+            line-height: 1.6;
+        }
+
+        /* Transcript & SRT Container */
+        .viewer-card {
+            background: var(--surface-elevated);
+            border: 1px solid var(--border-subtle);
+            border-radius: var(--radius-lg);
+            overflow: hidden;
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.3);
+        }
+
+        .viewer-toolbar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: var(--surface-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+            padding: 8px 16px;
             gap: 12px;
             flex-wrap: wrap;
         }
 
-        .source-info {
+        .tab-switcher {
             display: flex;
-            flex-direction: column;
+            background: rgba(0, 0, 0, 0.25);
+            padding: 3px;
+            border-radius: var(--radius-sm);
             gap: 2px;
-            min-width: 200px;
-            flex: 1;
         }
 
-        .source-label {
-            font-size: 11px;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--accent-primary);
-        }
-
-        .source-url {
-            font-size: 13px;
-            color: #e2e8f0;
-            word-break: break-all;
-            font-family: ui-monospace, Menlo, Consolas, monospace;
-        }
-
-        .source-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            background: var(--accent-primary);
-            color: #0c0e14;
-            font-size: 13px;
-            font-weight: 700;
-            padding: 8px 14px;
-            border-radius: 6px;
-            text-decoration: none;
-            flex-shrink: 0;
-            transition: opacity 0.2s;
-        }
-
-        .source-btn:hover { opacity: 0.9; }
-
-        .meta-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 16px;
-            padding-top: 16px;
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .meta-item { display: flex; flex-direction: column; }
-
-        .meta-label {
-            font-size: 12px;
-            color: var(--text-muted);
-            margin-bottom: 4px;
-        }
-
-        .meta-value {
-            font-size: 14px;
-            font-weight: 600;
-            color: var(--text-primary);
-        }
-
-        .section-grid { display: grid; grid-template-columns: 1fr; gap: 20px; margin-bottom: 24px; }
-
-        .card {
-            background: var(--surface-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            padding: 24px;
-            transition: border-color 0.2s ease;
-        }
-
-        .card:hover { border-color: var(--border-active); }
-
-        .card-header {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            margin-bottom: 16px;
-        }
-
-        .card-icon {
-            width: 30px;
-            height: 30px;
-            border-radius: 8px;
-            background: var(--surface-card-subtle);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 15px;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .card-title { font-size: 17px; font-weight: 700; color: #ffffff; }
-
-        p.desc { color: var(--text-secondary); font-size: 14.5px; margin-bottom: 12px; line-height: 1.65; }
-
-        .highlight-box {
-            background: var(--surface-card-subtle);
-            border-left: 3px solid var(--accent-primary);
-            padding: 12px 16px;
-            border-radius: 0 8px 8px 0;
-            font-size: 13.5px;
-            color: #e2e8f0;
-            margin-top: 10px;
-        }
-
-        .quote-list { list-style: none; display: flex; flex-direction: column; gap: 10px; }
-        .quote-item blockquote {
-            background: var(--surface-card-subtle);
-            border: 1px solid var(--border-subtle);
-            border-radius: 8px;
-            padding: 12px 16px;
-            font-size: 13.5px;
-            color: #cbd5e1;
-            font-style: italic;
-        }
-
-        .step-list { list-style: none; display: flex; flex-direction: column; gap: 14px; }
-        .step-item { display: flex; gap: 14px; align-items: flex-start; }
-        .step-num {
-            width: 24px;
-            height: 24px;
-            border-radius: 50%;
-            background: var(--accent-primary);
-            color: #0c0e14;
-            font-size: 12px;
-            font-weight: 700;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            margin-top: 2px;
-        }
-        .step-content strong { display: block; font-size: 14.5px; color: #ffffff; margin-bottom: 3px; }
-        .step-content p { font-size: 13.5px; color: var(--text-secondary); }
-
-        .transcript-card {
-            background: var(--surface-card);
-            border: 1px solid var(--border-subtle);
-            border-radius: 14px;
-            overflow: hidden;
-            margin-bottom: 24px;
-        }
-
-        .tab-bar {
-            display: flex;
-            background: var(--surface-card-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-            padding: 6px 12px;
-            gap: 8px;
-            align-items: center;
-            justify-content: space-between;
-        }
-
-        .tab-group { display: flex; gap: 6px; }
-
-        .tab-btn {
+        .tab-item {
             background: transparent;
             border: none;
             color: var(--text-secondary);
-            font-size: 13px;
+            font-family: var(--font-sans);
+            font-size: 12.5px;
             font-weight: 600;
-            padding: 8px 14px;
+            padding: 6px 14px;
             border-radius: 6px;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: var(--transition-smooth);
         }
 
-        .tab-btn.active {
-            background: var(--surface-card);
-            color: var(--accent-primary);
+        .tab-item.active {
+            background: var(--surface-elevated);
+            color: #ffffff;
+            box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
         }
 
-        .action-btn {
-            background: var(--surface-card);
+        .btn-copy {
+            background: var(--surface-hover);
             border: 1px solid var(--border-subtle);
             color: var(--text-primary);
+            font-family: var(--font-sans);
             font-size: 12px;
-            padding: 6px 12px;
-            border-radius: 6px;
+            font-weight: 600;
+            padding: 6px 14px;
+            border-radius: var(--radius-sm);
             cursor: pointer;
             display: inline-flex;
             align-items: center;
-            gap: 5px;
-            transition: background 0.2s;
+            gap: 6px;
+            transition: var(--transition-smooth);
         }
 
-        .action-btn:hover { background: var(--border-subtle); }
+        .btn-copy:hover {
+            background: var(--surface-subtle);
+            border-color: var(--border-strong);
+        }
 
-        .tab-panel {
-            display: none;
-            padding: 20px 24px;
-            font-size: 14px;
-            color: var(--text-secondary);
-            line-height: 1.8;
+        .btn-copy:active {
+            transform: scale(0.97);
+        }
+
+        .viewer-body {
+            padding: 24px;
             max-height: 420px;
             overflow-y: auto;
             white-space: pre-wrap;
+            line-height: 1.85;
+            font-size: 14.5px;
+            color: var(--text-secondary);
+            display: none;
         }
 
-        .tab-panel.active { display: block; }
-        .tab-panel.srt-panel { font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace; font-size: 12.5px; color: #a5b4fc; }
+        .viewer-body.active {
+            display: block;
+        }
 
+        .viewer-body.mono-srt {
+            font-family: var(--font-mono);
+            font-size: 12.5px;
+            color: #93c5fd;
+            background: #0b0d14;
+        }
+
+        /* Footer */
         .footer {
             text-align: center;
-            margin-top: 32px;
+            font-family: var(--font-mono);
+            font-size: 11.5px;
             color: var(--text-muted);
-            font-size: 12px;
+            padding: 12px 0 24px;
+            letter-spacing: 0.04em;
         }
 
         @media (max-width: 640px) {
-            body { padding: 16px 10px; }
-            .header { padding: 20px 16px; }
-            .title { font-size: 20px; }
-            .card { padding: 18px 16px; }
+            body { padding: 20px 12px 60px; }
+            .hero-card { padding: 22px 18px; }
+            .hero-title { font-size: 22px; }
+            .content-card { padding: 20px 16px; }
+            .metrics-strip { grid-template-columns: 1fr 1fr; }
+            .source-glass-banner { flex-direction: column; align-items: flex-start; }
+            .source-glass-btn { width: 100%; justify-content: center; }
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <header class="header">
-            <div class="badge-bar">
-                <span class="tag">AI 爆款深度拆解</span>
-                <span class="tag">本地文件</span>
-                <span class="tag time">2026-08-17</span>
+        <!-- Hero Card -->
+        <header class="hero-card">
+            <div class="hero-top-strip">
+                <div class="badge-group">
+                    <span class="tag-pill">VIRAL INTELLIGENCE</span>
+                    <span class="tag-pill muted">本地文件</span>
+                </div>
+                <span class="tag-pill muted">2026-08-17</span>
             </div>
-            <h1 class="title">什么是廉价陷阱？</h1>
+
+            <h1 class="hero-title">什么是廉价陷阱？</h1>
 
             
-        <div class="source-banner">
-            <div class="source-info">
-                <span class="source-label">🎥 原视频地址 (本地文件)</span>
-                <span class="source-url">https://www.douyin.com/video/7667502624799883334</span>
+        <div class="source-glass-banner">
+            <div class="source-glass-content">
+                <div class="source-glass-tag">
+                    <span class="pulse-indicator"></span>
+                    <span>ORIGINAL SOURCE · 本地文件</span>
+                </div>
+                <div class="source-glass-link" title="https://www.douyin.com/video/7667502624799883334">https://www.douyin.com/video/7667502624799883334</div>
             </div>
-            <a href="https://www.douyin.com/video/7667502624799883334" target="_blank" rel="noopener noreferrer" class="source-btn">
+            <a href="https://www.douyin.com/video/7667502624799883334" target="_blank" rel="noopener noreferrer" class="source-glass-btn">
                 <span>直达原片</span>
-                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
+                <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"></path><polyline points="15 3 21 3 21 9"></polyline><line x1="10" y1="14" x2="21" y2="3"></line></svg>
             </a>
         </div>
         
 
-            <div class="meta-grid">
-                <div class="meta-item">
-                    <span class="meta-label">原片时长</span>
-                    <span class="meta-value">完整原片</span>
+            <div class="metrics-strip">
+                <div class="metric-block">
+                    <span class="metric-label">Duration</span>
+                    <span class="metric-val">完整原片</span>
                 </div>
-                <div class="meta-item">
-                    <span class="meta-label">全文字数</span>
-                    <span class="meta-value">1234 字</span>
+                <div class="metric-block">
+                    <span class="metric-label">Word Count</span>
+                    <span class="metric-val">1234 字</span>
                 </div>
-                <div class="meta-item">
-                    <span class="meta-label">ASR 转写引擎</span>
-                    <span class="meta-value">SenseVoice-Small</span>
+                <div class="metric-block">
+                    <span class="metric-label">ASR Engine</span>
+                    <span class="metric-val">SenseVoice-Small</span>
                 </div>
             </div>
         </header>
 
-        <main class="section-grid">
-            <section class="card">
-                <div class="card-header">
-                    <div class="card-icon">🎯</div>
-                    <h2 class="card-title">黄金前 3 秒钩子 (Hook) 拆解</h2>
-                </div>
-                <p class="desc">开篇以设问或具象生活场景迅速建立好奇缺口，直接抛出反常识或大众普遍存在的潜在行为（如：什么是廉价陷阱），瞬间拉升前 3 秒留存率。</p>
-                <div class="highlight-box">
-                    <strong>开篇金句：</strong> 什么是廉价陷阱。
-                </div>
-            </section>
-
-            <section class="card">
-                <div class="card-header">
-                    <div class="card-icon">🔥</div>
-                    <h2 class="card-title">痛点与情绪共鸣点</h2>
-                </div>
-                <p class="desc">直击受众对于“自以为在省钱/理性消费，实则不知不觉陷入更大财务漏洞”的深层焦虑与认知反差。</p>
-                <div class="highlight-box">
-                    <strong>心理机制：</strong> 利用了心理学上的「心理账户」与「沉没成本认知偏差」，让受众产生强烈的对号入座感与恍然大悟的惊醒感。
-                </div>
-            </section>
-
-            <section class="card">
-                <div class="card-header">
-                    <div class="card-icon">🔄</div>
-                    <h2 class="card-title">叙事节奏与反转机制</h2>
-                </div>
-                <p class="desc">采用『生活具象场景切入 → 旁观者质疑/反常积累 → 算账时刻的高潮反转 → 升华至社会商业博弈本质』的四段式叙事链条，节奏紧凑递进。</p>
-                <div class="highlight-box">
-                    <strong>转折高潮：</strong> 当所有微小订单汇总计算，金额突破半月工资的瞬间，形成巨大的现实冲击力。
-                </div>
-            </section>
-
-            <section class="card">
-                <div class="card-header">
-                    <div class="card-icon">💡</div>
-                    <h2 class="card-title">传播金句与高赞提炼</h2>
-                </div>
-                <ul class="quote-list">
-                    <li class="quote-item"><blockquote>"每一件都不贵，每一件他都用得着——至少下单的时候他是这样想的。"</blockquote></li><li class="quote-item"><blockquote>"不记得自己是从什么时候开始，把便宜当成了需要。"</blockquote></li><li class="quote-item"><blockquote>"那些单价极低、毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到在月末叠加出惊人的总数。"</blockquote></li><li class="quote-item"><blockquote>"便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。"</blockquote></li>
-                </ul>
-            </section>
-
-            <section class="card">
-                <div class="card-header">
-                    <div class="card-icon">🛠️</div>
-                    <h2 class="card-title">爆款复刻与仿写指南</h2>
-                </div>
-                <ul class="step-list">
-                    <li class="step-item"><span class="step-num">1</span><div class="step-content"><strong>选定微小行为切入</strong><p>寻找大众日常中高频但极不起眼的‘小动作’（如攒塑料袋、买打折临期食品、各种 1 元虚拟会员）。</p></div></li><li class="step-item"><span class="step-num">2</span><div class="step-content"><strong>构建双人对话反差</strong><p>引入清醒的旁观者角色（类似派大星），通过连续提问揭穿主角自我催眠的逻辑。</p></div></li><li class="step-item"><span class="step-num">3</span><div class="step-content"><strong>设计算账震撼时刻</strong><p>量化微小支出/时间的长期累加效应，给观众一个超出直觉预期的具体数字。</p></div></li><li class="step-item"><span class="step-num">4</span><div class="step-content"><strong>升华至系统与认知层面</strong><p>不仅停留在劝导，而是上升到商业模式和消费心理的本质，提供高级认知增量。</p></div></li>
-                </ul>
-            </section>
-        </main>
-
-        <div class="transcript-card">
-            <div class="tab-bar">
-                <div class="tab-group">
-                    <button class="tab-btn active" onclick="switchTab('text')">📖 纯文本视图</button>
-                    <button class="tab-btn" onclick="switchTab('srt')">⏱️ SRT 字幕视图</button>
-                </div>
-                <button class="action-btn" onclick="copyActiveContent()">📋 复制内容</button>
+        <!-- Hook Section -->
+        <section class="content-card">
+            <div class="section-header">
+                <div class="section-icon">🎯</div>
+                <h2 class="section-title">黄金前 3 秒钩子 (Hook) 拆解</h2>
             </div>
-            <div id="panel-text" class="tab-panel active">什么是廉价陷阱。海绵宝宝最近迷上了网购，他第一次下单时对比了好几天的价格，发现网上那包零食便宜了将近一半，想都没想就付了款。从那以后他养成一个新习惯，不管想买什么，先在网上搜一下9.9的鞋垫，12块的压缩毛巾，5.9的手机壳，19块的便携台灯，每一件都不贵，每一件他都用得着。至少下单的时候，他是这样想的，他每天下了班回到住处躺在床上，打开软件往下滑，看到什么便宜就加进购物车，看到什么有折扣，就点进去看看。大多数时候，他不会直接买会先放着等他降价，或者等到自己觉得反正不贵的那天，可那个反正不贵的门槛降的越来越快，后来看到一件东西的时候，他先看价格再想用途，而不是先想需要再找价格。派大星有几次来找海绵宝宝站在门口，等他把堆在沙发上的东西挪开。那些东西包装完好。有些甚至没来得及拆派大星捡起一个巴丈大的密封罐，翻过来看了一下标签。你买这个干什么。海绵宝宝从厨房走出来看了一眼。放干货。派大星说，你什么时候开始用干货了。海绵宝宝没有回答，他确实没有干货，需要放派大星后来又看到海绵宝宝买了4个同样款式的沥水架，排成一排放置在窗台边缘。他说你买四个沥水架做什么。海绵宝宝说一个放厨房一个放阳台派大星指着剩下的两个这两个呢海绵宝宝说先放着以后用得上。可那两个沥水架一直放在原处，蒙了一层灰，从窗台的外侧一个一个向内延伸，最后两个已经不太容易购到了。派大星没有继续再问。他只是在那个堆满的房间里站了一会儿，然后换了一个更靠里的位置做下。海绵宝宝有一次整理房间的时候，把那些网购来的东西，按订单日期排成一排鞋垫毛巾手机壳台灯密封罐沥水架收纳盒挂钩贴膜替换刷头便携剪刀没有一样超过20块，没有一样是不该买的海绵宝宝蹲在地上把那些东西一个个拿起来。那些东西看起来都很小，凑近地面挨个看过去，每一件单独看都不值得注意。可等到他一路扫到尽头的时候，他忽然意识到那些东西已经铺满了整个房间的过道。他把所有订单金额加在一起，算了好几遍，得出的数字让他愣了一下，那些9.912块5块9块堆在一起，超过了他半个月的工资。海绵宝宝看着那个数字，想不起来这些钱是怎么花出去的。他记得每一单的价格也记得每一单的到达，但他不记得自己是从什么时候开始，把便宜当成了需要，这就是廉价陷阱，当消费决策被价格主导。那些单价极低，看起来毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到，在月末叠加出一个惊人的总数。海绵宝宝在每一个9.9块面前都做出了理性的选择。但他没有意识到自己重复做了很多次，不是任何一次下单出了问题。是那个便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。廉价陷阱本质是现代消费体系的结构性博弈。平台与商家通过高频小额的低价策略，系统性削弱大众的消费感知，利用普通人追求性价比的朴素心态，制造低成本无压力的消费假象。个体的单次决策并无过错，但制度化的持续诱导，会不断蚕食基层群体的财富沉淀空间，让节俭度日的人被动陷入月省钱，月存不下钱的发展困境。。</div>
-            <div id="panel-srt" class="tab-panel srt-panel">1
+            <p class="prose-text">开篇以设问或具象生活场景迅速建立好奇缺口，直接抛出反常识或大众普遍存在的潜在行为（如：什么是廉价陷阱），瞬间拉升前 3 秒留存率。</p>
+            <div class="callout-box">
+                <strong>开篇核心语句 : </strong> 什么是廉价陷阱。
+            </div>
+        </section>
+
+        <!-- Emotion Section -->
+        <section class="content-card">
+            <div class="section-header">
+                <div class="section-icon">🔥</div>
+                <h2 class="section-title">痛点激发与情绪共鸣机制</h2>
+            </div>
+            <p class="prose-text">直击受众对于“自以为在省钱/理性消费，实则不知不觉陷入更大财务漏洞”的深层焦虑与认知反差。</p>
+            <div class="callout-box">
+                <strong>底层心理机制 : </strong> 利用了心理学上的「心理账户」与「沉没成本认知偏差」，让受众产生强烈的对号入座感与恍然大悟的惊醒感。
+            </div>
+        </section>
+
+        <!-- Narrative Section -->
+        <section class="content-card">
+            <div class="section-header">
+                <div class="section-icon">🔄</div>
+                <h2 class="section-title">叙事节奏与反转高潮</h2>
+            </div>
+            <p class="prose-text">采用『生活具象场景切入 → 旁观者质疑/反常积累 → 算账时刻的高潮反转 → 升华至社会商业博弈本质』的四段式叙事链条，节奏紧凑递进。</p>
+            <div class="callout-box">
+                <strong>高潮时刻 : </strong> 当所有微小订单汇总计算，金额突破半月工资的瞬间，形成巨大的现实冲击力。
+            </div>
+        </section>
+
+        <!-- Quotes Section -->
+        <section class="content-card">
+            <div class="section-header">
+                <div class="section-icon">💡</div>
+                <h2 class="section-title">高传播力金句提炼</h2>
+            </div>
+            <div class="quotes-grid">
+                <div class="quote-card"><span class="quote-mark">“</span><p class="quote-text">每一件都不贵，每一件他都用得着 : 至少下单的时候他是这样想的。</p></div><div class="quote-card"><span class="quote-mark">“</span><p class="quote-text">不记得自己是从什么时候开始，把便宜当成了需要。</p></div><div class="quote-card"><span class="quote-mark">“</span><p class="quote-text">那些单价极低、毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到在月末叠加出惊人的总数。</p></div><div class="quote-card"><span class="quote-mark">“</span><p class="quote-text">便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。</p></div>
+            </div>
+        </section>
+
+        <!-- Replication Guide -->
+        <section class="content-card">
+            <div class="section-header">
+                <div class="section-icon">🛠️</div>
+                <h2 class="section-title">爆款选题复刻与结构仿写</h2>
+            </div>
+            <div class="steps-container">
+                <div class="step-card"><div class="step-badge">01</div><div class="step-body"><h4 class="step-heading">选定微小行为切入</h4><p class="step-desc">寻找大众日常中高频但极不起眼的‘小动作’（如攒塑料袋、买打折临期食品、各种 1 元虚拟会员）。</p></div></div><div class="step-card"><div class="step-badge">02</div><div class="step-body"><h4 class="step-heading">构建双人对话反差</h4><p class="step-desc">引入清醒的旁观者角色（类似派大星），通过连续提问揭穿主角自我催眠的逻辑。</p></div></div><div class="step-card"><div class="step-badge">03</div><div class="step-body"><h4 class="step-heading">设计算账震撼时刻</h4><p class="step-desc">量化微小支出/时间的长期累加效应，给观众一个超出直觉预期的具体数字。</p></div></div><div class="step-card"><div class="step-badge">04</div><div class="step-body"><h4 class="step-heading">升华至系统与认知层面</h4><p class="step-desc">不仅停留在劝导，而是上升到商业模式和消费心理的本质，提供高级认知增量。</p></div></div>
+            </div>
+        </section>
+
+        <!-- Transcript & SRT Viewer -->
+        <section class="viewer-card">
+            <div class="viewer-toolbar">
+                <div class="tab-switcher">
+                    <button class="tab-item active" onclick="switchViewerTab('text')">纯文本全文</button>
+                    <button class="tab-item" onclick="switchViewerTab('srt')">SRT 时间轴字幕</button>
+                </div>
+                <button class="btn-copy" onclick="copyViewerContent()">
+                    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                    <span>复制当前内容</span>
+                </button>
+            </div>
+            <div id="panel-text" class="viewer-body active">什么是廉价陷阱。海绵宝宝最近迷上了网购，他第一次下单时对比了好几天的价格，发现网上那包零食便宜了将近一半，想都没想就付了款。从那以后他养成一个新习惯，不管想买什么，先在网上搜一下9.9的鞋垫，12块的压缩毛巾，5.9的手机壳，19块的便携台灯，每一件都不贵，每一件他都用得着。至少下单的时候，他是这样想的，他每天下了班回到住处躺在床上，打开软件往下滑，看到什么便宜就加进购物车，看到什么有折扣，就点进去看看。大多数时候，他不会直接买会先放着等他降价，或者等到自己觉得反正不贵的那天，可那个反正不贵的门槛降的越来越快，后来看到一件东西的时候，他先看价格再想用途，而不是先想需要再找价格。派大星有几次来找海绵宝宝站在门口，等他把堆在沙发上的东西挪开。那些东西包装完好。有些甚至没来得及拆派大星捡起一个巴丈大的密封罐，翻过来看了一下标签。你买这个干什么。海绵宝宝从厨房走出来看了一眼。放干货。派大星说，你什么时候开始用干货了。海绵宝宝没有回答，他确实没有干货，需要放派大星后来又看到海绵宝宝买了4个同样款式的沥水架，排成一排放置在窗台边缘。他说你买四个沥水架做什么。海绵宝宝说一个放厨房一个放阳台派大星指着剩下的两个这两个呢海绵宝宝说先放着以后用得上。可那两个沥水架一直放在原处，蒙了一层灰，从窗台的外侧一个一个向内延伸，最后两个已经不太容易购到了。派大星没有继续再问。他只是在那个堆满的房间里站了一会儿，然后换了一个更靠里的位置做下。海绵宝宝有一次整理房间的时候，把那些网购来的东西，按订单日期排成一排鞋垫毛巾手机壳台灯密封罐沥水架收纳盒挂钩贴膜替换刷头便携剪刀没有一样超过20块，没有一样是不该买的海绵宝宝蹲在地上把那些东西一个个拿起来。那些东西看起来都很小，凑近地面挨个看过去，每一件单独看都不值得注意。可等到他一路扫到尽头的时候，他忽然意识到那些东西已经铺满了整个房间的过道。他把所有订单金额加在一起，算了好几遍，得出的数字让他愣了一下，那些9.912块5块9块堆在一起，超过了他半个月的工资。海绵宝宝看着那个数字，想不起来这些钱是怎么花出去的。他记得每一单的价格也记得每一单的到达，但他不记得自己是从什么时候开始，把便宜当成了需要，这就是廉价陷阱，当消费决策被价格主导。那些单价极低，看起来毫无负担的支出会像水一样渗进日常，不够重到引发警觉，却足够多到，在月末叠加出一个惊人的总数。海绵宝宝在每一个9.9块面前都做出了理性的选择。但他没有意识到自己重复做了很多次，不是任何一次下单出了问题。是那个便宜本身变成了不需要思考的理由，而没有觉察的下单，早晚会变成一笔对不上的账。廉价陷阱本质是现代消费体系的结构性博弈。平台与商家通过高频小额的低价策略，系统性削弱大众的消费感知，利用普通人追求性价比的朴素心态，制造低成本无压力的消费假象。个体的单次决策并无过错，但制度化的持续诱导，会不断蚕食基层群体的财富沉淀空间，让节俭度日的人被动陷入月省钱，月存不下钱的发展困境。。</div>
+            <div id="panel-srt" class="viewer-body mono-srt">1
 00:00:00,000 --&gt; 00:00:01,500
 什么是廉价陷阱。
 
@@ -540,18 +728,18 @@
 00:03:21,004 --&gt; 00:03:28,000
 个体的单次决策并无过错，但制度化的持续诱导，会不断蚕食基层群体的财富沉淀空间，让节俭度日的人被动陷入月省钱，月存不下钱的发展困境。。
 </div>
-        </div>
+        </section>
 
         <footer class="footer">
-            Generated by Antigravity Viral Video Analyzer · 2026-08-17
+            ANTIGRAVITY VIRAL ANALYZER · TASTESKILL COMPLIANT · 2026-08-17
         </footer>
     </div>
 
     <script>
-        let currentTab = 'text';
-        function switchTab(tab) {
-            currentTab = tab;
-            document.querySelectorAll('.tab-btn').forEach((btn, idx) => {
+        let currentViewerTab = 'text';
+        function switchViewerTab(tab) {
+            currentViewerTab = tab;
+            document.querySelectorAll('.tab-item').forEach((btn, idx) => {
                 btn.classList.toggle('active', (idx === 0 && tab === 'text') || (idx === 1 && tab === 'srt'));
             });
             document.getElementById('panel-text').classList.toggle('active', tab === 'text');
@@ -563,7 +751,7 @@
             if (!toast) {
                 toast = document.createElement('div');
                 toast.id = 'toast';
-                toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#38bdf8;color:#0c0e14;font-weight:700;font-size:13px;padding:8px 18px;border-radius:20px;box-shadow:0 4px 12px rgba(0,0,0,0.3);z-index:999;transition:opacity 0.3s;opacity:0;pointer-events:none;';
+                toast.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#38bdf8;color:#090a0f;font-weight:700;font-size:13px;padding:8px 18px;border-radius:9999px;box-shadow:0 8px 24px rgba(56,189,248,0.25);z-index:999;transition:opacity 0.2s cubic-bezier(0.16,1,0.3,1);opacity:0;pointer-events:none;';
                 document.body.appendChild(toast);
             }
             toast.innerText = msg;
@@ -571,13 +759,13 @@
             setTimeout(() => { toast.style.opacity = '0'; }, 2000);
         }
 
-        function copyActiveContent() {
-            const text = currentTab === 'text' 
+        function copyViewerContent() {
+            const text = currentViewerTab === 'text' 
                 ? document.getElementById('panel-text').innerText 
                 : document.getElementById('panel-srt').innerText;
             if (navigator.clipboard && window.isSecureContext) {
                 navigator.clipboard.writeText(text).then(() => {
-                    showToast('✅ 已成功复制到剪贴板！');
+                    showToast('已成功复制到剪贴板');
                 }).catch(() => { fallbackCopy(text); });
             } else {
                 fallbackCopy(text);
@@ -594,9 +782,9 @@
             textArea.select();
             try {
                 document.execCommand('copy');
-                showToast('✅ 已成功复制到剪贴板！');
+                showToast('已成功复制到剪贴板');
             } catch (err) {
-                showToast('⚠️ 复制失败，请手动长按复制');
+                showToast('请长按选中复制');
             }
             document.body.removeChild(textArea);
         }
